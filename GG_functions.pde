@@ -49,9 +49,9 @@ public void drawParameters() {
   fill(0, 255, 0, 255);
   text(g, centerPointX + 4 + (1*gap), centerPointY + 10);      // green
   fill(255, 0, 0, 255);
-  text(r, centerPointX + 8, centerPointY - 5);           // red
+  text(r, centerPointX + 8, centerPointY - 5);                 // red
   fill(0, 200, 255, 255);
-  text(b, centerPointX + (2*gap), centerPointY - 5);     // blue
+  text(b, centerPointX + (2*gap), centerPointY - 5);           // blue
 
 
   stroke(100);
