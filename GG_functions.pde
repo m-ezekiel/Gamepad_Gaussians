@@ -46,11 +46,11 @@ public void drawParameters() {
 
   fill(red, green, blue);
   text(a, centerPointX + 4 + (1*gap), centerPointY - 20);      // alpha
-  fill(0, 255, 0, 140);
+  fill(0, 255, 0, 255);
   text(g, centerPointX + 4 + (1*gap), centerPointY + 10);      // green
-  fill(255, 0, 0, 140);
+  fill(255, 0, 0, 255);
   text(r, centerPointX + 8, centerPointY - 5);           // red
-  fill(0, 200, 255, 150);
+  fill(0, 200, 255, 255);
   text(b, centerPointX + (2*gap), centerPointY - 5);     // blue
 
 

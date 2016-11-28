@@ -26,7 +26,7 @@ int mScalar = scalar / 1;
 int size = 300;
 int fps = 24;
 int red, blue, green = 0;
-int alpha = 0;
+int alpha = 50;
 
 // ASSIGN CONTROL MAPPINGS (variables numbered CCW from left)
 int A1_ctrl = red;
@@ -39,7 +39,7 @@ int A4_ctrl = alpha;
 
 public void setup() {
   size(1280, 750);
-  background(alpha);
+  background(0);
   noStroke();
 
   // Initialise the ControlIO
