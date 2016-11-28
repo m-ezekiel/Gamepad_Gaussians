@@ -34,7 +34,6 @@ public void drawParameters() {
 
   String dX = str(dpX/4);
   String dY = str(dpY/4);
-  String sz = str(size/10);
 
   String a = str(alpha);
   String r = str(red);
@@ -59,13 +58,13 @@ public void drawParameters() {
 
   // X-DISPERSION
   line(centerPointX - (1.5*gap) - dpX/20, centerPointY, centerPointX - (1.5*gap) + dpX/20, centerPointY);
-  ellipse(centerPointX - (1.5*gap) - dpX/20, centerPointY, size/50, size/50);
-  ellipse(centerPointX - (1.5*gap) + dpX/20, centerPointY, size/50, size/50);
+  ellipse(centerPointX - (1.5*gap) - dpX/20, centerPointY, brushSize_X/50, brushSize_Y/50);
+  ellipse(centerPointX - (1.5*gap) + dpX/20, centerPointY, brushSize_X/50, brushSize_Y/50);
 
   // Y-DISPERSION
   line(centerPointX - (1.5*gap), centerPointY - dpY/30, centerPointX - (1.5*gap), centerPointY + dpY/30);
-  ellipse(centerPointX - (1.5*gap), centerPointY - dpY/30, size/50, size/50);
-  ellipse(centerPointX - (1.5*gap), centerPointY + dpY/30, size/50, size/50);
+  ellipse(centerPointX - (1.5*gap), centerPointY - dpY/30, brushSize_X/50, brushSize_Y/50);
+  ellipse(centerPointX - (1.5*gap), centerPointY + dpY/30, brushSize_X/50, brushSize_Y/50);
 
 
   noStroke();
@@ -79,8 +78,8 @@ public void drawParameters() {
 
 public void drawShapes() {
   fill(red, green, blue, alpha);
-  ellipse(xpos, ypos, analogX * size, analogY * size);
-  ellipse(xpos, ypos, analogV * size, analogU * size);
+  ellipse(xpos, ypos, analogX * brushSize_X, analogY * brushSize_Y);
+  ellipse(xpos, ypos, analogV * brushSize_X, analogU * brushSize_Y);
 }
 
 
