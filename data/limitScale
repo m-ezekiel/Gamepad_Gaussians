@@ -1,0 +1,11 @@
+// ----------------------------------
+// Limit values to variable scale a:b
+// ----------------------------------
+
+public int limitScale(int x, int a, int b) {
+  if (x > b)
+    x = b;
+  if (x < a)
+    x = a;
+  return(x);
+}

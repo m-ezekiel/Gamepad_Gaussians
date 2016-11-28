@@ -1,0 +1,36 @@
+// ---------------
+// Draw parameters
+// ---------------
+
+public void drawParameters() {
+  int wB = 170;
+  int wH = 13;
+  int wX = width - wB;
+  int wY = height - wH;
+  int gap = 28;
+  fill(0, 155);
+  rect(wX, wY, wB, wH);
+
+  String disp = str(dispersion);
+  String a = str(alpha);
+  String r = str(red);
+  String g = str(green);
+  String b = str(blue);
+  String s = str(brushSize);
+
+  textAlign(CENTER, TOP);
+  textSize(9.5);
+
+  fill(red, green, blue);
+  text(a, wX+15, wY);             // alpha
+  fill(255, 0, 0, 140);
+  text(r, wX+15+(1*gap), wY);     // red
+  fill(0, 255, 0, 140);
+  text(g, wX+15+(2*gap), wY);     // green
+  fill(0, 200, 255, 150);
+  text(b, wX+15+(3*gap), wY);     // blue
+  fill(255, 150);
+  text(s, wX+15+(4*gap), wY);     // brush size
+  fill(255, 150);
+  text(disp, wX+15+(5*gap), wY);  // dispersion
+}

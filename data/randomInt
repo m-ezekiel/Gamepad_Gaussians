@@ -1,0 +1,7 @@
+// ----------------------------------
+// Limit values to variable scale a:b
+// ----------------------------------
+
+public int randomInt(int a, int b) {
+    
+}

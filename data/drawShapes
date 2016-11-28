@@ -1,0 +1,10 @@
+// -----------
+// Draw shapes
+// -----------
+
+public void drawShapes() {
+  noStroke();
+  fill(red, green, blue, alpha);
+  ellipse(xpos, ypos, analogX * size, analogY * size);
+  ellipse(xpos, ypos, analogV * size, analogU * size);
+}

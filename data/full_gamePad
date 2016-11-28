@@ -1,0 +1,18 @@
+testing
+analogXL	analogXL	3	SLIDER	x	0	1.0	0.001
+analogYL	analogYL	3	SLIDER	y	0	1.0	0.001
+analogXR	analogXR	3	SLIDER	z	0	1.0	0.015
+analogYR	analogYR	3	SLIDER	rz	0	1.0	0.015
+a	a	1	BUTTON	0	0	0.0	0.0
+b	b	1	BUTTON	1	0	0.0	0.0
+x	x	1	BUTTON	2	0	0.0	0.0
+y	y	1	BUTTON	3	0	0.0	0.0
+L1	L1	1	BUTTON	4	0	0.0	0.0
+L2	L2	1	BUTTON	6	0	0.0	0.0
+R1	R1	1	BUTTON	5	0	0.0	0.0
+R2	R2	1	BUTTON	7	0	0.0	0.0
+start	start	1	BUTTON	8	0	0.0	0.0
+select	select	1	BUTTON	9	0	0.0	0.0
+M1	M1	1	BUTTON	10	0	0.0	0.0
+M2	M2	1	BUTTON	11	0	0.0	0.0
+dPad	d-pad	2	HAT	cooliehat: pov	0	1.0	0.0

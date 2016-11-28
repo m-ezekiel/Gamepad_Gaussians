@@ -1,0 +1,9 @@
+
+public int gaussianInt(int dispersion, int dimension) {
+
+  float val = randomGaussian();  // Call random number from Z~(0,1)
+  float mean = dimension / 2;
+  int output = floor((val * dispersion) + mean);
+
+  return(output);
+}
