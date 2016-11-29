@@ -34,7 +34,6 @@ public void drawParameters() {
 
   String dX = str(dpX/4);
   String dY = str(dpY/4);
-  String sz = str(size/10);
 
   String a = str(alpha);
   String r = str(red);
@@ -44,7 +43,7 @@ public void drawParameters() {
   textAlign(CENTER, TOP);
   textSize(11);
 
-  fill(red, green, blue);
+  fill(200);
   text(a, centerPointX + 4 + (1*gap), centerPointY - 20);      // alpha
   fill(0, 255, 0, 255);
   text(g, centerPointX + 4 + (1*gap), centerPointY + 10);      // green
@@ -54,21 +53,26 @@ public void drawParameters() {
   text(b, centerPointX + (2*gap), centerPointY - 5);           // blue
 
 
-  stroke(100);
-  fill(red, green, blue, alpha);
+  stroke(150);
+  fill(red, green, blue, 127);
 
   // X-DISPERSION
   line(centerPointX - (1.5*gap) - dpX/20, centerPointY, centerPointX - (1.5*gap) + dpX/20, centerPointY);
-  ellipse(centerPointX - (1.5*gap) - dpX/20, centerPointY, size/50, size/50);
-  ellipse(centerPointX - (1.5*gap) + dpX/20, centerPointY, size/50, size/50);
+
+  ellipse(centerPointX - (1.5*gap) - dpX/20, centerPointY, brushSize_X/50, brushSize_Y/50);
+  ellipse(centerPointX - (1.5*gap) + dpX/20, centerPointY, brushSize_X/50, brushSize_Y/50);
 
   // Y-DISPERSION
   line(centerPointX - (1.5*gap), centerPointY - dpY/30, centerPointX - (1.5*gap), centerPointY + dpY/30);
-  ellipse(centerPointX - (1.5*gap), centerPointY - dpY/30, size/50, size/50);
-  ellipse(centerPointX - (1.5*gap), centerPointY + dpY/30, size/50, size/50);
 
+  ellipse(centerPointX - (1.5*gap), centerPointY - dpY/30, brushSize_X/50, brushSize_Y/50);
+  ellipse(centerPointX - (1.5*gap), centerPointY + dpY/30, brushSize_X/50, brushSize_Y/50);
 
-  noStroke();
+  // Colored ellipse
+  noStroke();  
+  fill(red, green, blue, alpha*3);
+  ellipse(centerPointX + 4 + (1*gap), centerPointY + 1, 10, 10);
+
 }
 
 
@@ -79,8 +83,8 @@ public void drawParameters() {
 
 public void drawShapes() {
   fill(red, green, blue, alpha);
-  ellipse(xpos, ypos, analogX * size, analogY * size);
-  ellipse(xpos, ypos, analogV * size, analogU * size);
+  ellipse(xpos, ypos, analogX * brushSize_X, analogY * brushSize_Y);
+  ellipse(xpos, ypos, analogU * brushSize_X, analogV * brushSize_Y);
 }
 
 
