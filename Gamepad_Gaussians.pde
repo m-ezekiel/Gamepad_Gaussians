@@ -25,9 +25,10 @@ int scalar = 50;
 int mScalar = scalar / 1;
 int brushSize_X = 300;
 int brushSize_Y = 300;
-int fps = 24;
 int red, blue, green = 0;
 int alpha = 60;
+
+float fps = 24;
 
 // ASSIGN CONTROL MAPPINGS (variables numbered CCW from left)
 int A1_ctrl = red;
@@ -39,6 +40,8 @@ public void setup() {
   size(1280, 750);
   background(0);
   noStroke();
+
+  frameRate(fps);
 
   // Initialise the ControlIO
   control = ControlIO.getInstance(this);
@@ -55,6 +58,9 @@ public void setup() {
 public void draw() {
 
   getUserInput();
+
+  // Make framerate a function of opacity
+
 
   // REFRESH CONTROL VALUES
   red = A1_ctrl;
@@ -125,10 +131,12 @@ public void draw() {
   if ((L2)) {
     brushSize_Y = randomInt(0, 1000);
     brushSize_X = randomInt(0, 1000);
-  }
-  if ((L2)) {
     dpY = randomInt(0, 400);
     dpX = randomInt(0, 400);
+    A1_ctrl = randomInt(0, 255);
+    A2_ctrl = randomInt(0, 255);
+    A3_ctrl = randomInt(0, 255);
+    A4_ctrl = randomInt(0, 200);
   }
 
   // MUTE VALUE w/R2
