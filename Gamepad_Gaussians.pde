@@ -25,9 +25,10 @@ int scalar = 50;
 int mScalar = scalar / 1;
 int brushSize_X = 300;
 int brushSize_Y = 300;
-int fps = 24;
 int red, blue, green = 0;
 int alpha = 60;
+
+float fps = 24;
 
 // ASSIGN CONTROL MAPPINGS (variables numbered CCW from left)
 int A1_ctrl = red;
@@ -39,6 +40,8 @@ public void setup() {
   size(1280, 750);
   background(0);
   noStroke();
+
+  frameRate(fps);
 
   // Initialise the ControlIO
   control = ControlIO.getInstance(this);
@@ -55,6 +58,9 @@ public void setup() {
 public void draw() {
 
   getUserInput();
+
+  // Make framerate a function of opacity
+
 
   // REFRESH CONTROL VALUES
   red = A1_ctrl;
@@ -89,14 +95,14 @@ public void draw() {
   if (right & select2) {brushSize_X += increment * 5;}
   if (left & select2) {brushSize_X -= increment * 5;}
 
-  if (R1 & select2) {
-    brushSize_Y += increment * 5;
-    brushSize_X += increment * 5;
-  }
-  if (L1 & select2) {
-    brushSize_Y -= increment * 5;
-    brushSize_X -= increment * 5;
-  }
+  // if (R1 & select2) {
+  //   brushSize_Y += increment * 5;
+  //   brushSize_X += increment * 5;
+  // }
+  // if (L1 & select2) {
+  //   brushSize_Y -= increment * 5;
+  //   brushSize_X -= increment * 5;
+  // }
 
   // DISPERSION BEHAVIORS (d-pad)
   if (up & select1) {dpY += increment * 5;}
@@ -104,14 +110,14 @@ public void draw() {
   if (right & select1) {dpX += increment * 5;}
   if (left & select1) {dpX -= increment * 5;}
 
-  if (L1 & select1) {
-    dpY += increment * 5;
-    dpX += increment * 5;
-  }
-  if (R1 & select1) {
-    dpY -= increment * 5;
-    dpX -= increment * 5;
-  }
+  // if (L1 & select1) {
+  //   dpY += increment * 5;
+  //   dpX += increment * 5;
+  // }
+  // if (R1 & select1) {
+  //   dpY -= increment * 5;
+  //   dpX -= increment * 5;
+  // }
 
   // RANDOM BEHAVIORS: if (R1 & button) {variable = randomInt(min, max);}
 
@@ -125,10 +131,12 @@ public void draw() {
   if ((L2)) {
     brushSize_Y = randomInt(0, 1000);
     brushSize_X = randomInt(0, 1000);
-  }
-  if ((L2)) {
     dpY = randomInt(0, 400);
     dpX = randomInt(0, 400);
+    A1_ctrl = randomInt(0, 255);
+    A2_ctrl = randomInt(0, 255);
+    A3_ctrl = randomInt(0, 255);
+    A4_ctrl = randomInt(0, 200);
   }
 
   // MUTE VALUE w/R2
@@ -161,15 +169,15 @@ public void draw() {
   if (A3 & (abs(joystick2) > 2)) {A3_ctrl += increment * joystick2 / mScalar;}
   if (A4 & (abs(joystick2) > 2)) {A4_ctrl += increment * joystick2 / mScalar;}
 
-  if(select1 & (abs(analogX) > 0.1)) {dpX += -analogX * 10 * increment;}
-  if(select1 & (abs(analogY) > 0.1)) {dpY += analogY * 10 * increment;}
-  if(select1 & (abs(analogU) > 0.2)) {dpX += -analogU * 10 * increment;}
-  if(select1 & (abs(analogV) > 0.1)) {dpY += analogV * 10 * increment;}
+  if((select1|select2) & (abs(analogX) > 0.1)) {dpX += -analogX * 10 * increment;}
+  if((select1|select2) & (abs(analogY) > 0.1)) {dpY += analogY * 10 * increment;}
+  if((select1|select2) & (abs(analogU) > 0.2)) {dpX += -analogU * 10 * increment;}
+  if((select1|select2) & (abs(analogV) > 0.1)) {dpY += analogV * 10 * increment;}
 
-  if(select2 & (abs(analogX) > 0.1)) {brushSize_X += -analogX * 15 * increment;}
-  if(select2 & (abs(analogY) > 0.1)) {brushSize_Y += analogY * 15 * increment;}
-  if(select2 & (abs(analogU) > 0.2)) {brushSize_X += analogU * 15 * increment;}
-  if(select2 & (abs(analogV) > 0.1)) {brushSize_Y += -analogV * 15 * increment;}
+  if((L1|R1) & (abs(analogX) > 0.1)) {brushSize_X += -analogX * 15 * increment;}
+  if((L1|R1) & (abs(analogY) > 0.1)) {brushSize_Y += analogY * 15 * increment;}
+  if((L1|R1) & (abs(analogU) > 0.2)) {brushSize_X += -analogU * 15 * increment;}
+  if((L1|R1) & (abs(analogV) > 0.1)) {brushSize_Y += analogV * 15 * increment;}
 
 
   // GAMEPLAY FUNCTIONS
