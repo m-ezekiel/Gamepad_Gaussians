@@ -148,15 +148,15 @@ public void draw() {
   if (A3 & (abs(joystick2) > 2)) {A3_ctrl += increment * joystick2 / mScalar;}
   if (A4 & (abs(joystick2) > 2)) {A4_ctrl += increment * joystick2 / mScalar;}
 
-  if((select1|select2) & (abs(analogX) > 0.1)) {dpX += -analogX * 10 * increment;}
-  if((select1|select2) & (abs(analogY) > 0.1)) {dpY += analogY * 10 * increment;}
-  if((select1|select2) & (abs(analogU) > 0.2)) {dpX += -analogU * 10 * increment;}
-  if((select1|select2) & (abs(analogV) > 0.1)) {dpY += analogV * 10 * increment;}
 
-  if((L1|R1) & (abs(analogX) > 0.1)) {brushSize_X += -analogX * 15 * increment;}
-  if((L1|R1) & (abs(analogY) > 0.1)) {brushSize_Y += analogY * 15 * increment;}
-  if((L1|R1) & (abs(analogU) > 0.2)) {brushSize_X += -analogU * 15 * increment;}
-  if((L1|R1) & (abs(analogV) > 0.1)) {brushSize_Y += analogV * 15 * increment;}
+  if((L1|R1) & (abs(analogX) > 0.2)) {dpX += -analogX * 10 * increment;}
+  if((L1|R1) & (abs(analogY) > 0.2)) {dpY += -analogY * 10 * increment;}
+  if((L1|R1) & (abs(analogU) > 0.2)) {dpX += analogU * 10 * increment;}
+  if((L1|R1) & (abs(analogV) > 0.2)) {dpY += -analogV * 10 * increment;}
+  if((select1|select2) & (abs(analogX) > 0.2)) {brushSize_X += -analogX * 15 * increment;}
+  if((select1|select2) & (abs(analogY) > 0.2)) {brushSize_Y += -analogY * 15 * increment;}
+  if((select1|select2) & (abs(analogU) > 0.2)) {brushSize_X += analogU * 15 * increment;}
+  if((select1|select2) & (abs(analogV) > 0.2)) {brushSize_Y += -analogV * 15 * increment;}
 
 
   // GAMEPLAY FUNCTIONS
