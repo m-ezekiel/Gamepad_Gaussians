@@ -10,6 +10,11 @@ ControlIO control;
 Configuration config;
 ControlDevice gpad;
 
+// KEYLOGGING DEFINITIONS
+PrintWriter output;
+// 16 does not include the analog sticks.
+// String [] keypress = new String[16];
+String keypress;
 
 // VARIABLE DEFINITIONS
 float analogX, analogY, analogU, analogV;
@@ -36,6 +41,8 @@ int A2_ctrl = green;
 int A3_ctrl = blue;
 int A4_ctrl = alpha;
 
+
+// SETUP
 public void setup() {
   size(1280, 750);
   background(0);
@@ -52,12 +59,16 @@ public void setup() {
     println("No suitable device configured");
     System.exit(-1); // End the program NOW!
   }
+
+  createKeypressFile();
 }
 
 
+// DRAW
 public void draw() {
 
   getUserInput();
+
 
   // Make framerate a function of opacity
 
@@ -118,6 +129,7 @@ public void draw() {
     A4_ctrl = randomInt(0, 200);
   }
 
+
   // MUTE VALUE w/R2
 
   if (R2) {A4_ctrl = 0;}
@@ -165,7 +177,9 @@ public void draw() {
   if (L2 & R2) {resetBlack();}
   if (up & L2 & R2) {resetWhite();}
 
+
   // LIMIT SCALE
+
   A1_ctrl = limitScale(A1_ctrl, 0, 255);
   A2_ctrl = limitScale(A2_ctrl, 0, 255);
   A3_ctrl = limitScale(A3_ctrl, 0, 255);
@@ -175,10 +189,28 @@ public void draw() {
   brushSize_Y = limitScale(brushSize_Y, 1, 1000);
   brushSize_X = limitScale(brushSize_X, 1, 1000);
 
+
+  // DRAW SHAPES
+
   drawShapes();
   drawParameters();
   // saveFrame();
 
+
   // DIAGNOSTICS
   println(joystick1, joystick2, analogX, analogY, analogU, analogV);
+
+  // Write the coordinate to a file with a "\t" (TAB character) between each entry
+  keypress = getKeyPress();
+  if (keypress != "NULL") {
+    output.println(millis() + "\t" + keypress);
+  }
+
+  // Write data
+  if (M1 & M2) {
+    output.flush(); // Write the remaining data
+    output.close(); // Finish the file
+    exit();
+  }
+
 }
