@@ -16,6 +16,26 @@ public int analogToInteger(float x, float y, int k) {
 
 
 
+// --------------------
+// Create keypress file
+// --------------------
+
+public void createKeypressFile() {
+  // Get datetime information
+  int [] datetime = new int[6];
+  datetime[0] = year();
+  datetime[1] = month();
+  datetime[2] = day();
+  datetime[3] = hour();
+  datetime[4] = minute();
+  datetime[5] = second();
+
+  // Define keylogging output file naming convention
+  output = createWriter("data/" + join(nf(datetime, 0), "-") + "_gamepadKeys.txt");  
+}
+
+
+
 // ---------------
 // Draw parameters
 // ---------------
@@ -213,3 +233,28 @@ public void saveImage() {
   save("IMG_exports/gamePad_sketch_" + join(nf(datetime, 0), "-") + ".png");  
 }
 
+
+
+
+// ---------------------------
+// Test function: Get keypress
+// ---------------------------
+
+String getKeyPress() {
+  String keypress = "NULL";
+
+  if (A1) {
+      keypress = "A1";
+  }
+  if (A2) {
+      keypress = "A2";
+  }
+  if (A3) {
+      keypress = "A3";
+  }
+  if (A4) {
+      keypress = "A4";
+  }
+
+  return(keypress);
+}
