@@ -12,9 +12,8 @@ ControlDevice gpad;
 
 // KEYLOGGING DEFINITIONS
 PrintWriter output;
-// 16 does not include the analog sticks.
-// String [] keypress = new String[16];
-String keypress;
+// There should be 18 total entries
+int [] kp_array;
 
 // VARIABLE DEFINITIONS
 float analogX, analogY, analogU, analogV;
@@ -33,7 +32,7 @@ int brushSize_Y = 300;
 int red, blue, green = 0;
 int alpha = 60;
 
-float fps = 24;
+float fps = 10;
 
 // ASSIGN CONTROL MAPPINGS (variables numbered CCW from left)
 int A1_ctrl = red;
@@ -201,10 +200,9 @@ public void draw() {
   println(joystick1, joystick2, analogX, analogY, analogU, analogV);
 
   // Write the coordinate to a file with a "\t" (TAB character) between each entry
-  keypress = getKeyPress();
-  if (keypress != "NULL") {
-    output.println(millis() + "\t" + keypress);
-  }
+  kp_array = getKPs();
+  output.println(millis() + "\t" + kp_array[0] + "\t" + kp_array[1] + "\t" + kp_array[2] + "\t" + kp_array[3] + "\t" + kp_array[4] + "\t" + kp_array[5] + "\t" + kp_array[6] + "\t" + kp_array[7] + "\t" + kp_array[8] + "\t" + kp_array[9] + "\t" + kp_array[10] + "\t" + kp_array[11] + "\t" + kp_array[12] + "\t" + kp_array[13] + "\t" + kp_array[14] + "\t" + kp_array[15]);
+  
 
   // Write data
   if (M1 & M2) {

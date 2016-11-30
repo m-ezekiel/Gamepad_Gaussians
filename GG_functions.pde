@@ -31,7 +31,9 @@ public void createKeypressFile() {
   datetime[5] = second();
 
   // Define keylogging output file naming convention
-  output = createWriter("data/" + join(nf(datetime, 0), "-") + "_gamepadKeys.txt");  
+  output = createWriter("data/" + join(nf(datetime, 0), "-") + "_gamepadKeys.txt");
+  // Create headers on output file
+  output.println("millis" + "\t" + "A1" + "\t" + "A2" + "\t" + "A3" + "\t" + "A4" + "\t" + "L1" + "\t" + "R1" + "\t" + "L2" + "\t" + "R2" + "\t" + "S1" + "\t" + "S2" + "\t" + "M1" + "\t" + "M2" + "\t" + "up" + "\t" + "dn" + "\t" + "lf" + "\t" + "rt");
 }
 
 
@@ -139,6 +141,39 @@ public int gaussianInt(int dispersion, int dimension) {
 
 
 // --------------
+// Get keypresses
+// --------------
+
+public int [] getKPs() {
+  int [] kp_array = new int[16];  
+
+  kp_array[0] = int(A1);
+  kp_array[1] = int(A2);
+  kp_array[2] = int(A3);
+  kp_array[3] = int(A4);
+
+  kp_array[4] = int(L1);
+  kp_array[5] = int(R1);
+  kp_array[6] = int(L2);
+  kp_array[7] = int(R2);
+
+  kp_array[8] = int(select1);
+  kp_array[9] = int(select2);
+
+  kp_array[10] = int(M1);
+  kp_array[11] = int(M2);
+
+  kp_array[12] = int(up);
+  kp_array[13] = int(down);
+  kp_array[14] = int(left);
+  kp_array[15] = int(right);
+
+  return(kp_array);
+}
+
+
+
+// --------------
 // Get user input
 // --------------
 
@@ -236,25 +271,3 @@ public void saveImage() {
 
 
 
-// ---------------------------
-// Test function: Get keypress
-// ---------------------------
-
-String getKeyPress() {
-  String keypress = "NULL";
-
-  if (A1) {
-      keypress = "A1";
-  }
-  if (A2) {
-      keypress = "A2";
-  }
-  if (A3) {
-      keypress = "A3";
-  }
-  if (A4) {
-      keypress = "A4";
-  }
-
-  return(keypress);
-}
