@@ -217,7 +217,6 @@ public void getUserInput() {
 // -----------
 
 public void muteAlpha() {
-  // alpha = 0;
   A4_ctrl = 0;
   increment = 2;
 }
@@ -240,11 +239,14 @@ public int randomInt(int a, int b) {
 // -----
 
 public void resetBlack() {
-  red = 0; green = 0; blue = 0; alpha = 0;
+  // A4_ctrl = 60;
+  dpX = 300; dpY = 300;
+  brushSize_X = 200; brushSize_Y = 200;
   background(0);
 }
 public void resetWhite() {
-  red = 0; green = 0; blue = 0; alpha = 0;
+  dpX = 300; dpY = 300;
+  brushSize_X = 200; brushSize_Y = 200;
   background(255);
 }
 

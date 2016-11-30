@@ -23,16 +23,16 @@ boolean left, right, up, down, select1, select2;
 
 // INITIALIZE PARAMETERS
 int xpos = 0; int ypos = 0;
-int dpX = 400; int dpY = 400;
+int dpX = 300; int dpY = 300;
 int increment = 2;
 int scalar = 50;
 int mScalar = scalar / 1;
-int brushSize_X = 300;
-int brushSize_Y = 300;
+int brushSize_X = 200;
+int brushSize_Y = 200;
 int red, blue, green = 0;
 int alpha = 60;
 
-float fps = 24;
+float fps = 30;
 
 // ASSIGN CONTROL MAPPINGS (variables numbered CCW from left)
 int A1_ctrl = red;
@@ -131,19 +131,17 @@ public void draw() {
 
   // MUTE VALUE w/R2
 
-  if (R2) {A4_ctrl = 0;}
-
   if ((R2) & A1) {A1_ctrl = 0;}
   if ((R2) & A2) {A2_ctrl = 0;}
   if ((R2) & A3) {A3_ctrl = 0;}
   if ((R2) & A4) {A4_ctrl = 0;}
   if ((R2) & select1) {
-    brushSize_Y = 0;
-    brushSize_X = 0;
+    brushSize_Y = 300;
+    brushSize_X = 300;
   }
   if ((R2) & select1) {
-    dpY = 0;
-    dpX = 0;
+    dpY = 300;
+    dpX = 300;
   }
 
 
@@ -160,21 +158,20 @@ public void draw() {
   if (A4 & (abs(joystick2) > 2)) {A4_ctrl += increment * joystick2 / mScalar;}
 
 
-  if((L1|R1) & (abs(analogX) > 0.2)) {dpX += -analogX * 10 * increment;}
-  if((L1|R1) & (abs(analogY) > 0.2)) {dpY += -analogY * 10 * increment;}
-  if((L1|R1) & (abs(analogU) > 0.2)) {dpX += analogU * 10 * increment;}
-  if((L1|R1) & (abs(analogV) > 0.2)) {dpY += -analogV * 10 * increment;}
-  if((select1|select2) & (abs(analogX) > 0.2)) {brushSize_X += -analogX * 15 * increment;}
-  if((select1|select2) & (abs(analogY) > 0.2)) {brushSize_Y += -analogY * 15 * increment;}
-  if((select1|select2) & (abs(analogU) > 0.2)) {brushSize_X += analogU * 15 * increment;}
-  if((select1|select2) & (abs(analogV) > 0.2)) {brushSize_Y += -analogV * 15 * increment;}
+  if((L1|R1) & (abs(analogX) > 0.15)) {dpX += -analogX * 10 * increment;}
+  if((L1|R1) & (abs(analogY) > 0.15)) {dpY += -analogY * 10 * increment;}
+  if((L1|R1) & (abs(analogU) > 0.15)) {dpX += analogU * 10 * increment;}
+  if((L1|R1) & (abs(analogV) > 0.15)) {dpY += -analogV * 10 * increment;}
+  if((select1|select2) & (abs(analogX) > 0.15)) {brushSize_X += -analogX * 15 * increment;}
+  if((select1|select2) & (abs(analogY) > 0.15)) {brushSize_Y += -analogY * 15 * increment;}
+  if((select1|select2) & (abs(analogU) > 0.15)) {brushSize_X += analogU * 15 * increment;}
+  if((select1|select2) & (abs(analogV) > 0.15)) {brushSize_Y += -analogV * 15 * increment;}
 
 
-  // GAMEPLAY FUNCTIONS
+  // RESET BACKGROUND
 
-  if (M1 & M2) {saveImage();}
-  if (L2 & R2) {resetBlack();}
-  if (up & L2 & R2) {resetWhite();}
+  if (R2 & up) {resetBlack();}
+  if (R2 & down) {resetWhite();}
 
 
   // LIMIT SCALE
@@ -208,6 +205,7 @@ public void draw() {
   if (M1 & M2) {
     output.flush(); // Write the remaining data
     output.close(); // Finish the file
+    saveImage();
     createKeypressFile();
   }
 
