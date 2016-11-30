@@ -194,7 +194,7 @@ public void draw() {
 
 
   // DIAGNOSTICS
-  println(joystick1, joystick2, analogX, analogY, analogU, analogV);
+  println(analogX, analogY, analogU, analogV);
 
   // Write the coordinate to a file with a "\t" (TAB character) between each entry
   kp_array = getKPs();

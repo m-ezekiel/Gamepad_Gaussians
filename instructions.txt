@@ -1,0 +1,47 @@
+# Game Instructions
+
+COLORS
+1. Hold #4 and analog-TR until the parameter reaches 255.
+
+2. Hold RedStar and Analog diagonally until the parameter reaches 255.
+	repeat with Green and Blue.
+
+3. Hold RedStar and Analog diagonally until the parameter reaches 0.
+	repeat with Green and Blue.
+
+OPACITY
+1. Hold #4 and analog diagonally until the parameter is between 20 and 50.
+
+2. Hold RedStar and GreenStar and analog diagonally until the params reach 255.
+
+3. Now play with colors.
+
+SAVE & RESET
+1. Save your drawing by pressing M1 and M2 together.
+
+2. Reset the background to black by pressing SilverStar and dPad-Up together.
+	For a white background press SilverStar and dPad-Down.
+
+DRAWING w/TWO CONTROLLERS
+1. Both analog sticks can draw simultaneous ellipses.
+
+DISPERSION
+1. Mix a bright color and set the opacity to around 100.
+
+2. Reset the background to black (M1+M2).
+
+3. Hold R1 or L1 and analog diagonal-DR for a few seconds.
+	repeat with all corners of the analog controller.
+
+SIZE/SHAPE
+1. Set the opacity to around 50 and reset the background.
+
+2. Hold S1 or S2 and analog diagonal-TR.
+	continue holding S1/S2 and move the analog stick to the opposite corner.
+	repeat with all corners of the analog controller.
+	don't forget to reset or change colors if the canvas gets too busy.
+
+RANDOM
+1. Press GoldStar and go nuts.
+
+2. Don't forget to save your work if you make something cool. (M1+M2)
