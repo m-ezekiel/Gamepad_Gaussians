@@ -208,7 +208,7 @@ public void draw() {
   if (M1 & M2) {
     output.flush(); // Write the remaining data
     output.close(); // Finish the file
-    exit();
+    createKeypressFile();
   }
 
 }
