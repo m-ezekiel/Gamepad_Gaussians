@@ -32,7 +32,7 @@ int brushSize_Y = 300;
 int red, blue, green = 0;
 int alpha = 60;
 
-float fps = 10;
+float fps = 24;
 
 // ASSIGN CONTROL MAPPINGS (variables numbered CCW from left)
 int A1_ctrl = red;
