@@ -28,20 +28,30 @@ DRAWING w/TWO CONTROLLERS
 DISPERSION
 1. Mix a bright color and set the opacity to around 100.
 
-2. Reset the background to black (M1+M2).
+2. Reset the background to black (SilverStar+Up).
 
 3. Hold R1 or L1 and analog diagonal-DR for a few seconds.
 	repeat with all corners of the analog controller.
 
 SIZE/SHAPE
-1. Set the opacity to around 50 and reset the background.
+1. Choose another color.
 
-2. Hold S1 or S2 and analog diagonal-TR.
+2. Set the opacity to around 50 and reset the background.
+
+3. Hold S1 or S2 and analog diagonal-TR.
 	continue holding S1/S2 and move the analog stick to the opposite corner.
 	repeat with all corners of the analog controller.
 	don't forget to reset or change colors if the canvas gets too busy.
 
+MUTE
+// learn how to use SilverStar to bring color parameters to their minimum.
+1. SilverStar + Alpha
+    repeat with colors.
+
+2. SilverStar + (Size|Disp|Focal_position)
+
 RANDOM
-1. Press GoldStar and go nuts.
+1. Press GoldStar and go nuts with the analog controllers.
 
 2. Don't forget to save your work if you make something cool. (M1+M2)
+
