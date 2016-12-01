@@ -1,7 +1,7 @@
 # Game Instructions
 
 COLORS
-1. Hold #4 and analog-TR until the parameter reaches 255.
+1. Hold #4 and move the analog stick to the top-right corner until the parameter reaches 255.
 
 2. Hold RedStar and Analog diagonally until the parameter reaches 255.
 	repeat with Green and Blue.
@@ -44,8 +44,7 @@ SIZE/SHAPE
 	don't forget to reset or change colors if the canvas gets too busy.
 
 MUTE
-// learn how to use SilverStar to bring color parameters to their minimum.
-1. SilverStar + Alpha
+1. Press SilverStar and #4 to mute the opacity (the parameter value will go to 0)
     repeat with colors.
 
 2. SilverStar + (Size|Disp|Focal_position)
