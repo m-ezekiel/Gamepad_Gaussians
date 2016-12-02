@@ -1,7 +1,0 @@
-// -----------------
-// Analog to integer
-// -----------------
-
-public int analogToInteger(float x, float y, int k) {
-    
-}
