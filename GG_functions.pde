@@ -16,6 +16,28 @@ public int analogToInteger(float x, float y, int k) {
 
 
 
+// --------------------
+// Create keypress file
+// --------------------
+
+public void createKeypressFile() {
+  // Get datetime information
+  int [] datetime = new int[6];
+  datetime[0] = year();
+  datetime[1] = month();
+  datetime[2] = day();
+  datetime[3] = hour();
+  datetime[4] = minute();
+  datetime[5] = second();
+
+  // Define keylogging output file naming convention
+  output = createWriter("data/" + join(nf(datetime, 0), "-") + "_gamepadKeys.txt");
+  // Create headers on output file
+  output.println("millis" + "\t" + "A1" + "\t" + "A2" + "\t" + "A3" + "\t" + "A4" + "\t" + "L1" + "\t" + "R1" + "\t" + "L2" + "\t" + "R2" + "\t" + "S1" + "\t" + "S2" + "\t" + "M1" + "\t" + "M2" + "\t" + "up" + "\t" + "dn" + "\t" + "lf" + "\t" + "rt" + "\t" + "red" + "\t" + "grn" + "\t" + "blu" + "\t" + "opc" + "\t" + "dpX" + "\t" + "dpY" + "\t" + "sX" + "\t" + "sY" + "\t" + "analogX" + "\t" + "analogY" + "\t" + "analogU" + "\t" + "analogV");
+}
+
+
+
 // ---------------
 // Draw parameters
 // ---------------
@@ -118,6 +140,77 @@ public int gaussianInt(int dispersion, int dimension) {
 
 
 
+
+// -----------------
+// Get analog values
+// -----------------
+
+public float [] getAVs() {
+  float [] AV_array = new float[4];  
+
+  AV_array[0] = analogX;
+  AV_array[1] = analogY;
+  AV_array[2] = analogU;
+  AV_array[3] = analogV;
+
+  return(AV_array);
+}
+
+
+// ---------------
+// Get draw values
+// ---------------
+
+public int [] getDVs() {
+  int [] DV_array = new int[8];  
+
+  DV_array[0] = red;
+  DV_array[1] = green;
+  DV_array[2] = blue;
+  DV_array[3] = alpha;
+
+  DV_array[4] = dpX;
+  DV_array[5] = dpY;
+  DV_array[6] = brushSize_X;
+  DV_array[7] = brushSize_Y;
+
+  return(DV_array);
+}
+
+
+// --------------
+// Get keypresses
+// --------------
+
+public int [] getKPs() {
+  int [] kp_array = new int[26];  
+
+  kp_array[0] = int(A1);
+  kp_array[1] = int(A2);
+  kp_array[2] = int(A3);
+  kp_array[3] = int(A4);
+
+  kp_array[4] = int(L1);
+  kp_array[5] = int(R1);
+  kp_array[6] = int(L2);
+  kp_array[7] = int(R2);
+
+  kp_array[8] = int(select1);
+  kp_array[9] = int(select2);
+
+  kp_array[10] = int(M1);
+  kp_array[11] = int(M2);
+
+  kp_array[12] = int(up);
+  kp_array[13] = int(down);
+  kp_array[14] = int(left);
+  kp_array[15] = int(right);
+
+  return(kp_array);
+}
+
+
+
 // --------------
 // Get user input
 // --------------
@@ -162,7 +255,6 @@ public void getUserInput() {
 // -----------
 
 public void muteAlpha() {
-  // alpha = 0;
   A4_ctrl = 0;
   increment = 2;
 }
@@ -185,11 +277,14 @@ public int randomInt(int a, int b) {
 // -----
 
 public void resetBlack() {
-  red = 0; green = 0; blue = 0; alpha = 0;
+  // A4_ctrl = 60;
+  // dpX = 300; dpY = 300;
+  // brushSize_X = 200; brushSize_Y = 200;
   background(0);
 }
 public void resetWhite() {
-  red = 0; green = 0; blue = 0; alpha = 0;
+  // dpX = 300; dpY = 300;
+  // brushSize_X = 200; brushSize_Y = 200;
   background(255);
 }
 
@@ -212,4 +307,7 @@ public void saveImage() {
   // Create new datestamped file in the sketch directory
   save("IMG_exports/gamePad_sketch_" + join(nf(datetime, 0), "-") + ".png");  
 }
+
+
+
 

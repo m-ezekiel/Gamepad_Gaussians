@@ -10,6 +10,13 @@ ControlIO control;
 Configuration config;
 ControlDevice gpad;
 
+// KEYLOGGING DEFINITIONS
+PrintWriter output;
+// keypresses, drawing values, analog values, position coordinates
+int [] KP_array;
+int [] DV_array;
+float [] AV_array;
+int [] PC_array;
 
 // VARIABLE DEFINITIONS
 float analogX, analogY, analogU, analogV;
@@ -19,16 +26,17 @@ boolean left, right, up, down, select1, select2;
 
 // INITIALIZE PARAMETERS
 int xpos = 0; int ypos = 0;
-int dpX = 400; int dpY = 400;
+int dpX = 300; int dpY = 300;
 int increment = 2;
 int scalar = 50;
 int mScalar = scalar / 1;
-int brushSize_X = 300;
-int brushSize_Y = 300;
+int brushSize_X = 200;
+int brushSize_Y = 200;
 int red, blue, green = 0;
 int alpha = 60;
 
-float fps = 24;
+float fps = 30;
+
 
 // ASSIGN CONTROL MAPPINGS (variables numbered CCW from left)
 int A1_ctrl = red;
@@ -36,8 +44,10 @@ int A2_ctrl = green;
 int A3_ctrl = blue;
 int A4_ctrl = alpha;
 
+
+// SETUP
 public void setup() {
-  size(1280, 750);
+  size(1920, 1150);
   background(0);
   noStroke();
 
@@ -52,12 +62,16 @@ public void setup() {
     println("No suitable device configured");
     System.exit(-1); // End the program NOW!
   }
+
+  createKeypressFile();
 }
 
 
+// DRAW
 public void draw() {
 
   getUserInput();
+
 
   // Make framerate a function of opacity
 
@@ -91,20 +105,26 @@ public void draw() {
   if ((up|right|R1) & A4) {A4_ctrl += increment;}
 
 
+  // SIZE BEHAVIORS (d-pad)
+  if (up & (select1|select2)) {brushSize_Y += increment * 15;}
+  if (down & (select1|select2)) {brushSize_Y -= increment * 15;}
+  if (right & (select1|select2)) {brushSize_X += increment * 15;}
+  if (left & (select1|select2)) {brushSize_X -= increment * 15;}
+
   // DISPERSION BEHAVIORS (d-pad)
-  if (up & (select1|select2)) {dpY += increment * 5;}
-  if (down & (select1|select2)) {dpY -= increment * 5;}
-  if (right & (select1|select2)) {dpX += increment * 5;}
-  if (left & (select1|select2)) {dpX -= increment * 5;}
+  if (up & (L1|R1)) {dpY += increment * 10;}
+  if (down & (L1|R1)) {dpY -= increment * 10;}
+  if (right & (L1|R1)) {dpX += increment * 10;}
+  if (left & (L1|R1)) {dpX -= increment * 10;}
 
 
-  // RANDOM BEHAVIORS: if (R1 & button) {variable = randomInt(min, max);}
+  // RANDOM BEHAVIORS: if (L2 & button) {variable = randomInt(min, max);}
 
-  if ((L2) & A1) {A1_ctrl = randomInt(0, 255);}
-  if ((L2) & A2) {A2_ctrl = randomInt(0, 255);}
-  if ((L2) & A3) {A3_ctrl = randomInt(0, 255);}
-  // Limit the range of opacity in random calls
-  if ((L2) & A4) {A4_ctrl = randomInt(0, 127);}
+  // if ((L2) & A1) {A1_ctrl = randomInt(0, 255);}
+  // if ((L2) & A2) {A2_ctrl = randomInt(0, 255);}
+  // if ((L2) & A3) {A3_ctrl = randomInt(0, 255);}
+  // // Limit the range of opacity in random calls
+  // if ((L2) & A4) {A4_ctrl = randomInt(0, 127);}
 
   // New position and size for every random call
   if ((L2)) {
@@ -118,22 +138,21 @@ public void draw() {
     A4_ctrl = randomInt(0, 200);
   }
 
-  // MUTE VALUE w/R2
 
-  if (R2) {A4_ctrl = 0;}
+  // MUTE VALUE w/R2
 
   if ((R2) & A1) {A1_ctrl = 0;}
   if ((R2) & A2) {A2_ctrl = 0;}
   if ((R2) & A3) {A3_ctrl = 0;}
   if ((R2) & A4) {A4_ctrl = 0;}
-  if ((R2) & select1) {
-    brushSize_Y = 0;
-    brushSize_X = 0;
-  }
-  if ((R2) & select1) {
-    dpY = 0;
-    dpX = 0;
-  }
+  // if ((R2) & (select1|select2)) {
+  //   brushSize_Y = 300;
+  //   brushSize_X = 300;
+  // }
+  // if ((R2) & (L1|R1)) {
+  //   dpY = 300;
+  //   dpX = 300;
+  // }
 
 
   // ANALOG MODIFIERS
@@ -149,23 +168,24 @@ public void draw() {
   if (A4 & (abs(joystick2) > 2)) {A4_ctrl += increment * joystick2 / mScalar;}
 
 
-  if((L1|R1) & (abs(analogX) > 0.2)) {dpX += -analogX * 10 * increment;}
-  if((L1|R1) & (abs(analogY) > 0.2)) {dpY += -analogY * 10 * increment;}
-  if((L1|R1) & (abs(analogU) > 0.2)) {dpX += analogU * 10 * increment;}
-  if((L1|R1) & (abs(analogV) > 0.2)) {dpY += -analogV * 10 * increment;}
-  if((select1|select2) & (abs(analogX) > 0.2)) {brushSize_X += -analogX * 15 * increment;}
-  if((select1|select2) & (abs(analogY) > 0.2)) {brushSize_Y += -analogY * 15 * increment;}
-  if((select1|select2) & (abs(analogU) > 0.2)) {brushSize_X += analogU * 15 * increment;}
-  if((select1|select2) & (abs(analogV) > 0.2)) {brushSize_Y += -analogV * 15 * increment;}
+  if((L1|R1) & (abs(analogX) > 0.15)) {dpX += -analogX * 10 * increment;}
+  if((L1|R1) & (abs(analogY) > 0.15)) {dpY += -analogY * 10 * increment;}
+  if((L1|R1) & (abs(analogU) > 0.15)) {dpX += analogU * 10 * increment;}
+  if((L1|R1) & (abs(analogV) > 0.15)) {dpY += -analogV * 10 * increment;}
+  if((select1|select2) & (abs(analogX) > 0.15)) {brushSize_X += -analogX * 15 * increment;}
+  if((select1|select2) & (abs(analogY) > 0.15)) {brushSize_Y += -analogY * 15 * increment;}
+  if((select1|select2) & (abs(analogU) > 0.15)) {brushSize_X += analogU * 15 * increment;}
+  if((select1|select2) & (abs(analogV) > 0.15)) {brushSize_Y += -analogV * 15 * increment;}
 
 
-  // GAMEPLAY FUNCTIONS
+  // RESET BACKGROUND
 
-  if (M1 & M2) {saveImage();}
-  if (L2 & R2) {resetBlack();}
-  if (up & L2 & R2) {resetWhite();}
+  if (R2 & up) {resetBlack();}
+  if (R2 & down) {resetWhite();}
+
 
   // LIMIT SCALE
+
   A1_ctrl = limitScale(A1_ctrl, 0, 255);
   A2_ctrl = limitScale(A2_ctrl, 0, 255);
   A3_ctrl = limitScale(A3_ctrl, 0, 255);
@@ -175,10 +195,31 @@ public void draw() {
   brushSize_Y = limitScale(brushSize_Y, 1, 1000);
   brushSize_X = limitScale(brushSize_X, 1, 1000);
 
+
+  // DRAW SHAPES
+
   drawShapes();
   drawParameters();
   // saveFrame();
 
+
   // DIAGNOSTICS
-  println(joystick1, joystick2, analogX, analogY, analogU, analogV);
+  println(analogX, analogY, analogU, analogV);
+
+  // Write the coordinate to a file with a "\t" (TAB character) between each entry
+  KP_array = getKPs();
+  DV_array = getDVs();
+  AV_array = getAVs();
+
+  output.println(millis() + "\t" + KP_array[0] + "\t" + KP_array[1] + "\t" + KP_array[2] + "\t" + KP_array[3] + "\t" + KP_array[4] + "\t" + KP_array[5] + "\t" + KP_array[6] + "\t" + KP_array[7] + "\t" + KP_array[8] + "\t" + KP_array[9] + "\t" + KP_array[10] + "\t" + KP_array[11] + "\t" + KP_array[12] + "\t" + KP_array[13] + "\t" + KP_array[14] + "\t" + KP_array[15] + "\t" +   DV_array[0] + "\t" + DV_array[1] + "\t" + DV_array[2] + "\t" + DV_array[3] + "\t" + DV_array[4] + "\t" + DV_array[5] + "\t" + DV_array[6] + "\t" + DV_array[7] + "\t" + AV_array[0] + "\t" + AV_array[1] + "\t" + AV_array[2] + "\t" + AV_array[3]);
+  
+  output.flush(); // Write the data
+
+  // Save file
+  if (M1 & M2) {
+    output.close(); // Finish the file
+    saveImage();
+    createKeypressFile();
+  }
+
 }
