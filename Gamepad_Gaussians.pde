@@ -12,10 +12,9 @@ ControlDevice gpad;
 
 // KEYLOGGING DEFINITIONS
 PrintWriter output;
-// keypresses, drawing values, analog values, position coordinates
 int [] XYpos_array;
-int [] Keypress_array;
 int [] ParamValue_array;
+int [] Keypress_array;
 float [] Analog_array;
 
 // VARIABLE DEFINITIONS
@@ -106,27 +105,23 @@ public void draw() {
 
 
   // SIZE BEHAVIORS (d-pad)
+
   if (up & (select1|select2)) {brushSize_Y += increment * 15;}
   if (down & (select1|select2)) {brushSize_Y -= increment * 15;}
   if (right & (select1|select2)) {brushSize_X += increment * 15;}
   if (left & (select1|select2)) {brushSize_X -= increment * 15;}
 
+
   // DISPERSION BEHAVIORS (d-pad)
+
   if (up & (L1|R1)) {dpY += increment * 10;}
   if (down & (L1|R1)) {dpY -= increment * 10;}
   if (right & (L1|R1)) {dpX += increment * 10;}
   if (left & (L1|R1)) {dpX -= increment * 10;}
 
 
-  // RANDOM BEHAVIORS: if (L2 & button) {variable = randomInt(min, max);}
+  // RANDOM BEHAVIORS: if (L2) {variable = randomInt(min, max);}
 
-  // if ((L2) & A1) {A1_ctrl = randomInt(0, 255);}
-  // if ((L2) & A2) {A2_ctrl = randomInt(0, 255);}
-  // if ((L2) & A3) {A3_ctrl = randomInt(0, 255);}
-  // // Limit the range of opacity in random calls
-  // if ((L2) & A4) {A4_ctrl = randomInt(0, 127);}
-
-  // New position and size for every random call
   if ((L2)) {
     brushSize_Y = randomInt(0, 1000);
     brushSize_X = randomInt(0, 1000);
@@ -139,20 +134,12 @@ public void draw() {
   }
 
 
-  // MUTE VALUE w/R2
+  // MUTE VALUE: if (R2 & button) {variable = 0}
 
   if ((R2) & A1) {A1_ctrl = 0;}
   if ((R2) & A2) {A2_ctrl = 0;}
   if ((R2) & A3) {A3_ctrl = 0;}
   if ((R2) & A4) {A4_ctrl = 0;}
-  // if ((R2) & (select1|select2)) {
-  //   brushSize_Y = 300;
-  //   brushSize_X = 300;
-  // }
-  // if ((R2) & (L1|R1)) {
-  //   dpY = 300;
-  //   dpX = 300;
-  // }
 
 
   // ANALOG MODIFIERS
@@ -172,10 +159,15 @@ public void draw() {
   if((L1|R1) & (abs(analogY) > 0.15)) {dpY += -analogY * 10 * increment;}
   if((L1|R1) & (abs(analogU) > 0.15)) {dpX += analogU * 10 * increment;}
   if((L1|R1) & (abs(analogV) > 0.15)) {dpY += -analogV * 10 * increment;}
-  if((select1|select2) & (abs(analogX) > 0.15)) {brushSize_X += -analogX * 15 * increment;}
-  if((select1|select2) & (abs(analogY) > 0.15)) {brushSize_Y += -analogY * 15 * increment;}
-  if((select1|select2) & (abs(analogU) > 0.15)) {brushSize_X += analogU * 15 * increment;}
-  if((select1|select2) & (abs(analogV) > 0.15)) {brushSize_Y += -analogV * 15 * increment;}
+
+  if((select1|select2) & (abs(analogX) > 0.15)) 
+    {brushSize_X += -analogX * 15 * increment;}
+  if((select1|select2) & (abs(analogY) > 0.15)) 
+    {brushSize_Y += -analogY * 15 * increment;}
+  if((select1|select2) & (abs(analogU) > 0.15)) 
+    {brushSize_X += analogU * 15 * increment;}
+  if((select1|select2) & (abs(analogV) > 0.15)) 
+    {brushSize_Y += -analogV * 15 * increment;}
 
 
   // RESET BACKGROUND
