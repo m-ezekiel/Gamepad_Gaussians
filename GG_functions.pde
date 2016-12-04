@@ -33,7 +33,9 @@ public void createKeypressFile() {
   // Define keylogging output file naming convention
   output = createWriter("data/" + join(nf(datetime, 0), "-") + "_gamepadKeys.txt");
   // Create headers on output file
-  output.println("millis" + "\t" + "A1" + "\t" + "A2" + "\t" + "A3" + "\t" + "A4" + "\t" + "L1" + "\t" + "R1" + "\t" + "L2" + "\t" + "R2" + "\t" + "S1" + "\t" + "S2" + "\t" + "M1" + "\t" + "M2" + "\t" + "up" + "\t" + "dn" + "\t" + "lf" + "\t" + "rt" + "\t" + "red" + "\t" + "grn" + "\t" + "blu" + "\t" + "opc" + "\t" + "dpX" + "\t" + "dpY" + "\t" + "sX" + "\t" + "sY" + "\t" + "analogX" + "\t" + "analogY" + "\t" + "analogU" + "\t" + "analogV");
+  output.println("millis" + "\t" + 
+    "xpos" + "\t" + "ypos" + "\t" + 
+    "A1" + "\t" + "A2" + "\t" + "A3" + "\t" + "A4" + "\t" + "L1" + "\t" + "R1" + "\t" + "L2" + "\t" + "R2" + "\t" + "S1" + "\t" + "S2" + "\t" + "M1" + "\t" + "M2" + "\t" + "up" + "\t" + "dn" + "\t" + "lf" + "\t" + "rt" + "\t" + "red" + "\t" + "grn" + "\t" + "blu" + "\t" + "opc" + "\t" + "dpX" + "\t" + "dpY" + "\t" + "sX" + "\t" + "sY" + "\t" + "analogX" + "\t" + "analogY" + "\t" + "analogU" + "\t" + "analogV");
 }
 
 
@@ -210,6 +212,18 @@ public int [] getKPs() {
 }
 
 
+// ------------------------
+// Get position coordinates
+// ------------------------
+
+public int [] getXYpos() {
+  int [] XYpos = new int[2];
+
+  XYpos[0] = xpos;
+  XYpos[1] = ypos;
+
+  return(XYpos);
+}
 
 // --------------
 // Get user input

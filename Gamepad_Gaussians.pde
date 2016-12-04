@@ -13,10 +13,10 @@ ControlDevice gpad;
 // KEYLOGGING DEFINITIONS
 PrintWriter output;
 // keypresses, drawing values, analog values, position coordinates
-int [] KP_array;
-int [] DV_array;
-float [] AV_array;
-int [] PC_array;
+int [] XYpos_array;
+int [] Keypress_array;
+int [] ParamValue_array;
+float [] Analog_array;
 
 // VARIABLE DEFINITIONS
 float analogX, analogY, analogU, analogV;
@@ -206,18 +206,26 @@ public void draw() {
   // DIAGNOSTICS
   println(analogX, analogY, analogU, analogV);
 
-  // Write the coordinate to a file with a "\t" (TAB character) between each entry
-  KP_array = getKPs();
-  DV_array = getDVs();
-  AV_array = getAVs();
+  // Write the values to a data file
+  Keypress_array = getKPs();
+  ParamValue_array = getDVs();
+  Analog_array = getAVs();
+  XYpos_array = getXYpos();
 
-  output.println(millis() + "\t" + KP_array[0] + "\t" + KP_array[1] + "\t" + KP_array[2] + "\t" + KP_array[3] + "\t" + KP_array[4] + "\t" + KP_array[5] + "\t" + KP_array[6] + "\t" + KP_array[7] + "\t" + KP_array[8] + "\t" + KP_array[9] + "\t" + KP_array[10] + "\t" + KP_array[11] + "\t" + KP_array[12] + "\t" + KP_array[13] + "\t" + KP_array[14] + "\t" + KP_array[15] + "\t" +   DV_array[0] + "\t" + DV_array[1] + "\t" + DV_array[2] + "\t" + DV_array[3] + "\t" + DV_array[4] + "\t" + DV_array[5] + "\t" + DV_array[6] + "\t" + DV_array[7] + "\t" + AV_array[0] + "\t" + AV_array[1] + "\t" + AV_array[2] + "\t" + AV_array[3]);
-  
-  output.flush(); // Write the data
+  output.println(
+    millis() + "\t" + XYpos_array[0] + "\t" + XYpos_array[1] + "\t" +
+
+    Keypress_array[0] + "\t" + Keypress_array[1] + "\t" + Keypress_array[2] + "\t" + Keypress_array[3] + "\t" + Keypress_array[4] + "\t" + Keypress_array[5] + "\t" + Keypress_array[6] + "\t" + Keypress_array[7] + "\t" + Keypress_array[8] + "\t" + Keypress_array[9] + "\t" + Keypress_array[10] + "\t" + Keypress_array[11] + "\t" + Keypress_array[12] + "\t" + Keypress_array[13] + "\t" + Keypress_array[14] + "\t" + Keypress_array[15] + "\t" +   
+    
+    ParamValue_array[0] + "\t" + ParamValue_array[1] + "\t" + ParamValue_array[2] + "\t" + ParamValue_array[3] + "\t" + ParamValue_array[4] + "\t" + ParamValue_array[5] + "\t" + ParamValue_array[6] + "\t" + ParamValue_array[7] + "\t" + 
+    
+    Analog_array[0] + "\t" + Analog_array[1] + "\t" + Analog_array[2] + "\t" + Analog_array[3]
+    );
+
+  output.flush(); 
 
   // Save file
   if (M1 & M2) {
-    output.close(); // Finish the file
     saveImage();
     createKeypressFile();
   }
