@@ -51,11 +51,11 @@ public void createKeypressFile() {
     "S1" + "\t" + "S2" + "\t" + "M1" + "\t" + "M2" + "\t" + 
     "up" + "\t" + "down" + "\t" + "left" + "\t" + "right" + "\t" + 
 
-    // Joystick integers
-    "joy1_int" + "\t" + "joy2_int" + "\t" + 
-
     // Analog axis values
-     "anlgX" + "\t" + "anlgY" + "\t" + "anlgU" + "\t" + "anlgV"
+     "anlgX" + "\t" + "anlgY" + "\t" + "anlgU" + "\t" + "anlgV" + "\t" +
+
+    // Joystick integers
+    "joy1_int" + "\t" + "joy2_int"
      );
 }
 
