@@ -32,10 +32,31 @@ public void createKeypressFile() {
 
   // Define keylogging output file naming convention
   output = createWriter("data/" + join(nf(datetime, 0), "-") + "_gamepadKeys.txt");
+
   // Create headers on output file
-  output.println("millis" + "\t" + 
-    "xpos" + "\t" + "ypos" + "\t" + 
-    "A1" + "\t" + "A2" + "\t" + "A3" + "\t" + "A4" + "\t" + "L1" + "\t" + "R1" + "\t" + "L2" + "\t" + "R2" + "\t" + "S1" + "\t" + "S2" + "\t" + "M1" + "\t" + "M2" + "\t" + "up" + "\t" + "dn" + "\t" + "lf" + "\t" + "rt" + "\t" + "red" + "\t" + "grn" + "\t" + "blu" + "\t" + "opc" + "\t" + "dpX" + "\t" + "dpY" + "\t" + "sX" + "\t" + "sY" + "\t" + "analogX" + "\t" + "analogY" + "\t" + "analogU" + "\t" + "analogV");
+  output.println(
+
+    // Temporal data
+    "millis" + "\t" + "xpos" + "\t" + "ypos" + "\t" + 
+
+    // Size and dispersion {sX, sY, dpX, dpY}
+    "sX" + "\t" + "sY" + "\t" + "dpX" + "\t" + "dpY" + "\t" + 
+
+    // Color values {R, G, B, A}
+    "red" + "\t" + "green" + "\t" + "blue" + "\t" + "opacity" + "\t" + 
+
+    // Keypress booleans {action, LR, select/M*, d-pad}
+    "A1" + "\t" + "A2" + "\t" + "A3" + "\t" + "A4" + "\t" + 
+    "L1" + "\t" + "R1" + "\t" + "L2" + "\t" + "R2" + "\t" + 
+    "S1" + "\t" + "S2" + "\t" + "M1" + "\t" + "M2" + "\t" + 
+    "up" + "\t" + "down" + "\t" + "left" + "\t" + "right" + "\t" + 
+
+    // Joystick integers
+    "joy1_int" + "\t" + "joy2_int" + "\t" + 
+
+    // Analog axis values
+     "anlgX" + "\t" + "anlgY" + "\t" + "anlgU" + "\t" + "anlgV"
+     );
 }
 
 
@@ -147,7 +168,7 @@ public int gaussianInt(int dispersion, int dimension) {
 // Get analog values
 // -----------------
 
-public float [] getAVs() {
+public float [] getAnalogValues() {
   float [] AV_array = new float[4];  
 
   AV_array[0] = analogX;
@@ -159,11 +180,11 @@ public float [] getAVs() {
 }
 
 
-// ---------------
-// Get draw values
-// ---------------
+// ---------------------------------------
+// Get parameter values (color, disp, size)
+// ----------------------------------------
 
-public int [] getDVs() {
+public int [] getParamValues() {
   int [] DV_array = new int[8];  
 
   DV_array[0] = red;
@@ -184,7 +205,7 @@ public int [] getDVs() {
 // Get keypresses
 // --------------
 
-public int [] getKPs() {
+public int [] getKeypresses() {
   int [] kp_array = new int[26];  
 
   kp_array[0] = int(A1);
@@ -291,14 +312,9 @@ public int randomInt(int a, int b) {
 // -----
 
 public void resetBlack() {
-  // A4_ctrl = 60;
-  // dpX = 300; dpY = 300;
-  // brushSize_X = 200; brushSize_Y = 200;
   background(0);
 }
 public void resetWhite() {
-  // dpX = 300; dpY = 300;
-  // brushSize_X = 200; brushSize_Y = 200;
   background(255);
 }
 
