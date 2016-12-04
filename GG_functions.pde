@@ -35,18 +35,26 @@ public void createKeypressFile() {
 
   // Create headers on output file
   output.println(
+
     // Temporal data
     "millis" + "\t" + "xpos" + "\t" + "ypos" + "\t" + 
+
     // Size and dispersion {sX, sY, dpX, dpY}
     "sX" + "\t" + "sY" + "\t" + "dpX" + "\t" + "dpY" + "\t" + 
+
     // Color values {R, G, B, A}
     "red" + "\t" + "green" + "\t" + "blue" + "\t" + "opacity" + "\t" + 
+
     // Keypress booleans {action, LR, select/M*, d-pad}
     "A1" + "\t" + "A2" + "\t" + "A3" + "\t" + "A4" + "\t" + 
     "L1" + "\t" + "R1" + "\t" + "L2" + "\t" + "R2" + "\t" + 
     "S1" + "\t" + "S2" + "\t" + "M1" + "\t" + "M2" + "\t" + 
     "up" + "\t" + "down" + "\t" + "left" + "\t" + "right" + "\t" + 
-    // Analog values {js1XY, js2UV}
+
+    // Joystick integers
+    "joy1_int" + "\t" + "joy2_int" + "\t" + 
+
+    // Analog axis values
      "anlgX" + "\t" + "anlgY" + "\t" + "anlgU" + "\t" + "anlgV"
      );
 }
