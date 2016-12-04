@@ -70,8 +70,6 @@ public void setup() {
 public void draw() {
 
   getUserInput();
-
-
   // Make framerate a function of opacity
 
 
@@ -192,7 +190,6 @@ public void draw() {
 
   drawShapes();
   drawParameters();
-  // saveFrame();
 
 
   // DIAGNOSTICS
@@ -231,7 +228,6 @@ public void draw() {
   // SAVE IMAGE
   if (M1 & M2) {
     saveImage();
-    createKeypressFile();
   }
 
 }

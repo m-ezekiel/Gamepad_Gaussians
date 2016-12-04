@@ -304,14 +304,9 @@ public int randomInt(int a, int b) {
 // -----
 
 public void resetBlack() {
-  // A4_ctrl = 60;
-  // dpX = 300; dpY = 300;
-  // brushSize_X = 200; brushSize_Y = 200;
   background(0);
 }
 public void resetWhite() {
-  // dpX = 300; dpY = 300;
-  // brushSize_X = 200; brushSize_Y = 200;
   background(255);
 }
 
