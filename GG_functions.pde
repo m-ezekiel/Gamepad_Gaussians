@@ -21,14 +21,8 @@ public int analogToInteger(float x, float y, int k) {
 // --------------------
 
 public void createKeypressFile() {
-  // Get datetime information
-  int [] datetime = new int[6];
-  datetime[0] = year();
-  datetime[1] = month();
-  datetime[2] = day();
-  datetime[3] = hour();
-  datetime[4] = minute();
-  datetime[5] = second();
+
+  int [] datetime = dateTime();
 
   // Define keylogging output file naming convention
   output = createWriter("data/" + join(nf(datetime, 0), "-") + "_gamepadKeys.txt");
@@ -59,6 +53,23 @@ public void createKeypressFile() {
      );
 }
 
+
+
+// ---------
+// Date time
+// ---------
+
+public int [] dateTime() {
+  int [] datetime = new int[6];
+  datetime[0] = year();
+  datetime[1] = month();
+  datetime[2] = day();
+  datetime[3] = hour();
+  datetime[4] = minute();
+  datetime[5] = second();
+
+  return(datetime);
+}
 
 
 // ---------------
@@ -233,6 +244,7 @@ public int [] getKeypresses() {
 }
 
 
+
 // ------------------------
 // Get position coordinates
 // ------------------------
@@ -245,6 +257,8 @@ public int [] getXYpos() {
 
   return(XYpos);
 }
+
+
 
 // --------------
 // Get user input
@@ -325,18 +339,12 @@ public void resetWhite() {
 // ----------
 
 public void saveImage() {
-  // Get datetime information
-  int [] datetime = new int[6];
-  datetime[0] = year();
-  datetime[1] = month();
-  datetime[2] = day();
-  datetime[3] = hour();
-  datetime[4] = minute();
-  datetime[5] = second();
 
-  // Create new datestamped file in the sketch directory
+  int [] datetime = dateTime();
+
   save("IMG_exports/gamePad_sketch_" + join(nf(datetime, 0), "-") + ".png");  
 }
+
 
 
 
