@@ -307,18 +307,6 @@ public void getUserInput() {
 
 
 
-
-// -----------
-// Mute colors
-// -----------
-
-public void muteAlpha() {
-  A4_ctrl = 0;
-  increment = 2;
-}
-
-
-
 // --------------
 // Random integer
 // --------------
