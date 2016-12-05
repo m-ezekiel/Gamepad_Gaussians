@@ -40,9 +40,9 @@ float fps = 30;
 
 
 // ASSIGN CONTROL MAPPINGS (variables numbered CCW from left)
-int A1_ctrl = red;
+int A1_ctrl = blue;
 int A2_ctrl = green;
-int A3_ctrl = blue;
+int A3_ctrl = red;
 int A4_ctrl = alpha;
 
 
@@ -75,9 +75,9 @@ public void draw() {
 
 
   // REFRESH CONTROL VALUES
-  red = A1_ctrl;
+  blue = A1_ctrl;
   green = A2_ctrl;
-  blue = A3_ctrl;
+  red = A3_ctrl;
   alpha = A4_ctrl;
 
 
