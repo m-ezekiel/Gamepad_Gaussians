@@ -77,6 +77,8 @@ public int [] dateTime() {
 // ---------------
 
 public void drawParameters() {
+
+  
   int wB = 150;
   int wH = 50;
   int wX = width - wB;
@@ -128,6 +130,13 @@ public void drawParameters() {
   noStroke();  
   fill(red, green, blue, alpha*3);
   ellipse(centerPointX + 4 + (1*gap), centerPointY + 1, 10, 10);
+
+
+  // IMAGE SAVED
+  if (imageSaved == true) {
+    fill(255);
+    text("SAVED", centerPointX, centerPointY - 20); 
+  }
 
 }
 
@@ -338,11 +347,10 @@ public void resetWhite() {
 // Save image
 // ----------
 
-public void saveImage() {
-
+public boolean saveImage() {
   int [] datetime = dateTime();
-
   save("IMG_exports/gamePad_sketch_" + join(nf(datetime, 0), "-") + ".png");  
+  return(true);
 }
 
 

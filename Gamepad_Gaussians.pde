@@ -22,6 +22,8 @@ float analogX, analogY, analogU, analogV;
 boolean A1, A2, A3, A4, M1, M2, L1, L2, R1, R2;
 boolean left, right, up, down, select1, select2;
 
+boolean imageSaved;
+
 
 // INITIALIZE PARAMETERS
 int xpos = 0; int ypos = 0;
@@ -70,7 +72,6 @@ public void setup() {
 public void draw() {
 
   getUserInput();
-  // Make framerate a function of opacity
 
 
   // REFRESH CONTROL VALUES
@@ -187,9 +188,9 @@ public void draw() {
 
 
   // SAVE IMAGE
-
+  imageSaved = false;
   if (M1 & M2) {
-    saveImage();
+    imageSaved = saveImage();
   }
 
 
