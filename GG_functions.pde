@@ -177,10 +177,9 @@ public int limitScale(int x, int min, int max) {
 // Gaussian integer
 // ----------------
 
-public int gaussianInt(int dispersion, int dimension) {
+public int gaussianInt(int dispersion, float mean) {
 
   float rGauss = randomGaussian();  // Random number from Z~(0,1)
-  float mean = dimension / 2;
   int value = floor((rGauss * dispersion) + mean);
 
   return(value);
