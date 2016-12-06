@@ -146,14 +146,6 @@ public void draw() {
   }
 
 
-  // MUTE VALUE: if (R2 & button) {variable = 0}
-
-  if ((R2) & A1) {A1_ctrl = 0;}
-  if ((R2) & A2) {A2_ctrl = 0;}
-  if ((R2) & A3) {A3_ctrl = 0;}
-  if ((R2) & A4) {A4_ctrl = 0;}
-
-
   // ANALOG MODIFIERS
 
   if (A1 & (abs(joystick1) > 2)) {A1_ctrl += increment * joystick1 / mScalar;}
@@ -189,6 +181,29 @@ public void draw() {
   if (down & (abs(joystick2) > 2)) {A2_ctrl += increment * joystick2 / mScalar;}
   if (right & (abs(joystick2) > 2)) {A3_ctrl += increment * joystick2 / mScalar;}
   if (up & (abs(joystick2) > 2)) {A4_ctrl += increment * joystick2 / mScalar;}
+
+
+
+  // MUTE VALUE: if (R2 & button) {variable = 0}
+
+  if ((R2) & A1) {A1_ctrl = 0;}
+  if ((R2) & A2) {A2_ctrl = 0;}
+  if ((R2) & A3) {A3_ctrl = 0;}
+  if ((R2) & A4) {A4_ctrl = 0;}
+
+  if (R2 & L1) {
+    brushSize_X = 250;
+    brushSize_Y = 250;
+  }
+  if (R2 & R1) {
+    dpX = 300;
+    dpY = 300;
+  }
+  if (R2 & (select1|select2)) {
+    x_mean = width/2;
+    y_mean = height/2;
+  }
+
 
 
   // RESET BACKGROUND

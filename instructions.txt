@@ -44,11 +44,19 @@ SIZE/SHAPE
 	continue holding Brush Size and move the Joystick 1 to the opposite corner.
 	repeat with all corners of the analog controller.
 
+POSITION
+1. Choose another color.
+
+2. Set the opacity to around 50 and reset the background.
+
+3. Hold the Position button (Select 2) and move Joystick 1 to the top-right corner.
+    repeat with all corners of the analog controller.
+
 MUTE
 1. Press Mute and Opacity to mute the opacity (the value value will go to 0)
     repeat with colors.
 
-2. Mute + (Size|Disp|Focal_position)
+2. Press Mute along with either Size, Dispersion, or Position and they will return to their default values.
 
 RANDOM
 1. Press Random (bottom-left trigger) and go nuts with the analog controllers.
