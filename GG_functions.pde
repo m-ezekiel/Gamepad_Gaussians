@@ -140,7 +140,7 @@ public void drawParameters(int width, int height) {
   text(blu, cpX + 8, cpY - 5);
   fill(255, 0, 0, 255);
   text(rd, cpX + (2*gap), cpY - 5);
-
+  // Position Values
   fill(180);
   text(x_mn, cpX - (2*gap), cpY + 14);
   text(y_mn, cpX - (1*gap), cpY + 14);
