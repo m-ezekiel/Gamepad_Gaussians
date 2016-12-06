@@ -36,6 +36,10 @@ int brushSize_Y = 200;
 int red, blue, green = 0;
 int alpha = 60;
 
+int x_mean;
+int y_mean;
+
+
 float fps = 30;
 
 
@@ -48,9 +52,12 @@ int A4_ctrl = alpha;
 
 // SETUP
 public void setup() {
-  size(1280, 750);
+  size(1280, 800);
   background(0);
   noStroke();
+
+  x_mean = width / 2;
+  y_mean = height / 2;
 
   frameRate(fps);
 
@@ -87,8 +94,8 @@ public void draw() {
 
 
   // GET COORDINATES
-  xpos = gaussianInt(dpX, width);
-  ypos = gaussianInt(dpY, height);
+  xpos = gaussianInt(dpX, x_mean);
+  ypos = gaussianInt(dpY, y_mean);
 
 
   // INCREMENTAL BEHAVIORS
@@ -105,10 +112,10 @@ public void draw() {
 
   // SIZE BEHAVIORS (d-pad)
 
-  if (up & (select1|select2)) {brushSize_Y += increment * 15;}
-  if (down & (select1|select2)) {brushSize_Y -= increment * 15;}
-  if (right & (select1|select2)) {brushSize_X += increment * 15;}
-  if (left & (select1|select2)) {brushSize_X -= increment * 15;}
+  if (up & (select1)) {brushSize_Y += increment * 15;}
+  if (down & (select1)) {brushSize_Y -= increment * 15;}
+  if (right & (select1)) {brushSize_X += increment * 15;}
+  if (left & (select1)) {brushSize_X -= increment * 15;}
 
 
   // DISPERSION BEHAVIORS (d-pad)
@@ -117,6 +124,14 @@ public void draw() {
   if (down & (L1|R1)) {dpY -= increment * 10;}
   if (right & (L1|R1)) {dpX += increment * 10;}
   if (left & (L1|R1)) {dpX -= increment * 10;}
+
+
+  // POSITION BEHAVIORS (d-pad)
+
+  if (up & (select2)) {y_mean += -increment * 5;}
+  if (down & (select2)) {y_mean -= -increment * 5;}
+  if (right & (select2)) {x_mean += increment * 5;}
+  if (left & (select2)) {x_mean -= increment * 5;}
 
 
   // RANDOM BEHAVIORS: if (L2) {variable = randomInt(min, max);}
@@ -183,8 +198,10 @@ public void draw() {
   A4_ctrl = limitScale(A4_ctrl, 0, 255);
   dpY = limitScale(dpY, 0, 400);
   dpX = limitScale(dpX, 0, 400);
-  brushSize_Y = limitScale(brushSize_Y, 1, 1000);
-  brushSize_X = limitScale(brushSize_X, 1, 1000);
+  brushSize_Y = limitScale(brushSize_Y, 1, 999);
+  brushSize_X = limitScale(brushSize_X, 1, 999);
+  x_mean = limitScale(x_mean, 0, width);
+  y_mean = limitScale(y_mean, 0, height);
 
 
   // SAVE IMAGE
@@ -196,7 +213,7 @@ public void draw() {
 
   // DRAW SHAPES
   drawShapes();
-  drawParameters();
+  drawParameters(width, height);
 
 
   // WRITE DATA

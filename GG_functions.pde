@@ -76,71 +76,80 @@ public int [] dateTime() {
 // Draw parameters
 // ---------------
 
-public void drawParameters() {
-
-  
-  int winBase = 150;
-  int winHeight = 50;
-  int winX = width - winBase;
-  int winY = 0;
+public void drawParameters(int width, int height) {
+  // Outer window
+  int hB = 160;
+  int hT = 60;
+  int hX = width - hB;
+  int hY = 0;
   int gap = 28;
-  fill(0, 155);
-  rect(winX, winY, winBase, winHeight);
-
-  // Prototype for inner window preview
-  stroke(100);
-  rect(winX + 13, winY + 12, winBase - 110, winHeight - 25);
-  noStroke();
-
-  int centerPointX = winX + (winBase/2);
-  int centerPointY = winY + (winHeight/2);
-
+  // Inner window
+  int iwB = 50;
+  int iwT = int(iwB * 0.625);
+  int iwCX = hX + hB/12 + iwB/2;
+  int iwCY = hY + hT/6 + iwT/2;
+  // Centerpoints
+  int cpX = hX + (hB/2);
+  int cpY = hY + (hT/2);
+  // Parameter values
+  String opacity = str(alpha);
+  String rd = str(red);
+  String grn = str(green);
+  String blu = str(blue);
+  String x_mn = str(x_mean);
+  String y_mn = str(y_mean);
   String dX = str(dpX/4);
   String dY = str(dpY/4);
 
-  String a = str(alpha);
-  String r = str(red);
-  String g = str(green);
-  String b = str(blue);
+  // Head Up Display (outer window)
+  fill(0, 155);
+  rect(hX, hY, hB, hT);
 
-  textAlign(CENTER, TOP);
-  textSize(11);
 
-  fill(200);
-  text(a, centerPointX + 4 + (1*gap), centerPointY - 20);      // alpha
-  fill(0, 255, 0, 255);
-  text(g, centerPointX + 4 + (1*gap), centerPointY + 10);      // green
-  fill(0, 200, 255, 255);
-  text(b, centerPointX + 8, centerPointY - 5);                 // blue
-  fill(255, 0, 0, 255);
-  text(r, centerPointX + (2*gap), centerPointY - 5);           // red
+  // Prototype for inner window preview
+  stroke(100);
+  rect(hX + hB/12, hY + hT/6, iwB, iwT);
+  noStroke();
 
 
   stroke(150);
   fill(red, green, blue, 127);
 
   // X-DISPERSION
-  line(centerPointX - (1.5*gap) - dpX/20, centerPointY, centerPointX - (1.5*gap) + dpX/20, centerPointY);
-
-  ellipse(centerPointX - (1.5*gap) - dpX/20, centerPointY, brushSize_X/50, brushSize_Y/50);
-  ellipse(centerPointX - (1.5*gap) + dpX/20, centerPointY, brushSize_X/50, brushSize_Y/50);
-
+  ellipse(cpX - (1.5*gap) - dpX/20 + (x_mean - width/2)/25, iwCY + (y_mean - height/2)/25, brushSize_X/50, brushSize_Y/50);
+  ellipse(cpX - (1.5*gap) + dpX/20 + (x_mean - width/2)/25, iwCY + (y_mean - height/2)/25, brushSize_X/50, brushSize_Y/50);
   // Y-DISPERSION
-  line(centerPointX - (1.5*gap), centerPointY - dpY/30, centerPointX - (1.5*gap), centerPointY + dpY/30);
+  ellipse(cpX - (1.5*gap) + (x_mean - width/2)/25, iwCY - dpY/30 + (y_mean - height/2)/25, brushSize_X/50, brushSize_Y/50);
+  ellipse(cpX - (1.5*gap) + (x_mean - width/2)/25, iwCY + dpY/30 + (y_mean - height/2)/25, brushSize_X/50, brushSize_Y/50);
 
-  ellipse(centerPointX - (1.5*gap), centerPointY - dpY/30, brushSize_X/50, brushSize_Y/50);
-  ellipse(centerPointX - (1.5*gap), centerPointY + dpY/30, brushSize_X/50, brushSize_Y/50);
-
-  // Colored ellipse
+  // Brush pigment colored ellipse
   noStroke();  
   fill(red, green, blue, alpha*3);
-  ellipse(centerPointX + 4 + (1*gap), centerPointY + 1, 10, 10);
+  ellipse(cpX + 4 + (1*gap), cpY + 1, 10, 10);
+
+
+  // Display color values according to controller position
+  textAlign(CENTER, TOP);
+  textSize(11);
+  // Color Values
+  fill(200);
+  text(opacity, cpX + 4 + (1*gap), cpY - 20);
+  fill(0, 255, 0, 255);
+  text(grn, cpX + 4 + (1*gap), cpY + 10);
+  fill(0, 200, 255, 255);
+  text(blu, cpX + 8, cpY - 5);
+  fill(255, 0, 0, 255);
+  text(rd, cpX + (2*gap), cpY - 5);
+  // Position Values
+  fill(180);
+  text(x_mn, cpX - (2*gap), cpY + 14);
+  text(y_mn, cpX - (1*gap), cpY + 14);
 
 
   // IMAGE SAVED
   if (imageSaved == true) {
     fill(255);
-    text("SAVED", centerPointX, centerPointY - 20); 
+    text("SAVED", cpX, cpY - 20); 
   }
 
 }
@@ -177,10 +186,9 @@ public int limitScale(int x, int min, int max) {
 // Gaussian integer
 // ----------------
 
-public int gaussianInt(int dispersion, int dimension) {
+public int gaussianInt(int dispersion, int mean) {
 
   float rGauss = randomGaussian();  // Random number from Z~(0,1)
-  float mean = dimension / 2;
   int value = floor((rGauss * dispersion) + mean);
 
   return(value);
