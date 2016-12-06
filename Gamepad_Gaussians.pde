@@ -36,8 +36,8 @@ int brushSize_Y = 200;
 int red, blue, green = 0;
 int alpha = 60;
 
-float x_mean;
-float y_mean;
+int x_mean;
+int y_mean;
 
 
 float fps = 30;
@@ -198,8 +198,10 @@ public void draw() {
   A4_ctrl = limitScale(A4_ctrl, 0, 255);
   dpY = limitScale(dpY, 0, 400);
   dpX = limitScale(dpX, 0, 400);
-  brushSize_Y = limitScale(brushSize_Y, 1, 1000);
-  brushSize_X = limitScale(brushSize_X, 1, 1000);
+  brushSize_Y = limitScale(brushSize_Y, 1, 999);
+  brushSize_X = limitScale(brushSize_X, 1, 999);
+  x_mean = limitScale(x_mean, 0, width);
+  y_mean = limitScale(y_mean, 0, height);
 
 
   // SAVE IMAGE
