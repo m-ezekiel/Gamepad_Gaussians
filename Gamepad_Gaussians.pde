@@ -48,8 +48,6 @@ int A1_ctrl = blue;
 int A2_ctrl = green;
 int A3_ctrl = red;
 int A4_ctrl = alpha;
-// int S2_ctrl_X = dpX;
-// int S2_ctrl_Y = dpY;
 
 // SETUP
 public void setup() {
@@ -80,7 +78,6 @@ public void setup() {
 public void draw() {
 
   getUserInput();
-
 
   // REFRESH CONTROL VALUES
   blue = A1_ctrl;
@@ -134,6 +131,7 @@ public void draw() {
   if (right & select2) {x_mean += increment * 15;}
   if (left & select2) {x_mean -= increment * 15;}
 
+
   // RANDOM BEHAVIORS: if (L2) {variable = randomInt(min, max);}
 
   if ((L2)) {
@@ -173,17 +171,16 @@ public void draw() {
   if (L1 & (abs(analogU) > 0.15)) {brushSize_X += analogU * 10 * increment;}
   if (L1 & (abs(analogV) > 0.15)) {brushSize_Y += -analogV * 10 * increment;}
 
+  if((select1|select2) & (abs(analogX) > 0.15)) {x_mean += analogX * 15 * increment;}
+  if((select1|select2) & (abs(analogY) > 0.15)) {y_mean += analogY * 15 * increment;}
+  if((select1|select2) & (abs(analogU) > 0.15)) {x_mean += analogU * 15 * increment;}
+  if((select1|select2) & (abs(analogV) > 0.15)) {y_mean += analogV * 15 * increment;}
+
   // Map D-Pad to colors when Joystick 2 is activated
   if (left & (abs(joystick2) > 2)) {A1_ctrl += increment * joystick2 / mScalar;}
   if (down & (abs(joystick2) > 2)) {A2_ctrl += increment * joystick2 / mScalar;}
   if (right & (abs(joystick2) > 2)) {A3_ctrl += increment * joystick2 / mScalar;}
   if (up & (abs(joystick2) > 2)) {A4_ctrl += increment * joystick2 / mScalar;}
-
-
-  if((select1|select2) & (abs(analogX) > 0.15)) {x_mean += analogX * 15 * increment;}
-  if((select1|select2) & (abs(analogY) > 0.15)) {y_mean += analogY * 15 * increment;}
-  if((select1|select2) & (abs(analogU) > 0.15)) {x_mean += analogU * 15 * increment;}
-  if((select1|select2) & (abs(analogV) > 0.15)) {y_mean += analogV * 15 * increment;}
 
 
   // RESET BACKGROUND
@@ -251,6 +248,6 @@ public void draw() {
 
 
   // DIAGNOSTICS
-  println(joystick1, joystick2, analogX, analogY, analogU, analogV);
-
+  // println();
+  
 }
