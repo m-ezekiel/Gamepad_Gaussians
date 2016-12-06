@@ -98,7 +98,7 @@ public void draw() {
   ypos = gaussianInt(dpY, y_mean);
 
 
-  // INCREMENTAL BEHAVIORS
+  // COLOR & OPACITY BEHAVIORS (d-pad)
 
   if ((down|left|L1) & A1) {A1_ctrl -= increment;}
   if ((down|left|L1) & A2) {A2_ctrl -= increment;}
@@ -122,8 +122,8 @@ public void draw() {
 
   if (up & (L1|R1)) {dpY += increment * 10;}
   if (down & (L1|R1)) {dpY -= increment * 10;}
-  if (right & (L1|R1)) {dpX += increment * 10;}
-  if (left & (L1|R1)) {dpX -= increment * 10;}
+  if (right & (L1|R1)) {dpX -= increment * 10;}
+  if (left & (L1|R1)) {dpX += increment * 10;}
 
 
   // POSITION BEHAVIORS (d-pad)
@@ -137,8 +137,8 @@ public void draw() {
   // RANDOM BEHAVIORS: if (L2) {variable = randomInt(min, max);}
 
   if ((L2)) {
-    brushSize_Y = randomInt(0, 1000);
-    brushSize_X = randomInt(0, 1000);
+    brushSize_Y = randomInt(0, 999);
+    brushSize_X = randomInt(0, 999);
     dpY = randomInt(0, 400);
     dpX = randomInt(0, 400);
     A1_ctrl = randomInt(0, 255);
@@ -174,14 +174,10 @@ public void draw() {
   if((L1|R1) & (abs(analogU) > 0.15)) {dpX += analogU * 10 * increment;}
   if((L1|R1) & (abs(analogV) > 0.15)) {dpY += -analogV * 10 * increment;}
 
-  if((select1|select2) & (abs(analogX) > 0.15)) 
-    {brushSize_X += -analogX * 15 * increment;}
-  if((select1|select2) & (abs(analogY) > 0.15)) 
-    {brushSize_Y += -analogY * 15 * increment;}
-  if((select1|select2) & (abs(analogU) > 0.15)) 
-    {brushSize_X += analogU * 15 * increment;}
-  if((select1|select2) & (abs(analogV) > 0.15)) 
-    {brushSize_Y += -analogV * 15 * increment;}
+  if((select1|select2) & (abs(analogX) > 0.15)) {brushSize_X += -analogX * 15 * increment;}
+  if((select1|select2) & (abs(analogY) > 0.15)) {brushSize_Y += -analogY * 15 * increment;}
+  if((select1|select2) & (abs(analogU) > 0.15)) {brushSize_X += analogU * 15 * increment;}
+  if((select1|select2) & (abs(analogV) > 0.15)) {brushSize_Y += -analogV * 15 * increment;}
 
 
   // RESET BACKGROUND
