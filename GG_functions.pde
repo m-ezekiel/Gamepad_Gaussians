@@ -79,16 +79,21 @@ public int [] dateTime() {
 public void drawParameters() {
 
   
-  int wB = 150;
-  int wH = 50;
-  int wX = width - wB;
-  int wY = 0;
+  int winBase = 150;
+  int winHeight = 50;
+  int winX = width - winBase;
+  int winY = 0;
   int gap = 28;
   fill(0, 155);
-  rect(wX, wY, wB, wH);
+  rect(winX, winY, winBase, winHeight);
 
-  int centerPointX = wX + (wB/2);
-  int centerPointY = wY + (wH/2);
+  // Prototype for inner window preview
+  stroke(100);
+  rect(winX + 13, winY + 12, winBase - 110, winHeight - 25);
+  noStroke();
+
+  int centerPointX = winX + (winBase/2);
+  int centerPointY = winY + (winHeight/2);
 
   String dX = str(dpX/4);
   String dY = str(dpY/4);
