@@ -48,7 +48,8 @@ int A1_ctrl = blue;
 int A2_ctrl = green;
 int A3_ctrl = red;
 int A4_ctrl = alpha;
-
+// int S2_ctrl_X = dpX;
+// int S2_ctrl_Y = dpY;
 
 // SETUP
 public void setup() {
@@ -112,27 +113,26 @@ public void draw() {
 
   // SIZE BEHAVIORS (d-pad)
 
-  if (up & (select1)) {brushSize_Y += increment * 15;}
-  if (down & (select1)) {brushSize_Y -= increment * 15;}
-  if (right & (select1)) {brushSize_X += increment * 15;}
-  if (left & (select1)) {brushSize_X -= increment * 15;}
+  if (up & L1) {brushSize_Y += increment * 15;}
+  if (down & L1) {brushSize_Y -= increment * 15;}
+  if (right & L1) {brushSize_X += increment * 15;}
+  if (left & L1) {brushSize_X -= increment * 15;}
 
 
   // DISPERSION BEHAVIORS (d-pad)
 
-  if (up & (L1|R1)) {dpY += increment * 10;}
-  if (down & (L1|R1)) {dpY -= increment * 10;}
-  if (right & (L1|R1)) {dpX -= increment * 10;}
-  if (left & (L1|R1)) {dpX += increment * 10;}
+  if (up & R1) {dpY += increment * 10;}
+  if (down & R1) {dpY -= increment * 10;}
+  if (right & R1) {dpX -= increment * 10;}
+  if (left & R1) {dpX += increment * 10;}
 
 
   // POSITION BEHAVIORS (d-pad)
 
-  if (up & (select2)) {y_mean += -increment * 5;}
-  if (down & (select2)) {y_mean -= -increment * 5;}
-  if (right & (select2)) {x_mean += increment * 5;}
-  if (left & (select2)) {x_mean -= increment * 5;}
-
+  if (up & select1) {y_mean += -increment * 5;}
+  if (down & select1) {y_mean -= -increment * 5;}
+  if (right & select1) {x_mean += increment * 5;}
+  if (left & select1) {x_mean -= increment * 5;}
 
   // RANDOM BEHAVIORS: if (L2) {variable = randomInt(min, max);}
 
