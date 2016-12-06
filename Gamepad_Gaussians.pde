@@ -52,7 +52,7 @@ int A4_ctrl = alpha;
 
 // SETUP
 public void setup() {
-  size(1280, 750);
+  size(1280, 800);
   background(0);
   noStroke();
 
@@ -213,7 +213,7 @@ public void draw() {
 
   // DRAW SHAPES
   drawShapes();
-  drawParameters();
+  drawParameters(width, height);
 
 
   // WRITE DATA

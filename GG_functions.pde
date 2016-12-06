@@ -76,29 +76,21 @@ public int [] dateTime() {
 // Draw parameters
 // ---------------
 
-public void drawParameters() {
-
-  
-  int winBase = 150;
-  int winHeight = 50;
-  int winX = width - winBase;
-  int winY = 0;
+public void drawParameters(int width, int height) {
+  // Outer window
+  int hB = 160;
+  int hT = 60;
+  int hX = width - hB;
+  int hY = 0;
   int gap = 28;
-  fill(0, 155);
-  rect(winX, winY, winBase, winHeight);
-
-  // Prototype for inner window preview
-  stroke(100);
-  rect(winX + 13, winY + 12, winBase - 110, winHeight - 25);
-  noStroke();
-
+  // Inner window
+  int iwB = 50;
+  int iwT = int(iwB * 0.625);
+  int iwCX = hX + hB/12 + iwB/2;
+  int iwCY = hY + hT/6 + iwT/2;
   // Centerpoints
-  int cpX = winX + (winBase/2);
-  int cpY = winY + (winHeight/2);
-
-  String dX = str(dpX/4);
-  String dY = str(dpY/4);
-
+  int cpX = hX + (hB/2);
+  int cpY = hY + (hT/2);
   // Parameter values
   String opacity = str(alpha);
   String rd = str(red);
@@ -106,11 +98,40 @@ public void drawParameters() {
   String blu = str(blue);
   String x_mn = str(x_mean);
   String y_mn = str(y_mean);
+  String dX = str(dpX/4);
+  String dY = str(dpY/4);
 
-  textAlign(CENTER, TOP);
-  textSize(11);
+  // Head Up Display (outer window)
+  fill(0, 155);
+  rect(hX, hY, hB, hT);
+
+
+  // Prototype for inner window preview
+  stroke(100);
+  rect(hX + hB/12, hY + hT/6, iwB, iwT);
+  noStroke();
+
+
+  stroke(150);
+  fill(red, green, blue, 127);
+
+  // X-DISPERSION
+  ellipse(cpX - (1.5*gap) - dpX/20 + (x_mean - width/2)/25, iwCY + (y_mean - height/2)/25, brushSize_X/50, brushSize_Y/50);
+  ellipse(cpX - (1.5*gap) + dpX/20 + (x_mean - width/2)/25, iwCY + (y_mean - height/2)/25, brushSize_X/50, brushSize_Y/50);
+  // Y-DISPERSION
+  ellipse(cpX - (1.5*gap) + (x_mean - width/2)/25, iwCY - dpY/30 + (y_mean - height/2)/25, brushSize_X/50, brushSize_Y/50);
+  ellipse(cpX - (1.5*gap) + (x_mean - width/2)/25, iwCY + dpY/30 + (y_mean - height/2)/25, brushSize_X/50, brushSize_Y/50);
+
+  // Brush pigment colored ellipse
+  noStroke();  
+  fill(red, green, blue, alpha*3);
+  ellipse(cpX + 4 + (1*gap), cpY + 1, 10, 10);
+
 
   // Display color values according to controller position
+  textAlign(CENTER, TOP);
+  textSize(11);
+  // Color Values
   fill(200);
   text(opacity, cpX + 4 + (1*gap), cpY - 20);
   fill(0, 255, 0, 255);
@@ -120,31 +141,9 @@ public void drawParameters() {
   fill(255, 0, 0, 255);
   text(rd, cpX + (2*gap), cpY - 5);
 
-  fill(255);
-  text(x_mn, cpX - (2*gap), cpY + 10);
-  fill(255);
-  text(y_mn, cpX - (1*gap), cpY + 10);
-
-
-  stroke(150);
-  fill(red, green, blue, 127);
-
-  // X-DISPERSION
-  line(cpX - (1.5*gap) - dpX/20, cpY, cpX - (1.5*gap) + dpX/20, cpY);
-
-  ellipse(cpX - (1.5*gap) - dpX/20, cpY, brushSize_X/50, brushSize_Y/50);
-  ellipse(cpX - (1.5*gap) + dpX/20, cpY, brushSize_X/50, brushSize_Y/50);
-
-  // Y-DISPERSION
-  line(cpX - (1.5*gap), cpY - dpY/30, cpX - (1.5*gap), cpY + dpY/30);
-
-  ellipse(cpX - (1.5*gap), cpY - dpY/30, brushSize_X/50, brushSize_Y/50);
-  ellipse(cpX - (1.5*gap), cpY + dpY/30, brushSize_X/50, brushSize_Y/50);
-
-  // Colored ellipse
-  noStroke();  
-  fill(red, green, blue, alpha*3);
-  ellipse(cpX + 4 + (1*gap), cpY + 1, 10, 10);
+  fill(180);
+  text(x_mn, cpX - (2*gap), cpY + 14);
+  text(y_mn, cpX - (1*gap), cpY + 14);
 
 
   // IMAGE SAVED
