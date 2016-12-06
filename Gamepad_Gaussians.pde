@@ -207,6 +207,8 @@ public void draw() {
   dpX = limitScale(dpX, 0, 400);
   brushSize_Y = limitScale(brushSize_Y, 1, 999);
   brushSize_X = limitScale(brushSize_X, 1, 999);
+  xpos = limitScale(xpos, 0, width);
+  ypos = limitScale(ypos, 0, height);
   x_mean = limitScale(x_mean, 0, width);
   y_mean = limitScale(y_mean, 0, height);
 
@@ -248,7 +250,7 @@ public void draw() {
     Analog_array[0] + "\t" + Analog_array[1] + "\t" + Analog_array[2] + "\t" + Analog_array[3] + "\t" +
 
     // Joystick integers
-    joystick1 + "\t" + joystick2 + "\t"
+    joystick1 + "\t" + joystick2
 
     );
 
@@ -256,6 +258,6 @@ public void draw() {
 
 
   // DIAGNOSTICS
-  // println();
+  println(XYpos_array[0], XYpos_array[1]);
 
 }
