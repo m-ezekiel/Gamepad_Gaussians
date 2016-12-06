@@ -31,8 +31,8 @@ int dpX = 300; int dpY = 300;
 int increment = 2;
 int scalar = 50;
 int mScalar = scalar / 1;
-int brushSize_X = 200;
-int brushSize_Y = 200;
+int brushSize_X = 250;
+int brushSize_Y = 250;
 int red, blue, green = 0;
 int alpha = 60;
 
@@ -129,10 +129,10 @@ public void draw() {
 
   // POSITION BEHAVIORS (d-pad)
 
-  if (up & select1) {y_mean += -increment * 5;}
-  if (down & select1) {y_mean -= -increment * 5;}
-  if (right & select1) {x_mean += increment * 5;}
-  if (left & select1) {x_mean -= increment * 5;}
+  if (up & select2) {y_mean += -increment * 5;}
+  if (down & select2) {y_mean -= -increment * 5;}
+  if (right & select2) {x_mean += increment * 5;}
+  if (left & select2) {x_mean -= increment * 5;}
 
   // RANDOM BEHAVIORS: if (L2) {variable = randomInt(min, max);}
 
@@ -168,6 +168,10 @@ public void draw() {
   if (A3 & (abs(joystick2) > 2)) {A3_ctrl += increment * joystick2 / mScalar;}
   if (A4 & (abs(joystick2) > 2)) {A4_ctrl += increment * joystick2 / mScalar;}
 
+  if (left & (abs(joystick2) > 2)) {A1_ctrl += increment * joystick2 / mScalar;}
+  if (down & (abs(joystick2) > 2)) {A2_ctrl += increment * joystick2 / mScalar;}
+  if (right & (abs(joystick2) > 2)) {A3_ctrl += increment * joystick2 / mScalar;}
+  if (up & (abs(joystick2) > 2)) {A4_ctrl += increment * joystick2 / mScalar;}
 
   if((L1|R1) & (abs(analogX) > 0.15)) {dpX += -analogX * 10 * increment;}
   if((L1|R1) & (abs(analogY) > 0.15)) {dpY += -analogY * 10 * increment;}
