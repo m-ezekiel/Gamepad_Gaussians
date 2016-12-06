@@ -129,10 +129,10 @@ public void draw() {
 
   // POSITION BEHAVIORS (d-pad)
 
-  if (up & select2) {y_mean += -increment * 5;}
-  if (down & select2) {y_mean -= -increment * 5;}
-  if (right & select2) {x_mean += increment * 5;}
-  if (left & select2) {x_mean -= increment * 5;}
+  if (up & select2) {y_mean += -increment * 15;}
+  if (down & select2) {y_mean -= -increment * 15;}
+  if (right & select2) {x_mean += increment * 15;}
+  if (left & select2) {x_mean -= increment * 15;}
 
   // RANDOM BEHAVIORS: if (L2) {variable = randomInt(min, max);}
 
@@ -168,20 +168,22 @@ public void draw() {
   if (A3 & (abs(joystick2) > 2)) {A3_ctrl += increment * joystick2 / mScalar;}
   if (A4 & (abs(joystick2) > 2)) {A4_ctrl += increment * joystick2 / mScalar;}
 
+  if (L1 & (abs(analogX) > 0.15)) {brushSize_X += analogX * 15 * increment;}
+  if (L1 & (abs(analogY) > 0.15)) {brushSize_Y += -analogY * 15 * increment;}
+  if (L1 & (abs(analogU) > 0.15)) {brushSize_X += analogU * 10 * increment;}
+  if (L1 & (abs(analogV) > 0.15)) {brushSize_Y += -analogV * 10 * increment;}
+
+  // Map D-Pad to colors when Joystick 2 is activated
   if (left & (abs(joystick2) > 2)) {A1_ctrl += increment * joystick2 / mScalar;}
   if (down & (abs(joystick2) > 2)) {A2_ctrl += increment * joystick2 / mScalar;}
   if (right & (abs(joystick2) > 2)) {A3_ctrl += increment * joystick2 / mScalar;}
   if (up & (abs(joystick2) > 2)) {A4_ctrl += increment * joystick2 / mScalar;}
 
-  if((L1|R1) & (abs(analogX) > 0.15)) {dpX += -analogX * 10 * increment;}
-  if((L1|R1) & (abs(analogY) > 0.15)) {dpY += -analogY * 10 * increment;}
-  if((L1|R1) & (abs(analogU) > 0.15)) {dpX += analogU * 10 * increment;}
-  if((L1|R1) & (abs(analogV) > 0.15)) {dpY += -analogV * 10 * increment;}
 
-  if((select1|select2) & (abs(analogX) > 0.15)) {brushSize_X += -analogX * 15 * increment;}
-  if((select1|select2) & (abs(analogY) > 0.15)) {brushSize_Y += -analogY * 15 * increment;}
-  if((select1|select2) & (abs(analogU) > 0.15)) {brushSize_X += analogU * 15 * increment;}
-  if((select1|select2) & (abs(analogV) > 0.15)) {brushSize_Y += -analogV * 15 * increment;}
+  if((select1|select2) & (abs(analogX) > 0.15)) {x_mean += analogX * 15 * increment;}
+  if((select1|select2) & (abs(analogY) > 0.15)) {y_mean += analogY * 15 * increment;}
+  if((select1|select2) & (abs(analogU) > 0.15)) {x_mean += analogU * 15 * increment;}
+  if((select1|select2) & (abs(analogV) > 0.15)) {y_mean += analogV * 15 * increment;}
 
 
   // RESET BACKGROUND
