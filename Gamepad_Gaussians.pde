@@ -31,8 +31,8 @@ int dpX = 300; int dpY = 300;
 int increment = 2;
 int scalar = 50;
 int mScalar = scalar / 1;
-int brushSize_X = 200;
-int brushSize_Y = 200;
+int brushSize_X = 250;
+int brushSize_Y = 250;
 int red, blue, green = 0;
 int alpha = 60;
 
@@ -48,7 +48,6 @@ int A1_ctrl = blue;
 int A2_ctrl = green;
 int A3_ctrl = red;
 int A4_ctrl = alpha;
-
 
 // SETUP
 public void setup() {
@@ -79,7 +78,6 @@ public void setup() {
 public void draw() {
 
   getUserInput();
-
 
   // REFRESH CONTROL VALUES
   blue = A1_ctrl;
@@ -112,26 +110,26 @@ public void draw() {
 
   // SIZE BEHAVIORS (d-pad)
 
-  if (up & (select1)) {brushSize_Y += increment * 15;}
-  if (down & (select1)) {brushSize_Y -= increment * 15;}
-  if (right & (select1)) {brushSize_X += increment * 15;}
-  if (left & (select1)) {brushSize_X -= increment * 15;}
+  if (up & L1) {brushSize_Y += increment * 15;}
+  if (down & L1) {brushSize_Y -= increment * 15;}
+  if (right & L1) {brushSize_X += increment * 15;}
+  if (left & L1) {brushSize_X -= increment * 15;}
 
 
   // DISPERSION BEHAVIORS (d-pad)
 
-  if (up & (L1|R1)) {dpY += increment * 10;}
-  if (down & (L1|R1)) {dpY -= increment * 10;}
-  if (right & (L1|R1)) {dpX -= increment * 10;}
-  if (left & (L1|R1)) {dpX += increment * 10;}
+  if (up & R1) {dpY += increment * 10;}
+  if (down & R1) {dpY -= increment * 10;}
+  if (right & R1) {dpX -= increment * 10;}
+  if (left & R1) {dpX += increment * 10;}
 
 
   // POSITION BEHAVIORS (d-pad)
 
-  if (up & (select2)) {y_mean += -increment * 5;}
-  if (down & (select2)) {y_mean -= -increment * 5;}
-  if (right & (select2)) {x_mean += increment * 5;}
-  if (left & (select2)) {x_mean -= increment * 5;}
+  if (up & select2) {y_mean += -increment * 15;}
+  if (down & select2) {y_mean -= -increment * 15;}
+  if (right & select2) {x_mean += increment * 15;}
+  if (left & select2) {x_mean -= increment * 15;}
 
 
   // RANDOM BEHAVIORS: if (L2) {variable = randomInt(min, max);}
@@ -148,14 +146,6 @@ public void draw() {
   }
 
 
-  // MUTE VALUE: if (R2 & button) {variable = 0}
-
-  if ((R2) & A1) {A1_ctrl = 0;}
-  if ((R2) & A2) {A2_ctrl = 0;}
-  if ((R2) & A3) {A3_ctrl = 0;}
-  if ((R2) & A4) {A4_ctrl = 0;}
-
-
   // ANALOG MODIFIERS
 
   if (A1 & (abs(joystick1) > 2)) {A1_ctrl += increment * joystick1 / mScalar;}
@@ -168,16 +158,52 @@ public void draw() {
   if (A3 & (abs(joystick2) > 2)) {A3_ctrl += increment * joystick2 / mScalar;}
   if (A4 & (abs(joystick2) > 2)) {A4_ctrl += increment * joystick2 / mScalar;}
 
+  // Brush Size 
+  if (L1 & (abs(analogX) > 0.15)) {brushSize_X += analogX * 15 * increment;}
+  if (L1 & (abs(analogY) > 0.15)) {brushSize_Y += -analogY * 15 * increment;}
+  if (L1 & (abs(analogU) > 0.15)) {brushSize_X += analogU * 15 * increment;}
+  if (L1 & (abs(analogV) > 0.15)) {brushSize_Y += -analogV * 15 * increment;}
 
-  if((L1|R1) & (abs(analogX) > 0.15)) {dpX += -analogX * 10 * increment;}
-  if((L1|R1) & (abs(analogY) > 0.15)) {dpY += -analogY * 10 * increment;}
-  if((L1|R1) & (abs(analogU) > 0.15)) {dpX += analogU * 10 * increment;}
-  if((L1|R1) & (abs(analogV) > 0.15)) {dpY += -analogV * 10 * increment;}
+  // Dispersion 
+  if (R1 & (abs(analogX) > 0.15)) {dpX += -analogX * 15 * increment;}
+  if (R1 & (abs(analogY) > 0.15)) {dpY += -analogY * 15 * increment;}
+  if (R1 & (abs(analogU) > 0.15)) {dpX += analogU * 15 * increment;}
+  if (R1 & (abs(analogV) > 0.15)) {dpY += -analogV * 15 * increment;}
 
-  if((select1|select2) & (abs(analogX) > 0.15)) {brushSize_X += -analogX * 15 * increment;}
-  if((select1|select2) & (abs(analogY) > 0.15)) {brushSize_Y += -analogY * 15 * increment;}
-  if((select1|select2) & (abs(analogU) > 0.15)) {brushSize_X += analogU * 15 * increment;}
-  if((select1|select2) & (abs(analogV) > 0.15)) {brushSize_Y += -analogV * 15 * increment;}
+  // Position
+  if((select1|select2) & (abs(analogX) > 0.15)) {x_mean += analogX * 15 * increment;}
+  if((select1|select2) & (abs(analogY) > 0.15)) {y_mean += analogY * 15 * increment;}
+  if((select1|select2) & (abs(analogU) > 0.15)) {x_mean += analogU * 15 * increment;}
+  if((select1|select2) & (abs(analogV) > 0.15)) {y_mean += analogV * 15 * increment;}
+
+  // Map D-Pad to colors when Joystick 2 is activated
+  if (left & (abs(joystick2) > 2)) {A1_ctrl += increment * joystick2 / mScalar;}
+  if (down & (abs(joystick2) > 2)) {A2_ctrl += increment * joystick2 / mScalar;}
+  if (right & (abs(joystick2) > 2)) {A3_ctrl += increment * joystick2 / mScalar;}
+  if (up & (abs(joystick2) > 2)) {A4_ctrl += increment * joystick2 / mScalar;}
+
+
+
+  // MUTE VALUE: if (R2 & button) {variable = 0}
+
+  if ((R2) & A1) {A1_ctrl = 0;}
+  if ((R2) & A2) {A2_ctrl = 0;}
+  if ((R2) & A3) {A3_ctrl = 0;}
+  if ((R2) & A4) {A4_ctrl = 0;}
+
+  if (R2 & L1) {
+    brushSize_X = 250;
+    brushSize_Y = 250;
+  }
+  if (R2 & R1) {
+    dpX = 300;
+    dpY = 300;
+  }
+  if (R2 & (select1|select2)) {
+    x_mean = width/2;
+    y_mean = height/2;
+  }
+
 
 
   // RESET BACKGROUND
@@ -196,6 +222,8 @@ public void draw() {
   dpX = limitScale(dpX, 0, 400);
   brushSize_Y = limitScale(brushSize_Y, 1, 999);
   brushSize_X = limitScale(brushSize_X, 1, 999);
+  xpos = limitScale(xpos, 0, width);
+  ypos = limitScale(ypos, 0, height);
   x_mean = limitScale(x_mean, 0, width);
   y_mean = limitScale(y_mean, 0, height);
 
@@ -237,7 +265,7 @@ public void draw() {
     Analog_array[0] + "\t" + Analog_array[1] + "\t" + Analog_array[2] + "\t" + Analog_array[3] + "\t" +
 
     // Joystick integers
-    joystick1 + "\t" + joystick2 + "\t"
+    joystick1 + "\t" + joystick2
 
     );
 
@@ -245,6 +273,6 @@ public void draw() {
 
 
   // DIAGNOSTICS
-  println(joystick1, joystick2, analogX, analogY, analogU, analogV);
+  println(XYpos_array[0], XYpos_array[1]);
 
 }
