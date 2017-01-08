@@ -342,6 +342,12 @@ public void resetBlack() {
 public void resetWhite() {
   background(255);
 }
+public void resetColor() {
+  background(red, green, blue, alpha);
+}
+public void resetInverse() {
+  background(255 - red, 255 - green, 255 - blue, 255 - alpha);
+}
 
 
 

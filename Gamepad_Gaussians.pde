@@ -215,6 +215,8 @@ public void draw() {
 
   if (R2 & up) {resetBlack();}
   if (R2 & down) {resetWhite();}
+  if (R2 & right) {resetColor();}
+  if (R2 & left) {resetInverse();}
 
 
   // LIMIT SCALE
