@@ -164,7 +164,7 @@ public void draw() {
   if (A4 & (abs(joystick2) > 2)) {A4_ctrl += increment * joystick2 / mScalar;}
 
   // Brush Size 
-  if (L1 & (abs(analogX) > 0.15)) {brushSize_X += analogX * 15 * increment;}
+  if (L1 & (abs(analogX) > 0.15)) {brushSize_X += -analogX * 15 * increment;}
   if (L1 & (abs(analogY) > 0.15)) {brushSize_Y += -analogY * 15 * increment;}
   if (L1 & (abs(analogU) > 0.15)) {brushSize_X += analogU * 15 * increment;}
   if (L1 & (abs(analogV) > 0.15)) {brushSize_Y += -analogV * 15 * increment;}
