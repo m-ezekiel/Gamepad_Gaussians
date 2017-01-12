@@ -147,7 +147,7 @@ public void draw() {
     A1_ctrl = randomInt(0, 255);
     A2_ctrl = randomInt(0, 255);
     A3_ctrl = randomInt(0, 255);
-    A4_ctrl = randomInt(0, 200);
+    // A4_ctrl = randomInt(0, 200);
   }
 
 
