@@ -1,5 +1,4 @@
-# Game Instructions
-# Follow them one a time-- no need to read them all.
+# Instructions
 
 COLORS
 1. Hold Opacity and move Joystick 1 to the top-right corner until the value reaches 255.
@@ -43,14 +42,6 @@ SIZE/SHAPE
 3. Hold Brush Size (top-left trigger) and move Joystick 1 to the top-right corner.
 	continue holding Brush Size and move the Joystick 1 to the opposite corner.
 	repeat with all corners of the analog controller.
-
-POSITION
-1. Choose another color.
-
-2. Set the opacity to around 50 and reset the background.
-
-3. Hold the Position button (Select 2) and move Joystick 1 to the top-right corner.
-    repeat with all corners of the analog controller.
 
 MUTE
 1. Press Mute and Opacity to mute the opacity (the value value will go to 0)

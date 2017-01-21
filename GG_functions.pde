@@ -116,11 +116,12 @@ public void drawParameters(int width, int height) {
   fill(red, green, blue, 127);
 
   // X-DISPERSION
-  ellipse(cpX - (1.5*gap) - dpX/20 + (x_mean - width/2)/25, iwCY + (y_mean - height/2)/25, brushSize_X/50, brushSize_Y/50);
-  ellipse(cpX - (1.5*gap) + dpX/20 + (x_mean - width/2)/25, iwCY + (y_mean - height/2)/25, brushSize_X/50, brushSize_Y/50);
+  ellipse(cpX - (1.5*gap) - dpX/20 + (x_mean - width/2)/25, iwCY + (y_mean - height/2)/25, brushSize_X/28, brushSize_Y/28);
+  ellipse(cpX - (1.5*gap) + dpX/20 + (x_mean - width/2)/25, iwCY + (y_mean - height/2)/25, brushSize_X/28, brushSize_Y/28);
+
   // Y-DISPERSION
-  ellipse(cpX - (1.5*gap) + (x_mean - width/2)/25, iwCY - dpY/30 + (y_mean - height/2)/25, brushSize_X/50, brushSize_Y/50);
-  ellipse(cpX - (1.5*gap) + (x_mean - width/2)/25, iwCY + dpY/30 + (y_mean - height/2)/25, brushSize_X/50, brushSize_Y/50);
+  ellipse(cpX - (1.5*gap) + (x_mean - width/2)/25, iwCY - dpY/30 + (y_mean - height/2)/25, brushSize_X/28, brushSize_Y/28);
+  ellipse(cpX - (1.5*gap) + (x_mean - width/2)/25, iwCY + dpY/30 + (y_mean - height/2)/25, brushSize_X/28, brushSize_Y/28);
 
   // Brush pigment colored ellipse
   noStroke();  
@@ -340,6 +341,12 @@ public void resetBlack() {
 }
 public void resetWhite() {
   background(255);
+}
+public void resetColor() {
+  background(red, green, blue, alpha);
+}
+public void resetInverse() {
+  background(255 - red, 255 - green, 255 - blue, 255 - alpha);
 }
 
 

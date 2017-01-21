@@ -24,8 +24,9 @@ boolean left, right, up, down, select1, select2;
 
 boolean imageSaved;
 
-
 // INITIALIZE PARAMETERS
+boolean writeData = false;
+
 int xpos = 0; int ypos = 0;
 int dpX = 300; int dpY = 300;
 int increment = 2;
@@ -70,8 +71,12 @@ public void setup() {
     System.exit(-1); // End the program NOW!
   }
 
-  createKeypressFile();
+  // Log play data
+  if (writeData == true)
+    createKeypressFile();
 }
+
+
 
 
 // DRAW
@@ -142,7 +147,7 @@ public void draw() {
     A1_ctrl = randomInt(0, 255);
     A2_ctrl = randomInt(0, 255);
     A3_ctrl = randomInt(0, 255);
-    A4_ctrl = randomInt(0, 200);
+    // A4_ctrl = randomInt(0, 200);
   }
 
 
@@ -159,7 +164,7 @@ public void draw() {
   if (A4 & (abs(joystick2) > 2)) {A4_ctrl += increment * joystick2 / mScalar;}
 
   // Brush Size 
-  if (L1 & (abs(analogX) > 0.15)) {brushSize_X += analogX * 15 * increment;}
+  if (L1 & (abs(analogX) > 0.15)) {brushSize_X += -analogX * 15 * increment;}
   if (L1 & (abs(analogY) > 0.15)) {brushSize_Y += -analogY * 15 * increment;}
   if (L1 & (abs(analogU) > 0.15)) {brushSize_X += analogU * 15 * increment;}
   if (L1 & (abs(analogV) > 0.15)) {brushSize_Y += -analogV * 15 * increment;}
@@ -210,6 +215,8 @@ public void draw() {
 
   if (R2 & up) {resetBlack();}
   if (R2 & down) {resetWhite();}
+  if (R2 & right) {resetColor();}
+  if (R2 & left) {resetInverse();}
 
 
   // LIMIT SCALE
@@ -224,8 +231,8 @@ public void draw() {
   brushSize_X = limitScale(brushSize_X, 1, 999);
   xpos = limitScale(xpos, 0, width);
   ypos = limitScale(ypos, 0, height);
-  x_mean = limitScale(x_mean, 0, width);
-  y_mean = limitScale(y_mean, 0, height);
+  // x_mean = limitScale(x_mean, 0, width);
+  // y_mean = limitScale(y_mean, 0, height);
 
 
   // SAVE IMAGE
@@ -242,37 +249,40 @@ public void draw() {
 
   // WRITE DATA
 
-  XYpos_array = getXYpos();
-  ParamValue_array = getParamValues();
-  Keypress_array = getKeypresses();
-  Analog_array = getAnalogValues();
+  if (writeData == true) {
 
-  output.println(
+    XYpos_array = getXYpos();
+    ParamValue_array = getParamValues();
+    Keypress_array = getKeypresses();
+    Analog_array = getAnalogValues();
 
-    // Temporal data {time, position}
-    millis() + "\t" + XYpos_array[0] + "\t" + XYpos_array[1] + "\t" +
+    output.println(
 
-    // Size and dispersion {sX, sY, dpX, dpY}
-    ParamValue_array[6] + "\t" + ParamValue_array[7] + "\t" + ParamValue_array[4] + "\t" + ParamValue_array[5] + "\t" + 
+      // Temporal data {time, position}
+      millis() + "\t" + XYpos_array[0] + "\t" + XYpos_array[1] + "\t" +
 
-    // Color values {R, G, B, A}
-    ParamValue_array[0] + "\t" + ParamValue_array[1] + "\t" + ParamValue_array[2] + "\t" + ParamValue_array[3] + "\t" +  
+      // Size and dispersion {sX, sY, dpX, dpY}
+      ParamValue_array[6] + "\t" + ParamValue_array[7] + "\t" + ParamValue_array[4] + "\t" + ParamValue_array[5] + "\t" + 
 
-    // Keypresses {action, LR, select, M*, d-pad}
-    Keypress_array[0] + "\t" + Keypress_array[1] + "\t" + Keypress_array[2] + "\t" + Keypress_array[3] + "\t" + Keypress_array[4] + "\t" + Keypress_array[5] + "\t" + Keypress_array[6] + "\t" + Keypress_array[7] + "\t" + Keypress_array[8] + "\t" + Keypress_array[9] + "\t" + Keypress_array[10] + "\t" + Keypress_array[11] + "\t" + Keypress_array[12] + "\t" + Keypress_array[13] + "\t" + Keypress_array[14] + "\t" + Keypress_array[15] + "\t" +
-    
-    // Analog values {js1X, js1Y, js2U, js2V}
-    Analog_array[0] + "\t" + Analog_array[1] + "\t" + Analog_array[2] + "\t" + Analog_array[3] + "\t" +
+      // Color values {R, G, B, A}
+      ParamValue_array[0] + "\t" + ParamValue_array[1] + "\t" + ParamValue_array[2] + "\t" + ParamValue_array[3] + "\t" +  
 
-    // Joystick integers
-    joystick1 + "\t" + joystick2
+      // Keypresses {action, LR, select, M*, d-pad}
+      Keypress_array[0] + "\t" + Keypress_array[1] + "\t" + Keypress_array[2] + "\t" + Keypress_array[3] + "\t" + Keypress_array[4] + "\t" + Keypress_array[5] + "\t" + Keypress_array[6] + "\t" + Keypress_array[7] + "\t" + Keypress_array[8] + "\t" + Keypress_array[9] + "\t" + Keypress_array[10] + "\t" + Keypress_array[11] + "\t" + Keypress_array[12] + "\t" + Keypress_array[13] + "\t" + Keypress_array[14] + "\t" + Keypress_array[15] + "\t" +
+      
+      // Analog values {js1X, js1Y, js2U, js2V}
+      Analog_array[0] + "\t" + Analog_array[1] + "\t" + Analog_array[2] + "\t" + Analog_array[3] + "\t" +
 
-    );
+      // Joystick integers
+      joystick1 + "\t" + joystick2
 
-  output.flush(); 
+      );
 
+    output.flush(); 
+
+  }
 
   // DIAGNOSTICS
-  println(XYpos_array[0], XYpos_array[1]);
+  // println(XYpos_array[0], XYpos_array[1]);
 
 }
