@@ -7,8 +7,6 @@ Gamepad Gaussians is an art video game that integrates random integers from a Ga
 
 The game is completely devoid of narrative, competition, scoring and there are no explicit goals.  So what are you supposed to do?  Play in easy mode to see what the game is capable of and then move onto hard mode to execute purposeful aesthetic decisions (and combine them inbetween).
 
-I'll readily admit that it's difficult for me as the designer to 
-
 
 3. Gameplay Controls
 
