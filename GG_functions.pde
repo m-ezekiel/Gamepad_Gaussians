@@ -331,10 +331,11 @@ public void getUserInput() {
 // -----------------
 
 public boolean getDPad() {
-  boolean value = true;
+  boolean value = false;
 
+  // If buttons are pressed then value is false
   if (left | right | up | down)
-    value = false;
+    value = true;
 
   return(value);
 }

@@ -26,7 +26,7 @@ boolean imageSaved;
 
 // INITIALIZE PARAMETERS
 boolean writeData = false;
-boolean dpad_val = false;
+boolean dpad_pressed = false;
 
 int xpos = 0; int ypos = 0;
 int dpX = 300; int dpY = 300;
@@ -139,8 +139,8 @@ public void draw() {
 
 
   // RANDOM BEHAVIORS: if (L2) {variable = randomInt(min, max);}
-  dpad_val = getDPad();
-  if ((L2 & dpad_val)) {
+  dpad_pressed = getDPad();
+  if ((L2 & !dpad_pressed)) {
     brushSize_Y = randomInt(0, 999);
     brushSize_X = randomInt(0, 999);
     dpY = randomInt(0, 400);
