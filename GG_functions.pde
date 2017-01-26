@@ -77,14 +77,17 @@ public int [] dateTime() {
 // ---------------
 
 public void drawParameters(int width, int height) {
+  int w = width;
+  int h = height;
+
   // Outer window
-  int hB = 160;
-  int hT = 60;
+  int hB = w/8; // 160
+  int hT = w/21; // 60
   int hX = width - hB;
   int hY = 0;
-  int gap = 28;
+  int gap = w/45; // 28
   // Inner window
-  int iwB = 50;
+  int iwB = w/25;
   int iwT = int(iwB * 0.625);
   int iwCX = hX + hB/12 + iwB/2;
   int iwCY = hY + hT/6 + iwT/2;
@@ -101,6 +104,8 @@ public void drawParameters(int width, int height) {
   String dX = str(dpX/4);
   String dY = str(dpY/4);
 
+  int brushScale = w/45;
+
   // Head Up Display (outer window)
   fill(0, 155);
   rect(hX, hY, hB, hT);
@@ -116,12 +121,12 @@ public void drawParameters(int width, int height) {
   fill(red, green, blue, 127);
 
   // X-DISPERSION
-  ellipse(cpX - (1.5*gap) - dpX/20 + (x_mean - width/2)/25, iwCY + (y_mean - height/2)/25, brushSize_X/28, brushSize_Y/28);
-  ellipse(cpX - (1.5*gap) + dpX/20 + (x_mean - width/2)/25, iwCY + (y_mean - height/2)/25, brushSize_X/28, brushSize_Y/28);
+  ellipse(cpX - (1.5*gap) - dpX/20 + (x_mean - width/2)/25, iwCY + (y_mean - height/2)/25, brushSize_X/brushScale, brushSize_Y/brushScale);
+  ellipse(cpX - (1.5*gap) + dpX/20 + (x_mean - width/2)/25, iwCY + (y_mean - height/2)/25, brushSize_X/brushScale, brushSize_Y/brushScale);
 
   // Y-DISPERSION
-  ellipse(cpX - (1.5*gap) + (x_mean - width/2)/25, iwCY - dpY/30 + (y_mean - height/2)/25, brushSize_X/28, brushSize_Y/28);
-  ellipse(cpX - (1.5*gap) + (x_mean - width/2)/25, iwCY + dpY/30 + (y_mean - height/2)/25, brushSize_X/28, brushSize_Y/28);
+  ellipse(cpX - (1.5*gap) + (x_mean - width/2)/25, iwCY - dpY/30 + (y_mean - height/2)/25, brushSize_X/brushScale, brushSize_Y/brushScale);
+  ellipse(cpX - (1.5*gap) + (x_mean - width/2)/25, iwCY + dpY/30 + (y_mean - height/2)/25, brushSize_X/brushScale, brushSize_Y/brushScale);
 
   // Brush pigment colored ellipse
   noStroke();  
@@ -131,7 +136,7 @@ public void drawParameters(int width, int height) {
 
   // Display color values according to controller position
   textAlign(CENTER, TOP);
-  textSize(11);
+  textSize(w/116);
   // Color Values
   fill(200);
   text(opacity, cpX + 4 + (1*gap), cpY - 20);
@@ -318,6 +323,22 @@ public void getUserInput() {
   up = gpad.getHat("dPad").up();
   down = gpad.getHat("dPad").down();
 }
+
+
+
+// -----------------
+// Get direction pad
+// -----------------
+
+public boolean getDPad() {
+  boolean value = true;
+
+  if (left | right | up | down)
+    value = false;
+
+  return(value);
+}
+
 
 
 

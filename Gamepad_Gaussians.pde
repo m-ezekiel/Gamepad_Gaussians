@@ -26,6 +26,7 @@ boolean imageSaved;
 
 // INITIALIZE PARAMETERS
 boolean writeData = false;
+boolean dpad_val = false;
 
 int xpos = 0; int ypos = 0;
 int dpX = 300; int dpY = 300;
@@ -138,8 +139,8 @@ public void draw() {
 
 
   // RANDOM BEHAVIORS: if (L2) {variable = randomInt(min, max);}
-
-  if ((L2)) {
+  dpad_val = getDPad();
+  if ((L2 & dpad_val)) {
     brushSize_Y = randomInt(0, 999);
     brushSize_X = randomInt(0, 999);
     dpY = randomInt(0, 400);
@@ -242,10 +243,6 @@ public void draw() {
   }
 
 
-  // DRAW SHAPES
-  drawShapes();
-  drawParameters(width, height);
-
 
   // WRITE DATA
 
@@ -281,6 +278,11 @@ public void draw() {
     output.flush(); 
 
   }
+
+
+  drawParameters(width, height);
+  // draw_ctrlStrobe(); 
+  drawShapes();
 
   // DIAGNOSTICS
   // println(XYpos_array[0], XYpos_array[1]);
