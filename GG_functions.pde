@@ -81,19 +81,19 @@ public void drawParameters(int width, int height) {
   int h = height;
 
   // Outer window
-  int hB = w/8; // 160
-  int hT = w/21; // 60
-  int hX = width - hB;
-  int hY = 0;
+  int owB = w/8; // 160
+  float owH = owB/2.5; // 60
+  int owX = width - owB;
+  int owY = 0;
   int gap = w/45; // 28
   // Inner window
-  int iwB = w/25;
-  int iwT = int(iwB * 0.625);
-  int iwCX = hX + hB/12 + iwB/2;
-  int iwCY = hY + hT/6 + iwT/2;
+  float iwB = owB/3.125;
+  float iwH = iwB * 0.625;
   // Centerpoints
-  int cpX = hX + (hB/2);
-  int cpY = hY + (hT/2);
+  float owCX = owX + (owB/2);
+  float owCY = owY + (owH/2);
+  float iwCX = owX + owB/12 + iwB/2;
+  float iwCY = owY + owH/6 + iwH/2;  
   // Parameter values
   String opacity = str(alpha);
   String rd = str(red);
@@ -108,12 +108,12 @@ public void drawParameters(int width, int height) {
 
   // Head Up Display (outer window)
   fill(0, 155);
-  rect(hX, hY, hB, hT);
+  rect(owX, owY, owB, owH);
 
 
   // Prototype for inner window preview
   stroke(100);
-  rect(hX + hB/12, hY + hT/6, iwB, iwT);
+  rect(owX + owB/12, owY + owH/6, iwB, iwH);
   noStroke();
 
 
@@ -121,17 +121,22 @@ public void drawParameters(int width, int height) {
   fill(red, green, blue, 127);
 
   // X-DISPERSION
-  ellipse(cpX - (1.5*gap) - dpX/20 + (x_mean - width/2)/25, iwCY + (y_mean - height/2)/25, brushSize_X/brushScale, brushSize_Y/brushScale);
-  ellipse(cpX - (1.5*gap) + dpX/20 + (x_mean - width/2)/25, iwCY + (y_mean - height/2)/25, brushSize_X/brushScale, brushSize_Y/brushScale);
+  ellipse(iwCX - dpX/20 + (x_mean - width/2)/25, iwCY + (y_mean - height/2)/25, 
+    brushSize_X/brushScale, brushSize_Y/brushScale);
+
+  ellipse(iwCX + dpX/20 + (x_mean - width/2)/25, iwCY + (y_mean - height/2)/25, 
+    brushSize_X/brushScale, brushSize_Y/brushScale);
 
   // Y-DISPERSION
-  ellipse(cpX - (1.5*gap) + (x_mean - width/2)/25, iwCY - dpY/30 + (y_mean - height/2)/25, brushSize_X/brushScale, brushSize_Y/brushScale);
-  ellipse(cpX - (1.5*gap) + (x_mean - width/2)/25, iwCY + dpY/30 + (y_mean - height/2)/25, brushSize_X/brushScale, brushSize_Y/brushScale);
+  ellipse(iwCX + (x_mean - width/2)/25, iwCY - dpY/30 + (y_mean - height/2)/25, 
+    brushSize_X/brushScale, brushSize_Y/brushScale);
+  ellipse(iwCX + (x_mean - width/2)/25, iwCY + dpY/30 + (y_mean - height/2)/25, 
+    brushSize_X/brushScale, brushSize_Y/brushScale);
 
   // Brush pigment colored ellipse
   noStroke();  
   fill(red, green, blue, alpha*3);
-  ellipse(cpX + 4 + (1*gap), cpY + 1, 10, 10);
+  ellipse(owCX + gap + gap/11, owCY, gap/2, gap/2);
 
 
   // Display color values according to controller position
@@ -139,23 +144,30 @@ public void drawParameters(int width, int height) {
   textSize(w/116);
   // Color Values
   fill(200);
-  text(opacity, cpX + 4 + (1*gap), cpY - 20);
+  text(opacity, owCX + gap + gap/11, owCY - gap/1.2);
+
   fill(0, 255, 0, 255);
-  text(grn, cpX + 4 + (1*gap), cpY + 10);
+  text(grn, owCX + gap + gap/11, owCY + gap/3);
+
   fill(0, 200, 255, 255);
-  text(blu, cpX + 8, cpY - 5);
+  text(blu, owCX + gap/5, owCY - gap/3);
+
   fill(255, 0, 0, 255);
-  text(rd, cpX + (2*gap), cpY - 5);
+  text(rd, owCX + (2*gap), owCY - gap/3);
+
   // Position Values
   fill(180);
-  text(x_mn, cpX - (2*gap), cpY + 14);
-  text(y_mn, cpX - (1*gap), cpY + 14);
+  text(x_mn, owCX - (2*gap), owCY + gap/2);
+  text(y_mn, owCX - (1*gap), owCY + gap/2);
 
+  // Diagnostics
+  println("owCX: "+ owCX );
+  println("owB: "+ owB );
 
   // IMAGE SAVED
   if (imageSaved == true) {
     fill(255);
-    text("SAVED", cpX, cpY - 20); 
+    text("SAVED", owCX, owCY - 20); 
   }
 
 }
@@ -340,6 +352,20 @@ public boolean getDPad() {
   return(value);
 }
 
+
+// --------------
+// Get action pad
+// --------------
+
+public boolean getActionPad() {
+  boolean value = false;
+
+  // If buttons are pressed then value is false
+  if (A1 | A2 | A3 | A4)
+    value = true;
+
+  return(value);
+}
 
 
 
