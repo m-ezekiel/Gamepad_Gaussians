@@ -26,14 +26,15 @@ boolean imageSaved;
 
 // INITIALIZE PARAMETERS
 boolean writeData = false;
+boolean actionPad_pressed = false;
 
 int xpos = 0; int ypos = 0;
 int dpX = 300; int dpY = 300;
 int increment = 2;
 int scalar = 50;
 int mScalar = scalar / 1;
-int brushSize_X = 250;
-int brushSize_Y = 250;
+int brushSize_X = 350;
+int brushSize_Y = 350;
 int red, blue, green = 0;
 int alpha = 60;
 
@@ -41,7 +42,7 @@ int x_mean;
 int y_mean;
 
 
-float fps = 30;
+float fps = 12;
 
 
 // ASSIGN CONTROL MAPPINGS (variables numbered CCW from left)
@@ -115,18 +116,18 @@ public void draw() {
 
   // SIZE BEHAVIORS (d-pad)
 
-  if (up & L1) {brushSize_Y += increment * 15;}
-  if (down & L1) {brushSize_Y -= increment * 15;}
-  if (right & L1) {brushSize_X += increment * 15;}
-  if (left & L1) {brushSize_X -= increment * 15;}
+  if (up & R1) {brushSize_Y += increment * 15;}
+  if (down & R1) {brushSize_Y -= increment * 15;}
+  if (right & R1) {brushSize_X -= increment * 15;}
+  if (left & R1) {brushSize_X += increment * 15;}
 
 
   // DISPERSION BEHAVIORS (d-pad)
 
-  if (up & R1) {dpY += increment * 10;}
-  if (down & R1) {dpY -= increment * 10;}
-  if (right & R1) {dpX -= increment * 10;}
-  if (left & R1) {dpX += increment * 10;}
+  if (up & L1) {dpY += increment * 10;}
+  if (down & L1) {dpY -= increment * 10;}
+  if (right & L1) {dpX -= increment * 10;}
+  if (left & L1) {dpX += increment * 10;}
 
 
   // POSITION BEHAVIORS (d-pad)
@@ -138,8 +139,8 @@ public void draw() {
 
 
   // RANDOM BEHAVIORS: if (L2) {variable = randomInt(min, max);}
-
-  if ((L2)) {
+  actionPad_pressed = getActionPad();
+  if ((L2 & !actionPad_pressed)) {
     brushSize_Y = randomInt(0, 999);
     brushSize_X = randomInt(0, 999);
     dpY = randomInt(0, 400);
@@ -147,9 +148,13 @@ public void draw() {
     A1_ctrl = randomInt(0, 255);
     A2_ctrl = randomInt(0, 255);
     A3_ctrl = randomInt(0, 255);
-    // A4_ctrl = randomInt(0, 200);
   }
 
+  // Localized random behaviors
+  if ((L2 & A4)) A4_ctrl = randomInt(0, 200);
+  if ((L2 & A2)) A2_ctrl = randomInt(0, 255);
+  if ((L2 & A1)) A1_ctrl = randomInt(0, 255);
+  if ((L2 & A3)) A3_ctrl = randomInt(0, 255);
 
   // ANALOG MODIFIERS
 
@@ -164,16 +169,16 @@ public void draw() {
   if (A4 & (abs(joystick2) > 2)) {A4_ctrl += increment * joystick2 / mScalar;}
 
   // Brush Size 
-  if (L1 & (abs(analogX) > 0.15)) {brushSize_X += -analogX * 15 * increment;}
-  if (L1 & (abs(analogY) > 0.15)) {brushSize_Y += -analogY * 15 * increment;}
-  if (L1 & (abs(analogU) > 0.15)) {brushSize_X += analogU * 15 * increment;}
-  if (L1 & (abs(analogV) > 0.15)) {brushSize_Y += -analogV * 15 * increment;}
+  if (R1 & (abs(analogX) > 0.15)) {brushSize_X += -analogX * 15 * increment;}
+  if (R1 & (abs(analogY) > 0.15)) {brushSize_Y += -analogY * 15 * increment;}
+  if (R1 & (abs(analogU) > 0.15)) {brushSize_X += analogU * 15 * increment;}
+  if (R1 & (abs(analogV) > 0.15)) {brushSize_Y += -analogV * 15 * increment;}
 
   // Dispersion 
-  if (R1 & (abs(analogX) > 0.15)) {dpX += -analogX * 15 * increment;}
-  if (R1 & (abs(analogY) > 0.15)) {dpY += -analogY * 15 * increment;}
-  if (R1 & (abs(analogU) > 0.15)) {dpX += analogU * 15 * increment;}
-  if (R1 & (abs(analogV) > 0.15)) {dpY += -analogV * 15 * increment;}
+  if (L1 & (abs(analogX) > 0.15)) {dpX += -analogX * 15 * increment;}
+  if (L1 & (abs(analogY) > 0.15)) {dpY += -analogY * 15 * increment;}
+  if (L1 & (abs(analogU) > 0.15)) {dpX += analogU * 15 * increment;}
+  if (L1 & (abs(analogV) > 0.15)) {dpY += -analogV * 15 * increment;}
 
   // Position
   if((select1|select2) & (abs(analogX) > 0.15)) {x_mean += analogX * 15 * increment;}
@@ -197,8 +202,8 @@ public void draw() {
   if ((R2) & A4) {A4_ctrl = 0;}
 
   if (R2 & L1) {
-    brushSize_X = 250;
-    brushSize_Y = 250;
+    brushSize_X = 350;
+    brushSize_Y = 350;
   }
   if (R2 & R1) {
     dpX = 300;
@@ -217,6 +222,21 @@ public void draw() {
   if (R2 & down) {resetWhite();}
   if (R2 & right) {resetColor();}
   if (R2 & left) {resetInverse();}
+
+  // RESET ALL VALUES TO DEFAULT
+  if (select1 & select2) {
+    dpX = 300;
+    dpY = 300;
+    brushSize_X = 350;
+    brushSize_Y = 350;
+    A1_ctrl = 60;
+    A2_ctrl = 60;
+    A3_ctrl = 60;
+    A4_ctrl = 60;
+    x_mean = width/2;
+    y_mean = height/2;
+    resetBlack();    
+  }
 
 
   // LIMIT SCALE
@@ -241,10 +261,6 @@ public void draw() {
     imageSaved = saveImage();
   }
 
-
-  // DRAW SHAPES
-  drawShapes();
-  drawParameters(width, height);
 
 
   // WRITE DATA
@@ -281,6 +297,10 @@ public void draw() {
     output.flush(); 
 
   }
+
+
+  togglePreview();
+  drawShapes();
 
   // DIAGNOSTICS
   // println(XYpos_array[0], XYpos_array[1]);
