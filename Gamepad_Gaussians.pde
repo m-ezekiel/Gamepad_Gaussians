@@ -25,7 +25,7 @@ boolean left, right, up, down, select1, select2;
 boolean imageSaved;
 
 // INITIALIZE PARAMETERS
-boolean writeData = false;
+boolean writeData = true;
 boolean actionPad_pressed = false;
 
 int xpos = 0; int ypos = 0;
@@ -42,7 +42,7 @@ int x_mean;
 int y_mean;
 
 
-float fps = 12;
+float fps = 30;
 
 
 // ASSIGN CONTROL MAPPINGS (variables numbered CCW from left)
@@ -272,30 +272,33 @@ public void draw() {
     Keypress_array = getKeypresses();
     Analog_array = getAnalogValues();
 
-    output.println(
+    // if thumb keys above threshold...
+    if (abs(joystick1) > 2 | abs(joystick2) > 2) {
 
-      // Temporal data {time, position}
-      millis() + "\t" + XYpos_array[0] + "\t" + XYpos_array[1] + "\t" +
+      output.println(
 
-      // Size and dispersion {sX, sY, dpX, dpY}
-      ParamValue_array[6] + "\t" + ParamValue_array[7] + "\t" + ParamValue_array[4] + "\t" + ParamValue_array[5] + "\t" + 
+        // Temporal data {time, position}
+        millis() + "\t" + XYpos_array[0] + "\t" + XYpos_array[1] + "\t" +
 
-      // Color values {R, G, B, A}
-      ParamValue_array[0] + "\t" + ParamValue_array[1] + "\t" + ParamValue_array[2] + "\t" + ParamValue_array[3] + "\t" +  
+        // Size and dispersion {sX, sY, dpX, dpY}
+        ParamValue_array[6] + "\t" + ParamValue_array[7] + "\t" + ParamValue_array[4] + "\t" + ParamValue_array[5] + "\t" + 
 
-      // Keypresses {action, LR, select, M*, d-pad}
-      Keypress_array[0] + "\t" + Keypress_array[1] + "\t" + Keypress_array[2] + "\t" + Keypress_array[3] + "\t" + Keypress_array[4] + "\t" + Keypress_array[5] + "\t" + Keypress_array[6] + "\t" + Keypress_array[7] + "\t" + Keypress_array[8] + "\t" + Keypress_array[9] + "\t" + Keypress_array[10] + "\t" + Keypress_array[11] + "\t" + Keypress_array[12] + "\t" + Keypress_array[13] + "\t" + Keypress_array[14] + "\t" + Keypress_array[15] + "\t" +
-      
-      // Analog values {js1X, js1Y, js2U, js2V}
-      Analog_array[0] + "\t" + Analog_array[1] + "\t" + Analog_array[2] + "\t" + Analog_array[3] + "\t" +
+        // Color values {R, G, B, A}
+        ParamValue_array[0] + "\t" + ParamValue_array[1] + "\t" + ParamValue_array[2] + "\t" + ParamValue_array[3] + "\t" +  
 
-      // Joystick integers
-      joystick1 + "\t" + joystick2
+        // Keypresses {action, LR, select, M*, d-pad}
+        Keypress_array[0] + "\t" + Keypress_array[1] + "\t" + Keypress_array[2] + "\t" + Keypress_array[3] + "\t" + Keypress_array[4] + "\t" + Keypress_array[5] + "\t" + Keypress_array[6] + "\t" + Keypress_array[7] + "\t" + Keypress_array[8] + "\t" + Keypress_array[9] + "\t" + Keypress_array[10] + "\t" + Keypress_array[11] + "\t" + Keypress_array[12] + "\t" + Keypress_array[13] + "\t" + Keypress_array[14] + "\t" + Keypress_array[15] + "\t" +
+        
+        // Analog values {js1X, js1Y, js2U, js2V}
+        Analog_array[0] + "\t" + Analog_array[1] + "\t" + Analog_array[2] + "\t" + Analog_array[3] + "\t" +
 
-      );
+        // Joystick integers
+        joystick1 + "\t" + joystick2
 
-    output.flush(); 
+        );
 
+      output.flush(); 
+    }
   }
 
 
