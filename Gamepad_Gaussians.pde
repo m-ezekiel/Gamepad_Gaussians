@@ -33,8 +33,8 @@ int dpX = 300; int dpY = 300;
 int increment = 2;
 int scalar = 50;
 int mScalar = scalar / 1;
-int brushSize_X = 250;
-int brushSize_Y = 250;
+int brushSize_X = 350;
+int brushSize_Y = 350;
 int red, blue, green = 0;
 int alpha = 60;
 
@@ -42,7 +42,7 @@ int x_mean;
 int y_mean;
 
 
-float fps = 30;
+float fps = 12;
 
 
 // ASSIGN CONTROL MAPPINGS (variables numbered CCW from left)
@@ -53,7 +53,7 @@ int A4_ctrl = alpha;
 
 // SETUP
 public void setup() {
-  size(1920, 1200);
+  size(1280, 800);
   background(0);
   noStroke();
 
@@ -118,8 +118,8 @@ public void draw() {
 
   if (up & R1) {brushSize_Y += increment * 15;}
   if (down & R1) {brushSize_Y -= increment * 15;}
-  if (right & R1) {brushSize_X += increment * 15;}
-  if (left & R1) {brushSize_X -= increment * 15;}
+  if (right & R1) {brushSize_X -= increment * 15;}
+  if (left & R1) {brushSize_X += increment * 15;}
 
 
   // DISPERSION BEHAVIORS (d-pad)
@@ -202,8 +202,8 @@ public void draw() {
   if ((R2) & A4) {A4_ctrl = 0;}
 
   if (R2 & L1) {
-    brushSize_X = 250;
-    brushSize_Y = 250;
+    brushSize_X = 350;
+    brushSize_Y = 350;
   }
   if (R2 & R1) {
     dpX = 300;
@@ -222,6 +222,21 @@ public void draw() {
   if (R2 & down) {resetWhite();}
   if (R2 & right) {resetColor();}
   if (R2 & left) {resetInverse();}
+
+  // RESET ALL VALUES TO DEFAULT
+  if (select1 & select2) {
+    dpX = 300;
+    dpY = 300;
+    brushSize_X = 350;
+    brushSize_Y = 350;
+    A1_ctrl = 60;
+    A2_ctrl = 60;
+    A3_ctrl = 60;
+    A4_ctrl = 60;
+    x_mean = width/2;
+    y_mean = height/2;
+    resetBlack();    
+  }
 
 
   // LIMIT SCALE
@@ -284,8 +299,7 @@ public void draw() {
   }
 
 
-  drawParameters(width, height);
-  // draw_ctrlStrobe(); 
+  togglePreview();
   drawShapes();
 
   // DIAGNOSTICS

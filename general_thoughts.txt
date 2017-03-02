@@ -28,3 +28,34 @@ SIZE/POS/DISP:
 {spd} +/- value
 
 rbgspd...;
+
+- - -
+
+Video Tutorial
+
+* highlight the preview window aspect as values are changed. *
+
+
+[TITLE] Gamepad Gaussians [/t]
+
+[SUMMARY] Gamepad Gaussians is an interactive media project that blends color theory, mathematics and gaming into an experimental drawing environment. [/s]
+
+[TITLE] Color/Opacity [/t]
+
+[SUMMARY] Color values range from 0 to 255. Use the d-Pad or joysticks to +/- value. [/s]
+
+[TITLE] Size/Shape [/t]
+
+[SUMMARY] Values for the vertical and horizontal ellipse diameters can be manipulated with the d-Pad. [/s]
+
+[TITLE] Dispersion [/t]
+
+[SUMMARY] Dispersion refers to the spread of the randomness.  A picture would be good here. [/s]
+
+[TITLE] Random [/t]
+
+[SUMMARY]  [/s]
+
+[TITLE] Reset [/t]
+
+[SUMMARY]  [/s]

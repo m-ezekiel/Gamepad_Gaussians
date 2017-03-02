@@ -73,17 +73,17 @@ public int [] dateTime() {
 
 
 // ---------------
-// Draw parameters
+// Toggle preview
 // ---------------
 
-public void drawParameters(int width, int height) {
+public void togglePreview() {
   int w = width;
   int h = height;
 
   // Outer window
-  int owB = w/8; // 160
+  int owB = w/7; // 160 (default is 8)
   float owH = owB/2.5; // 60
-  int owX = width - owB;
+  int owX = width - owB - 300; // Minus 300 for the video demo, 0 otherwise
   int owY = 0;
   int gap = w/45; // 28
   // Inner window
@@ -134,17 +134,17 @@ public void drawParameters(int width, int height) {
     brushSize_X/brushScale, brushSize_Y/brushScale);
 
   // Brush pigment colored ellipse
-  noStroke();  
+  noStroke();
   fill(red, green, blue, alpha*3);
-  ellipse(owCX + gap + gap/11, owCY, gap/2, gap/2);
+  ellipse(owCX + gap + gap/11, owCY - gap/11, gap/2, gap/2);
 
 
   // Display color values according to controller position
   textAlign(CENTER, TOP);
-  textSize(w/116);
+  textSize(owB/15);
   // Color Values
   fill(200);
-  text(opacity, owCX + gap + gap/11, owCY - gap/1.2);
+  text(opacity, owCX + gap + gap/11, owCY - gap/1.1);
 
   fill(0, 255, 0, 255);
   text(grn, owCX + gap + gap/11, owCY + gap/3);
@@ -157,12 +157,9 @@ public void drawParameters(int width, int height) {
 
   // Position Values
   fill(180);
-  text(x_mn, owCX - (2*gap), owCY + gap/2);
-  text(y_mn, owCX - (1*gap), owCY + gap/2);
+  text(x_mn, iwCX - gap/2, owCY + gap/2);
+  text(y_mn, iwCX + gap/2, owCY + gap/2);
 
-  // Diagnostics
-  println("owCX: "+ owCX );
-  println("owB: "+ owB );
 
   // IMAGE SAVED
   if (imageSaved == true) {
@@ -408,8 +405,5 @@ public boolean saveImage() {
   save("IMG_exports/gamePad_sketch_" + join(nf(datetime, 0), "-") + ".png");  
   return(true);
 }
-
-
-
 
 
