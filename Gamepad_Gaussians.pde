@@ -36,7 +36,7 @@ int mScalar = scalar / 1;
 int brushSize_X = 350;
 int brushSize_Y = 350;
 int red, blue, green = 0;
-int alpha = 60;
+int alpha = 85;
 
 int x_mean;
 int y_mean;
@@ -140,6 +140,7 @@ public void draw() {
 
   // RANDOM BEHAVIORS: if (L2) {variable = randomInt(min, max);}
   actionPad_pressed = getActionPad();
+
   if ((L2 & !actionPad_pressed)) {
     brushSize_Y = randomInt(0, 999);
     brushSize_X = randomInt(0, 999);
@@ -148,6 +149,12 @@ public void draw() {
     A1_ctrl = randomInt(0, 255);
     A2_ctrl = randomInt(0, 255);
     A3_ctrl = randomInt(0, 255);
+    A4_ctrl = randomInt(1,255);
+
+    // Reduce the probability of landing on full opacity
+    if (A4_ctrl > 60) {
+      A4_ctrl = A4_ctrl / randomInt(1,3);
+    }
   }
 
   // Localized random behaviors
@@ -218,10 +225,26 @@ public void draw() {
 
   // RESET BACKGROUND
 
-  if (R2 & up) {resetBlack();}
-  if (R2 & down) {resetWhite();}
-  if (R2 & right) {resetColor();}
-  if (R2 & left) {resetInverse();}
+  if (R2 & up) {
+    resetBlack();
+    output.close();
+    createKeypressFile();
+  }
+  if (R2 & down) {
+    resetWhite();
+    output.close();
+    createKeypressFile();  
+  }
+  if (R2 & right) {
+    resetColor();
+    output.close();
+    createKeypressFile();
+  }
+  if (R2 & left) {
+    resetInverse();
+    output.close();
+    createKeypressFile();
+  }
 
   // RESET ALL VALUES TO DEFAULT
   if (select1 & select2) {
@@ -273,7 +296,7 @@ public void draw() {
     Analog_array = getAnalogValues();
 
     // if thumb keys above threshold...
-    if (abs(joystick1) > 2 | abs(joystick2) > 2) {
+    if (abs(analogX) > .1 | abs(analogY) > .1 | abs(analogU) > .1 | abs(analogV) > .1) {
 
       output.println(
 
