@@ -359,7 +359,7 @@ public boolean getActionPad() {
   boolean value = false;
 
   // If buttons are pressed then value is false
-  if (A1 | A2 | A3 | A4)
+  if (A1 | A2 | A3 | A4 | R1 | L1 | up | down | left | right | select1 | select2)
     value = true;
 
   return(value);

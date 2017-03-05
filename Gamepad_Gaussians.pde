@@ -35,8 +35,10 @@ int scalar = 50;
 int mScalar = scalar / 1;
 int brushSize_X = 350;
 int brushSize_Y = 350;
-int red, blue, green = 0;
-int alpha = 85;
+int red = 60;
+int blue = 60;
+int green = 60;
+int alpha = 60;
 
 int x_mean;
 int y_mean;
@@ -53,7 +55,7 @@ int A4_ctrl = alpha;
 
 // SETUP
 public void setup() {
-  size(1280, 800);
+  size(1920, 1200);
   background(0);
   noStroke();
 
@@ -153,8 +155,17 @@ public void draw() {
 
     // Reduce the probability of landing on full opacity
     if (A4_ctrl > 60) {
-      A4_ctrl = A4_ctrl / randomInt(1,3);
+      A4_ctrl = A4_ctrl / randomInt(1,5);
     }
+
+    // // Reduce the probability of landing on maximum size
+    // if (brushSize_X > 300) {
+    //   brushSize_X = brushSize_X / randomInt(1,3);
+    // }
+    // if (brushSize_Y > 300) {
+    //   brushSize_Y = brushSize_Y / randomInt(1,3);
+    // }
+
   }
 
   // Localized random behaviors
@@ -162,6 +173,10 @@ public void draw() {
   if ((L2 & A2)) A2_ctrl = randomInt(0, 255);
   if ((L2 & A1)) A1_ctrl = randomInt(0, 255);
   if ((L2 & A3)) A3_ctrl = randomInt(0, 255);
+  if (L2 & R1) {
+    brushSize_Y = randomInt(0, 999);
+    brushSize_X = randomInt(0, 999);
+  }
 
   // ANALOG MODIFIERS
 
@@ -296,7 +311,7 @@ public void draw() {
     Analog_array = getAnalogValues();
 
     // if thumb keys above threshold...
-    if (abs(analogX) > .1 | abs(analogY) > .1 | abs(analogU) > .1 | abs(analogV) > .1) {
+    if (abs(analogX) > .1 | abs(analogY) > .1 | abs(analogU) > .1 | abs(analogV) > .1 | actionPad_pressed == true) {
 
       output.println(
 
