@@ -397,6 +397,18 @@ public void resetInverse() {
 
 
 
+// ----------------------
+// Refresh control values
+// ----------------------
+
+public void refreshControlValues() {
+
+  blue = A1_ctrl;
+  green = A2_ctrl;
+  red = A3_ctrl;
+  alpha = A4_ctrl;  
+}
+
 // ----------
 // Save image
 // ----------

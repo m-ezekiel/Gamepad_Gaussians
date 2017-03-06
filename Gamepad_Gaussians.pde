@@ -88,12 +88,7 @@ public void setup() {
 public void draw() {
 
   getUserInput();
-
-  // REFRESH CONTROL VALUES
-  blue = A1_ctrl;
-  green = A2_ctrl;
-  red = A3_ctrl;
-  alpha = A4_ctrl;
+  refreshControlValues();
 
   joystick1 = analogToInteger(analogX, analogY, scalar);
   joystick2 = analogToInteger(analogU, analogV, scalar);
@@ -103,21 +98,13 @@ public void draw() {
   ypos = gaussianInt(dpY, y_mean);
 
   defineControlBehaviors();
-  defineResetBehaviors()
+  defineResetBehaviors();
   constrainParameters();
-
-
-  // SAVE IMAGE
-  imageSaved = false;
-  if (M1 & M2) {
-    imageSaved = saveImage();
-  }
-
+  togglePreview();
+  drawShapes();
 
   writeData(writeData);
 
-  togglePreview();
-  drawShapes();
 
   // DIAGNOSTICS
   // println(XYpos_array[0], XYpos_array[1]);
