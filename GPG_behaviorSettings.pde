@@ -5,11 +5,11 @@ Desc.: Function script for Gamepad Gaussians
 */
 
 
-// -----------------
-// Behavior settings
-// -----------------
+// ------------------------
+// Define control behaviors
+// ------------------------
 
-public void behaviorSettings() {
+public void defineControlBehaviors() {
 
   // COLOR & OPACITY (d-pad)
 

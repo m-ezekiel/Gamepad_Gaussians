@@ -95,73 +95,16 @@ public void draw() {
   red = A3_ctrl;
   alpha = A4_ctrl;
 
-
-  // ANALOG TO INTEGER
   joystick1 = analogToInteger(analogX, analogY, scalar);
   joystick2 = analogToInteger(analogU, analogV, scalar);
 
-
-  // GET COORDINATES
+  // Get random gaussian distributed XY coordinates
   xpos = gaussianInt(dpX, x_mean);
   ypos = gaussianInt(dpY, y_mean);
 
-  // Call conditional statements for control behaviors
-  behaviorSettings();
-
-
-  // RESET BACKGROUND
-
-  if (R2 & up) {
-    resetBlack();
-    output.close();
-    createKeypressFile();
-  }
-  if (R2 & down) {
-    resetWhite();
-    output.close();
-    createKeypressFile();  
-  }
-  if (R2 & right) {
-    resetColor();
-    output.close();
-    createKeypressFile();
-  }
-  if (R2 & left) {
-    resetInverse();
-    output.close();
-    createKeypressFile();
-  }
-
-  // RESET ALL VALUES TO DEFAULT
-  if (select1 & select2) {
-    dpX = 300;
-    dpY = 300;
-    brushSize_X = 350;
-    brushSize_Y = 350;
-    A1_ctrl = 60;
-    A2_ctrl = 60;
-    A3_ctrl = 60;
-    A4_ctrl = 60;
-    x_mean = width/2;
-    y_mean = height/2;
-    resetBlack();    
-  }
-
-
-  // LIMIT SCALE
-
-  A1_ctrl = limitScale(A1_ctrl, 0, 255);
-  A2_ctrl = limitScale(A2_ctrl, 0, 255);
-  A3_ctrl = limitScale(A3_ctrl, 0, 255);
-  A4_ctrl = limitScale(A4_ctrl, 0, 255);
-  dpY = limitScale(dpY, 0, 400);
-  dpX = limitScale(dpX, 0, 400);
-  brushSize_Y = limitScale(brushSize_Y, 1, 999);
-  brushSize_X = limitScale(brushSize_X, 1, 999);
-  xpos = limitScale(xpos, 0, width);
-  ypos = limitScale(ypos, 0, height);
-  // x_mean = limitScale(x_mean, 0, width);
-  // y_mean = limitScale(y_mean, 0, height);
+  defineControlBehaviors();
+  defineResetBehaviors()
+  constrainParameters();
 
 
   // SAVE IMAGE
