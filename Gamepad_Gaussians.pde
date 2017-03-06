@@ -25,7 +25,7 @@ boolean left, right, up, down, select1, select2;
 boolean imageSaved;
 
 // INITIALIZE PARAMETERS
-boolean writeData = false;
+boolean writeData = true;
 boolean actionPad_pressed = false;
 
 int xpos = 0; int ypos = 0;
@@ -35,14 +35,16 @@ int scalar = 50;
 int mScalar = scalar / 1;
 int brushSize_X = 350;
 int brushSize_Y = 350;
-int red, blue, green = 0;
+int red = 60;
+int blue = 60;
+int green = 60;
 int alpha = 60;
 
 int x_mean;
 int y_mean;
 
 
-float fps = 12;
+float fps = 20;
 
 
 // ASSIGN CONTROL MAPPINGS (variables numbered CCW from left)
@@ -104,14 +106,14 @@ public void draw() {
 
   // COLOR & OPACITY BEHAVIORS (d-pad)
 
-  if ((down|left|L1) & A1) {A1_ctrl -= increment;}
-  if ((down|left|L1) & A2) {A2_ctrl -= increment;}
-  if ((down|left|L1) & A3) {A3_ctrl -= increment;}
-  if ((down|left|L1) & A4) {A4_ctrl -= increment;}
-  if ((up|right|R1) & A1) {A1_ctrl += increment;}
-  if ((up|right|R1) & A2) {A2_ctrl += increment;}
-  if ((up|right|R1) & A3) {A3_ctrl += increment;}
-  if ((up|right|R1) & A4) {A4_ctrl += increment;}
+  if ((down|left) & A1) {A1_ctrl -= increment;}
+  if ((down|left) & A2) {A2_ctrl -= increment;}
+  if ((down|left) & A3) {A3_ctrl -= increment;}
+  if ((down|left) & A4) {A4_ctrl -= increment;}
+  if ((up|right) & A1) {A1_ctrl += increment;}
+  if ((up|right) & A2) {A2_ctrl += increment;}
+  if ((up|right) & A3) {A3_ctrl += increment;}
+  if ((up|right) & A4) {A4_ctrl += increment;}
 
 
   // SIZE BEHAVIORS (d-pad)
@@ -140,6 +142,7 @@ public void draw() {
 
   // RANDOM BEHAVIORS: if (L2) {variable = randomInt(min, max);}
   actionPad_pressed = getActionPad();
+
   if ((L2 & !actionPad_pressed)) {
     brushSize_Y = randomInt(0, 999);
     brushSize_X = randomInt(0, 999);
@@ -148,6 +151,21 @@ public void draw() {
     A1_ctrl = randomInt(0, 255);
     A2_ctrl = randomInt(0, 255);
     A3_ctrl = randomInt(0, 255);
+    A4_ctrl = randomInt(1,255);
+
+    // // Reduce the probability of landing on full opacity
+    // if (A4_ctrl > 60) {
+    //   A4_ctrl = A4_ctrl / randomInt(1,5);
+    // }
+
+    // // Reduce the probability of landing on maximum size
+    // if (brushSize_X > 300) {
+    //   brushSize_X = brushSize_X / randomInt(1,3);
+    // }
+    // if (brushSize_Y > 300) {
+    //   brushSize_Y = brushSize_Y / randomInt(1,3);
+    // }
+
   }
 
   // Localized random behaviors
@@ -155,6 +173,10 @@ public void draw() {
   if ((L2 & A2)) A2_ctrl = randomInt(0, 255);
   if ((L2 & A1)) A1_ctrl = randomInt(0, 255);
   if ((L2 & A3)) A3_ctrl = randomInt(0, 255);
+  if (L2 & R1) {
+    brushSize_Y = randomInt(0, 999);
+    brushSize_X = randomInt(0, 999);
+  }
 
   // ANALOG MODIFIERS
 
@@ -218,10 +240,26 @@ public void draw() {
 
   // RESET BACKGROUND
 
-  if (R2 & up) {resetBlack();}
-  if (R2 & down) {resetWhite();}
-  if (R2 & right) {resetColor();}
-  if (R2 & left) {resetInverse();}
+  if (R2 & up) {
+    resetBlack();
+    output.close();
+    createKeypressFile();
+  }
+  if (R2 & down) {
+    resetWhite();
+    output.close();
+    createKeypressFile();  
+  }
+  if (R2 & right) {
+    resetColor();
+    output.close();
+    createKeypressFile();
+  }
+  if (R2 & left) {
+    resetInverse();
+    output.close();
+    createKeypressFile();
+  }
 
   // RESET ALL VALUES TO DEFAULT
   if (select1 & select2) {
@@ -272,30 +310,33 @@ public void draw() {
     Keypress_array = getKeypresses();
     Analog_array = getAnalogValues();
 
-    output.println(
+    // if thumb keys above threshold...
+    if (abs(analogX) > .1 | abs(analogY) > .1 | abs(analogU) > .1 | abs(analogV) > .1 | actionPad_pressed == true) {
 
-      // Temporal data {time, position}
-      millis() + "\t" + XYpos_array[0] + "\t" + XYpos_array[1] + "\t" +
+      output.println(
 
-      // Size and dispersion {sX, sY, dpX, dpY}
-      ParamValue_array[6] + "\t" + ParamValue_array[7] + "\t" + ParamValue_array[4] + "\t" + ParamValue_array[5] + "\t" + 
+        // Temporal data {time, position}
+        millis() + "\t" + XYpos_array[0] + "\t" + XYpos_array[1] + "\t" +
 
-      // Color values {R, G, B, A}
-      ParamValue_array[0] + "\t" + ParamValue_array[1] + "\t" + ParamValue_array[2] + "\t" + ParamValue_array[3] + "\t" +  
+        // Size and dispersion {sX, sY, dpX, dpY}
+        ParamValue_array[6] + "\t" + ParamValue_array[7] + "\t" + ParamValue_array[4] + "\t" + ParamValue_array[5] + "\t" + 
 
-      // Keypresses {action, LR, select, M*, d-pad}
-      Keypress_array[0] + "\t" + Keypress_array[1] + "\t" + Keypress_array[2] + "\t" + Keypress_array[3] + "\t" + Keypress_array[4] + "\t" + Keypress_array[5] + "\t" + Keypress_array[6] + "\t" + Keypress_array[7] + "\t" + Keypress_array[8] + "\t" + Keypress_array[9] + "\t" + Keypress_array[10] + "\t" + Keypress_array[11] + "\t" + Keypress_array[12] + "\t" + Keypress_array[13] + "\t" + Keypress_array[14] + "\t" + Keypress_array[15] + "\t" +
-      
-      // Analog values {js1X, js1Y, js2U, js2V}
-      Analog_array[0] + "\t" + Analog_array[1] + "\t" + Analog_array[2] + "\t" + Analog_array[3] + "\t" +
+        // Color values {R, G, B, A}
+        ParamValue_array[0] + "\t" + ParamValue_array[1] + "\t" + ParamValue_array[2] + "\t" + ParamValue_array[3] + "\t" +  
 
-      // Joystick integers
-      joystick1 + "\t" + joystick2
+        // Keypresses {action, LR, select, M*, d-pad}
+        Keypress_array[0] + "\t" + Keypress_array[1] + "\t" + Keypress_array[2] + "\t" + Keypress_array[3] + "\t" + Keypress_array[4] + "\t" + Keypress_array[5] + "\t" + Keypress_array[6] + "\t" + Keypress_array[7] + "\t" + Keypress_array[8] + "\t" + Keypress_array[9] + "\t" + Keypress_array[10] + "\t" + Keypress_array[11] + "\t" + Keypress_array[12] + "\t" + Keypress_array[13] + "\t" + Keypress_array[14] + "\t" + Keypress_array[15] + "\t" +
+        
+        // Analog values {js1X, js1Y, js2U, js2V}
+        Analog_array[0] + "\t" + Analog_array[1] + "\t" + Analog_array[2] + "\t" + Analog_array[3] + "\t" +
 
-      );
+        // Joystick integers
+        joystick1 + "\t" + joystick2
 
-    output.flush(); 
+        );
 
+      output.flush(); 
+    }
   }
 
 
