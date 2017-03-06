@@ -1,5 +1,5 @@
 // File: Gamepad_Gaussians.pde
-// Author: m-ezekiel
+// Author: Mario Ezekiel H. (@m_ezkiel)
 // PS4-style controller digital painting
 
 import org.gamecontrolplus.gui.*;

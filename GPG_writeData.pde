@@ -1,3 +1,14 @@
+/*
+File: GPG_writeData.pde
+Author: Mario Ezekiel H. (@m_ezkiel)
+Desc.: Function script for Gamepad Gaussians
+*/
+
+
+// ----------
+// Write data
+// ----------
+
 public void writeData(boolean writeData, int joystick1, int joystick2) {
 
   if (writeData == true) {
