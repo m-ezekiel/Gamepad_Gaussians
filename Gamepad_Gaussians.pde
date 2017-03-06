@@ -44,7 +44,7 @@ int x_mean;
 int y_mean;
 
 
-float fps = 30;
+float fps = 20;
 
 
 // ASSIGN CONTROL MAPPINGS (variables numbered CCW from left)
@@ -106,14 +106,14 @@ public void draw() {
 
   // COLOR & OPACITY BEHAVIORS (d-pad)
 
-  if ((down|left|L1) & A1) {A1_ctrl -= increment;}
-  if ((down|left|L1) & A2) {A2_ctrl -= increment;}
-  if ((down|left|L1) & A3) {A3_ctrl -= increment;}
-  if ((down|left|L1) & A4) {A4_ctrl -= increment;}
-  if ((up|right|R1) & A1) {A1_ctrl += increment;}
-  if ((up|right|R1) & A2) {A2_ctrl += increment;}
-  if ((up|right|R1) & A3) {A3_ctrl += increment;}
-  if ((up|right|R1) & A4) {A4_ctrl += increment;}
+  if ((down|left) & A1) {A1_ctrl -= increment;}
+  if ((down|left) & A2) {A2_ctrl -= increment;}
+  if ((down|left) & A3) {A3_ctrl -= increment;}
+  if ((down|left) & A4) {A4_ctrl -= increment;}
+  if ((up|right) & A1) {A1_ctrl += increment;}
+  if ((up|right) & A2) {A2_ctrl += increment;}
+  if ((up|right) & A3) {A3_ctrl += increment;}
+  if ((up|right) & A4) {A4_ctrl += increment;}
 
 
   // SIZE BEHAVIORS (d-pad)
@@ -153,10 +153,10 @@ public void draw() {
     A3_ctrl = randomInt(0, 255);
     A4_ctrl = randomInt(1,255);
 
-    // Reduce the probability of landing on full opacity
-    if (A4_ctrl > 60) {
-      A4_ctrl = A4_ctrl / randomInt(1,5);
-    }
+    // // Reduce the probability of landing on full opacity
+    // if (A4_ctrl > 60) {
+    //   A4_ctrl = A4_ctrl / randomInt(1,5);
+    // }
 
     // // Reduce the probability of landing on maximum size
     // if (brushSize_X > 300) {
@@ -262,7 +262,7 @@ public void draw() {
   }
 
   // RESET ALL VALUES TO DEFAULT
-  if (select1 & select2) {
+  if (select1) {
     dpX = 300;
     dpY = 300;
     brushSize_X = 350;
