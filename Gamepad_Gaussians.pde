@@ -55,7 +55,7 @@ int A4_ctrl = alpha;
 
 // SETUP
 public void setup() {
-  size(1920, 1200);
+  size(1280, 800);
   background(0);
   noStroke();
 
@@ -262,7 +262,7 @@ public void draw() {
   }
 
   // RESET ALL VALUES TO DEFAULT
-  if (select1) {
+  if (select1 & select2) {
     dpX = 300;
     dpY = 300;
     brushSize_X = 350;
