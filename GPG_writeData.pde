@@ -9,7 +9,7 @@ Desc.: Function script for Gamepad Gaussians
 // Write data
 // ----------
 
-public void writeData(boolean writeData, int joystick1, int joystick2) {
+public void writeData(boolean writeData) {
 
   if (writeData == true) {
 
