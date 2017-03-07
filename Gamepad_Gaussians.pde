@@ -46,7 +46,7 @@ int x_mean;
 int y_mean;
 
 
-float fps = 20;
+float fps = 30;
 
 
 // ASSIGN CONTROL MAPPINGS (variables numbered CCW from left)
@@ -104,9 +104,4 @@ public void draw() {
   drawShapes();
 
   writeData(writeData);
-
-
-  // DIAGNOSTICS
-  // println(XYpos_array[0], XYpos_array[1]);
-
 }

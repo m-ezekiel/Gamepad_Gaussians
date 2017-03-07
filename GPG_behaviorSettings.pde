@@ -71,14 +71,14 @@ public void defineControlBehaviors() {
   actionPad_pressed = getActionPad();
 
   if ((L2 & !actionPad_pressed)) {
-    brushSize_Y = randomInt(0, 999);
-    brushSize_X = randomInt(0, 999);
+    brushSize_Y = randomInt(0, 500);
+    brushSize_X = randomInt(0, 500);
     dpY = randomInt(0, 400);
     dpX = randomInt(0, 400);
     A1_ctrl = randomInt(0, 255);
     A2_ctrl = randomInt(0, 255);
     A3_ctrl = randomInt(0, 255);
-    A4_ctrl = randomInt(1,255);
+    A4_ctrl = randomInt(1, 255);
 
     // // Reduce the probability of landing on full opacity
     // if (A4_ctrl > 60) {
@@ -103,8 +103,8 @@ public void defineControlBehaviors() {
   if ((L2 & A1)) A1_ctrl = randomInt(0, 255);
   if ((L2 & A3)) A3_ctrl = randomInt(0, 255);
   if (L2 & R1) {
-    brushSize_Y = randomInt(0, 999);
-    brushSize_X = randomInt(0, 999);
+    brushSize_Y = randomInt(0, 500);
+    brushSize_X = randomInt(0, 500);
   }
 
 
