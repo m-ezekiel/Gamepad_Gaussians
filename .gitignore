@@ -6,6 +6,6 @@ application.windows32
 application.windows64
 application.macosx
 build-TMP
-IMG_exports
+#IMG_exports
 data/nicolasa_data_2016-12-04-56.txt
 #Developer_Notes/
