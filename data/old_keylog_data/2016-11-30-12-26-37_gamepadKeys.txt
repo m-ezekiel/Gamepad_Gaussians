@@ -1,0 +1,2 @@
+millis	A1	A2	A3	A4	L1	R1	L2	R2	S1	S2	M1	M2	up	dn	lf	rt
+602118	0	0	0	0	0	0	0	0	0	0	1	1	0	0	0	0

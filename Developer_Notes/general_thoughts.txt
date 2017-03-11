@@ -1,0 +1,61 @@
+
+The absolute value transformation is limiting the use of quadrants 2 and 4 for modifying value and makes for some unintuoitive as fuck controls when mode is activated.
+
+HOly shit, you can get pastel values by rotating around the d-pad as long as colors are mapped to them.
+
+Jacob is right though, that people will not play if they just keep fucking up shit.  Even though that's part of what it's about.
+
+There's a research question.  Can you tell when people fuck up their painting?
+
+They have two choices after they fuck up: either start from black or keep going.
+
+Son of a bitch.  If I want to upload images somewhere I am going to have to make an ingest daemon.  That's funny.
+
+COLORS/TRANSPARENCY:
+{rgba} +/- value             
+
+. = 5
+.. = 10
+... = 20
+.... = 40
+..... = 60
+...... = 120
+....... = 240
+
+Every semi-colon is draw.
+
+SIZE/POS/DISP:
+{spd} +/- value
+
+rbgspd...;
+
+- - -
+
+Video Tutorial
+
+* highlight the preview window aspect as values are changed. *
+
+
+[TITLE] Gamepad Gaussians [/t]
+
+[SUMMARY] Gamepad Gaussians is an interactive media project that blends color theory, mathematics and gaming into an experimental drawing environment. [/s]
+
+[TITLE] Color/Opacity [/t]
+
+[SUMMARY] Color values range from 0 to 255. Use the d-Pad or joysticks to +/- value. [/s]
+
+[TITLE] Size/Shape [/t]
+
+[SUMMARY] Values for the vertical and horizontal ellipse diameters can be manipulated with the d-Pad. [/s]
+
+[TITLE] Dispersion [/t]
+
+[SUMMARY] Dispersion refers to the spread of the randomness.  A picture would be good here. [/s]
+
+[TITLE] Random [/t]
+
+[SUMMARY]  [/s]
+
+[TITLE] Reset [/t]
+
+[SUMMARY]  [/s]
