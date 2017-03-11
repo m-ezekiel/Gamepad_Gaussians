@@ -78,7 +78,7 @@ public void defineControlBehaviors() {
     A1_ctrl = randomInt(0, 255);
     A2_ctrl = randomInt(0, 255);
     A3_ctrl = randomInt(0, 255);
-    A4_ctrl = randomInt(1, 255);
+    // A4_ctrl = randomInt(1, 255);
 
     // // Reduce the probability of landing on full opacity
     // if (A4_ctrl > 60) {

@@ -84,7 +84,7 @@ public void togglePreview() {
   // Outer window
   int owB = w/7; // 160 (default is 8)
   float owH = owB/2.5; // 60
-  int owX = width - owB - 300; // Minus 300 for the video demo, 0 otherwise
+  int owX = width - owB - 0; // Minus 300 for the video demo, 0 otherwise
   int owY = 0;
   int gap = w/45; // 28
   // Inner window
