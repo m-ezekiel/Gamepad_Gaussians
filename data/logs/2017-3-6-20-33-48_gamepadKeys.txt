@@ -1,0 +1,2 @@
+millis	xpos	ypos	sX	sY	dpX	dpY	red	green	blue	opacity	A1	A2	A3	A4	L1	R1	L2	R2	S1	S2	M1	M2	up	down	left	right	anlgX	anlgY	anlgU	anlgV	joy1_int	joy2_int
+136513	710	622	206	944	180	120	0	0	0	62	0	0	0	0	0	0	0	1	0	0	0	0	0	1	0	0	0.0	0.0	0.0	0.0	0	0
