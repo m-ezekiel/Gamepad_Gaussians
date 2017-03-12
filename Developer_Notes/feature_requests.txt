@@ -1,3 +1,0 @@
-# 2016-12-08
-
-Multiple shapes, undo button, make the size reflect the actual size.
