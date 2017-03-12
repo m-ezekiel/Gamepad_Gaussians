@@ -13,7 +13,8 @@ The program uses a Playstation-style gamepad to control parameters such as color
 - USB game controller
 
 ### Getting Started
-- Clone repo, should work out of the box
+- Install [Processing](http://processing.org) and the [Game Control Plus library](http://lagers.org.uk/gamecontrol/)
+- Clone the repo, it should work out of the box
 
 ## How to play
 - Video link, https://vimeo.com/205996679
@@ -21,4 +22,4 @@ The program uses a Playstation-style gamepad to control parameters such as color
 <img src="docs/controller_diagram.png" width="900px"/>
 
 ### Acknowledgments
-- JBJ, Rebholz, A. White, GP lib creator
+- JBJ, Rebholz, A. White, Peter Lager (GCP library creator)
