@@ -1,0 +1,5 @@
+# How to play
+
+The controls are made of 2 parts: variables and volume knobs.  You must press them at the
+same time in order to change the variable value.  Push the "reset" button to clear the
+canvas.

@@ -1,0 +1,14 @@
+I want to know about vountary engagement levels and self-reported gameplay impressions.
+The data will show how many new sessions were initiated and the quantity of data inside
+each one.  For sessions of a certain length I could also do a cluster analysis to look
+at keypress colocation.  
+
+DOCUMENTATION:
+- Controller keymap
+- Github tutorial page
+- Video tutorial
+
+It's interesting that some players have described an approach I hadn't anticipated in 
+gameplay: play a little, do something else, repeat over the course of an undefined amount
+of time.  The difference in that case was the enormous size of the screen.  I should get
+the data from that session.
