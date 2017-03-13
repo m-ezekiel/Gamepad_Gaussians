@@ -239,7 +239,7 @@ public void createKeypressFile() {
   int [] datetime = dateTime();
 
   // Define keylogging output file naming convention
-  output = createWriter("data/" + join(nf(datetime, 0), "-") + "_gamepadKeys.txt");
+  output = createWriter("data/logs/" + join(nf(datetime, 2), "-") + "_gamepadKeys.txt");
 
   // Create headers on output file
   output.println(
