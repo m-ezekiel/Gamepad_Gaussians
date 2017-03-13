@@ -458,40 +458,26 @@ public void defineControlBehaviors() {
 
 public void defineResetBehaviors() {
 
-  // Reset background
-  // if (R2 & up) {
-    // resetBlack();
-    // output.close();
-    // createKeypressFile();
-  // }
-  // if (R2 & down) {
-  //   resetWhite();
-  //   output.close();
-  //   createKeypressFile();  
-  // }
-  // if (R2 & right) {
-  //   resetColor();
-  //   output.close();
-  //   createKeypressFile();
-  // }
-  // if (R2 & left) {
-  //   resetInverse();
-  //   output.close();
-  //   createKeypressFile();
-  // }
+  if (select2 & !select1) {
+    resetBlack();
 
-  // Reset all values to default w/(s1 & s2)
-  if (select2) {
-    // dpX = 300;
-    // dpY = 300;
-    // brushSize_X = 350;
-    // brushSize_Y = 350;
-    // A1_ctrl = 60;
-    // A2_ctrl = 60;
-    // A3_ctrl = 60;
-    // A4_ctrl = 60;
-    // x_mean = width/2;
-    // y_mean = height/2;
+    if (writeData == true) {
+      output.close();
+      createKeypressFile();
+    }
+  }
+
+  if (select2 & select1) {
+    dpX = 300;
+    dpY = 300;
+    brushSize_X = 350;
+    brushSize_Y = 350;
+    A1_ctrl = 60;
+    A2_ctrl = 60;
+    A3_ctrl = 60;
+    A4_ctrl = 60;
+    x_mean = width/2;
+    y_mean = height/2;
     resetBlack();
 
     if (writeData == true) {
