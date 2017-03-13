@@ -170,9 +170,9 @@ public void resetInverse() {
 
 
 public void refreshControlValues() {
-  blue = A1_ctrl;
+  red = A1_ctrl;
   green = A2_ctrl;
-  red = A3_ctrl;
+  blue = A3_ctrl;
   alpha = A4_ctrl;  
 }
 
