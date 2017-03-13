@@ -155,18 +155,10 @@ public int randomInt(int a, int b) {
 }
 
 
-public void resetBlack() {
-  background(0);
-}
-public void resetWhite() {
-  background(255);
-}
-public void resetColor() {
-  background(red, green, blue, alpha);
-}
-public void resetInverse() {
-  background(255 - red, 255 - green, 255 - blue, 255 - alpha);
-}
+public void resetBlack() {background(0);}
+public void resetWhite() {background(255);}
+public void resetColor() {background(red, green, blue, alpha);}
+public void resetInverse() {background(255 - red, 255 - green, 255 - blue, 255 - alpha);}
 
 
 public void refreshControlValues() {
@@ -326,8 +318,7 @@ public void writeData(boolean writeData) {
 
 public void defineControlBehaviors() {
 
-  // COLOR & OPACITY (d-pad)
-
+  // Color & opacity (d-pad)
   if ((down|left) & A1) {A1_ctrl -= increment;}
   if ((down|left) & A2) {A2_ctrl -= increment;}
   if ((down|left) & A3) {A3_ctrl -= increment;}
@@ -338,45 +329,41 @@ public void defineControlBehaviors() {
   if ((up|right) & A4) {A4_ctrl += increment;}
 
 
-  // SIZE (d-pad)
-
+  // Size (d-pad)
   if (up & R1) {brushSize_Y += increment * 15;}
   if (down & R1) {brushSize_Y -= increment * 15;}
   if (right & R1) {brushSize_X -= increment * 15;}
   if (left & R1) {brushSize_X += increment * 15;}
 
 
-  // DISPERSION (d-pad)
-
+  // Dispersion (d-pad)
   if (up & L1) {dpY += increment * 10;}
   if (down & L1) {dpY -= increment * 10;}
   if (right & L1) {dpX -= increment * 10;}
   if (left & L1) {dpX += increment * 10;}
 
 
-  // POSITION (d-pad)
+  // Position (d-pad)
+  if (up & R2) {y_mean += -increment * 15;}
+  if (down & R2) {y_mean -= -increment * 15;}
+  if (right & R2) {x_mean += increment * 15;}
+  if (left & R2) {x_mean -= increment * 15;}
 
-  if (up & select2) {y_mean += -increment * 15;}
-  if (down & select2) {y_mean -= -increment * 15;}
-  if (right & select2) {x_mean += increment * 15;}
-  if (left & select2) {x_mean -= increment * 15;}
 
-
-  // MUTE VALUE: if (R2 & button) {variable = 0}
-
-  if ((R2) & A1) {A1_ctrl = 0;}
-  if ((R2) & A2) {A2_ctrl = 0;}
-  if ((R2) & A3) {A3_ctrl = 0;}
-  if ((R2) & A4) {A4_ctrl = 0;}
-  if (R2 & L1) {
+  // Mute values: if (mute & button) {variable = 0}
+  if ((select1) & A1) {A1_ctrl = 0;}
+  if ((select1) & A2) {A2_ctrl = 0;}
+  if ((select1) & A3) {A3_ctrl = 0;}
+  if ((select1) & A4) {A4_ctrl = 0;}
+  if (select1 & L1) {
     brushSize_X = 350;
     brushSize_Y = 350;
   }
-  if (R2 & R1) {
+  if (select1 & R1) {
     dpX = 300;
     dpY = 300;
   }
-  if (R2 & (select1|select2)) {
+  if (select1 & R2) {
     x_mean = width/2;
     y_mean = height/2;
   }
@@ -423,8 +410,7 @@ public void defineControlBehaviors() {
   }
 
 
-  // ANALOG MODIFIERS
-
+  // Color & opacity (analog)
   if (A1 & (abs(joystick1) > 2)) {A1_ctrl += increment * joystick1 / mScalar;}
   if (A2 & (abs(joystick1) > 2)) {A2_ctrl += increment * joystick1 / mScalar;}
   if (A3 & (abs(joystick1) > 2)) {A3_ctrl += increment * joystick1 / mScalar;}
@@ -448,10 +434,10 @@ public void defineControlBehaviors() {
   if (L1 & (abs(analogV) > 0.15)) {dpY += -analogV * 15 * increment;}
 
   // Position
-  if((select1|select2) & (abs(analogX) > 0.15)) {x_mean += analogX * 15 * increment;}
-  if((select1|select2) & (abs(analogY) > 0.15)) {y_mean += analogY * 15 * increment;}
-  if((select1|select2) & (abs(analogU) > 0.15)) {x_mean += analogU * 15 * increment;}
-  if((select1|select2) & (abs(analogV) > 0.15)) {y_mean += analogV * 15 * increment;}
+  if(R2 & (abs(analogX) > 0.15)) {x_mean += analogX * 15 * increment;}
+  if(R2 & (abs(analogY) > 0.15)) {y_mean += analogY * 15 * increment;}
+  if(R2 & (abs(analogU) > 0.15)) {x_mean += analogU * 15 * increment;}
+  if(R2 & (abs(analogV) > 0.15)) {y_mean += analogV * 15 * increment;}
 
   // Map D-Pad to colors when Joystick 2 is activated
   if (left & (abs(joystick2) > 2)) {A1_ctrl += increment * joystick2 / mScalar;}
@@ -473,40 +459,45 @@ public void defineControlBehaviors() {
 public void defineResetBehaviors() {
 
   // Reset background
-  if (R2 & up) {
-    resetBlack();
-    output.close();
-    createKeypressFile();
-  }
-  if (R2 & down) {
-    resetWhite();
-    output.close();
-    createKeypressFile();  
-  }
-  if (R2 & right) {
-    resetColor();
-    output.close();
-    createKeypressFile();
-  }
-  if (R2 & left) {
-    resetInverse();
-    output.close();
-    createKeypressFile();
-  }
+  // if (R2 & up) {
+    // resetBlack();
+    // output.close();
+    // createKeypressFile();
+  // }
+  // if (R2 & down) {
+  //   resetWhite();
+  //   output.close();
+  //   createKeypressFile();  
+  // }
+  // if (R2 & right) {
+  //   resetColor();
+  //   output.close();
+  //   createKeypressFile();
+  // }
+  // if (R2 & left) {
+  //   resetInverse();
+  //   output.close();
+  //   createKeypressFile();
+  // }
 
   // Reset all values to default w/(s1 & s2)
-  if (select1 & select2) {
-    dpX = 300;
-    dpY = 300;
-    brushSize_X = 350;
-    brushSize_Y = 350;
-    A1_ctrl = 60;
-    A2_ctrl = 60;
-    A3_ctrl = 60;
-    A4_ctrl = 60;
-    x_mean = width/2;
-    y_mean = height/2;
-    resetBlack();    
+  if (select2) {
+    // dpX = 300;
+    // dpY = 300;
+    // brushSize_X = 350;
+    // brushSize_Y = 350;
+    // A1_ctrl = 60;
+    // A2_ctrl = 60;
+    // A3_ctrl = 60;
+    // A4_ctrl = 60;
+    // x_mean = width/2;
+    // y_mean = height/2;
+    resetBlack();
+
+    if (writeData == true) {
+      output.close();
+      createKeypressFile();
+    }
   }
 }
 
@@ -530,8 +521,8 @@ public void constrainParameters() {
   brushSize_X = limitScale(brushSize_X, 1, 999);
   xpos = limitScale(xpos, 0, width);
   ypos = limitScale(ypos, 0, height);
-  // x_mean = limitScale(x_mean, 0, width);
-  // y_mean = limitScale(y_mean, 0, height);
+  x_mean = limitScale(x_mean, 0, width);
+  y_mean = limitScale(y_mean, 0, height);
 }
 
 
