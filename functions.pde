@@ -562,10 +562,10 @@ public void togglePreview() {
   float iwCX = owX + owB/12 + iwB/2;
   float iwCY = owY + owH/6 + iwH/2;  
   // Parameter values
-  String opacity = str(alpha);
-  String rd = str(red);
-  String grn = str(green);
-  String blu = str(blue);
+  String A4_val = str(alpha);
+  String A3_val = str(blue);
+  String A2_val = str(green);
+  String A1_val = str(red);
   String x_mn = str(x_mean);
   String y_mn = str(y_mean);
   String dX = str(dpX/4);
@@ -611,16 +611,16 @@ public void togglePreview() {
   textSize(owB/15);
   // Color Values
   fill(200);
-  text(opacity, owCX + gap + gap/11, owCY - gap/1.1);
+  text(A4_val, owCX + gap + gap/11, owCY - gap/1.1);
 
   fill(0, 255, 0, 255);
-  text(grn, owCX + gap + gap/11, owCY + gap/3);
-
-  fill(0, 200, 255, 255);
-  text(blu, owCX + gap/5, owCY - gap/3);
+  text(A2_val, owCX + gap + gap/11, owCY + gap/3);
 
   fill(255, 0, 0, 255);
-  text(rd, owCX + (2*gap), owCY - gap/3);
+  text(A1_val, owCX + gap/5, owCY - gap/3);
+
+  fill(0, 200, 255, 255);
+  text(A3_val, owCX + (2*gap), owCY - gap/3);
 
   // Position Values
   fill(180);
