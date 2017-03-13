@@ -25,7 +25,7 @@ boolean left, right, up, down, select1, select2;
 boolean imageSaved;
 
 // INITIALIZE PARAMETERS
-boolean writeData = true;
+boolean writeData = false;
 boolean actionPad_pressed = false;
 
 int xpos = 0; int ypos = 0;
