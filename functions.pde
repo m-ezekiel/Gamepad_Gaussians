@@ -142,7 +142,7 @@ public boolean getActionPad() {
   boolean value = false;
 
   // If buttons are pressed then value is false
-  if (A1 | A2 | A3 | A4 | R1 | L1 | up | down | left | right | select1 | select2)
+  if (A1 | A2 | A3 | A4 | R1 | R2 | L1 | up | down | left | right | select1 | select2)
     value = true;
 
   return(value);
@@ -408,7 +408,10 @@ public void defineControlBehaviors() {
     brushSize_Y = randomInt(0, 500);
     brushSize_X = randomInt(0, 500);
   }
-
+  if (L2 & R2) {
+    x_mean = randomInt(0, width);
+    y_mean = randomInt(0, height);
+  }
 
   // Color & opacity (analog)
   if (A1 & (abs(joystick1) > 2)) {A1_ctrl += increment * joystick1 / mScalar;}
