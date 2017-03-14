@@ -462,7 +462,13 @@ public void defineControlBehaviors() {
 public void defineResetBehaviors() {
 
   if (select2 & !select1) {
-    resetBlack();
+    int bgColor = randomInt(0, 2);
+    if (bgColor == 0)
+      resetBlack();
+    if (bgColor > 0)
+      resetWhite();
+
+    println("bg: "+bgColor);
 
     if (writeData == true) {
       output.close();
