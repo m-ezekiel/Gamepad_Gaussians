@@ -9,12 +9,12 @@ The program uses a Playstation-style gamepad to control parameters such as color
 ## Setup
 
 ### Requirements
-- Processing 3 (processing.org)
 - USB game controller
 
 ### Getting Started
+- [Download the game](https://m-ezekiel.itch.io/gamepad-gaussians?secret=Chu1XE4238kxY8nLetH2G4bd0cQ), or...
 - Install [Processing](http://processing.org) and the [Game Control Plus library](http://lagers.org.uk/gamecontrol/)
-- Clone the repo, it should work out of the box
+- Clone the repo and build
 
 ## How to play
 - Video link, https://vimeo.com/205996679
