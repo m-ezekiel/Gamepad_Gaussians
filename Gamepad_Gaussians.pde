@@ -46,7 +46,7 @@ int x_mean;
 int y_mean;
 
 
-float fps = 60;
+float fps = 30;
 
 
 // ASSIGN CONTROL MAPPINGS (variables numbered CCW from left)
@@ -57,7 +57,7 @@ int A4_ctrl = alpha;
 
 // SETUP
 public void setup() {
-  size(3600, 2400);
+  size(1280, 800);
   background(0);
   noStroke();
 
