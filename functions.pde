@@ -510,10 +510,10 @@ public void constrainParameters() {
   A2_ctrl = limitScale(A2_ctrl, 0, 255);
   A3_ctrl = limitScale(A3_ctrl, 0, 255);
   A4_ctrl = limitScale(A4_ctrl, 0, 255);
-  dpY = limitScale(dpY, 0, 400);
-  dpX = limitScale(dpX, 0, 400);
-  brushSize_Y = limitScale(brushSize_Y, 1, 999);
-  brushSize_X = limitScale(brushSize_X, 1, 999);
+  dpY = limitScale(dpY, 0, height/2);
+  dpX = limitScale(dpX, 0, height/2);
+  brushSize_Y = limitScale(brushSize_Y, 1, height);
+  brushSize_X = limitScale(brushSize_X, 1, height);
   xpos = limitScale(xpos, 0, width);
   ypos = limitScale(ypos, 0, height);
   x_mean = limitScale(x_mean, 0, width);

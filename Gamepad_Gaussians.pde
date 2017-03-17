@@ -57,7 +57,7 @@ int A4_ctrl = alpha;
 
 // SETUP
 public void setup() {
-  size(1280, 800);
+  size(3600, 2400);
   background(0);
   noStroke();
 
