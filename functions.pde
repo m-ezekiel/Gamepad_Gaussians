@@ -587,6 +587,7 @@ public void togglePreview() {
     brushSize_X/brushScale, brushSize_Y/brushScale);
 
   // Brush pigment colored ellipse
+  // Add inverse color stroke to offset low value colors
   stroke(255-red, 255-green, 255-blue, 60);
   fill(red, green, blue, 255);
   ellipse(owCX + gap + gap/11, owCY - gap/11, gap/2, gap/2);
