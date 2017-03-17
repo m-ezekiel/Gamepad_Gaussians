@@ -571,7 +571,7 @@ public void togglePreview() {
 
 
   stroke(150);
-  fill(red, green, blue, 127);
+  fill(red, green, blue, alpha*2);
 
   // X-DISPERSION
   ellipse(iwCX - dpX/20 + (x_mean - width/2)/25, iwCY + (y_mean - height/2)/25, 
@@ -587,10 +587,12 @@ public void togglePreview() {
     brushSize_X/brushScale, brushSize_Y/brushScale);
 
   // Brush pigment colored ellipse
-  noStroke();
-  fill(red, green, blue, alpha*3);
+  // noStroke();
+  stroke(60);
+  fill(red, green, blue, 255);
   ellipse(owCX + gap + gap/11, owCY - gap/11, gap/2, gap/2);
 
+  noStroke();
 
   // Display color values according to controller position
   textAlign(CENTER, TOP);

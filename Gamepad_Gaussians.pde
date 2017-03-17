@@ -46,7 +46,7 @@ int x_mean;
 int y_mean;
 
 
-float fps = 30;
+float fps = 60;
 
 
 // ASSIGN CONTROL MAPPINGS (variables numbered CCW from left)
