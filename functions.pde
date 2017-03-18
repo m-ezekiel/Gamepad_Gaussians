@@ -171,7 +171,7 @@ public void refreshControlValues() {
 
 public boolean saveImage() {
   int [] datetime = dateTime();
-  save("IMG_exports/gamePad_sketch_" + join(nf(datetime, 0), "-") + ".png");  
+  save("IMG_exports/gamePad_sketch_" + join(nf(datetime, 2), "-") + ".png");  
   return(true);
 }
 
@@ -462,13 +462,13 @@ public void defineControlBehaviors() {
 public void defineResetBehaviors() {
 
   if (select2 & !select1) {
-    int bgColor = randomInt(0, 2);
-    if (bgColor == 0)
-      resetBlack();
-    if (bgColor > 0)
-      resetWhite();
+    // int bgColor = randomInt(0, 2);
+    // if (bgColor == 0)
+    //   resetBlack();
+    // if (bgColor > 0)
+    //   resetWhite();
 
-    println("bg: "+bgColor);
+    // println("bg: "+bgColor);
 
     if (writeData == true) {
       output.close();
@@ -611,9 +611,9 @@ public void togglePreview() {
   text(A3_val, owCX + (2*gap), owCY - gap/3);
 
   // Position Values
-  fill(180);
-  text(x_mn, iwCX - gap/2, owCY + gap/2);
-  text(y_mn, iwCX + gap/2, owCY + gap/2);
+  // fill(180);
+  // text(x_mn, iwCX - gap/2, owCY + gap/2);
+  // text(y_mn, iwCX + gap/2, owCY + gap/2);
 
   // IMAGE SAVED
   if (imageSaved == true) {
