@@ -171,7 +171,8 @@ public void refreshControlValues() {
 
 public boolean saveImage() {
   int [] datetime = dateTime();
-  save("IMG_exports/gamePad_sketch_" + join(nf(datetime, 2), "-") + ".png");  
+  save("IMG_exports/gamePad_sketch_" + join(nf(datetime, 2), "-") + ".png");
+  save("gameplay_data/gamePad_sketch_" + join(nf(datetime, 2), "-") + ".png");  
   return(true);
 }
 
@@ -231,7 +232,7 @@ public void createKeypressFile() {
   int [] datetime = dateTime();
 
   // Define keylogging output file naming convention
-  output = createWriter("data/logs/" + join(nf(datetime, 2), "-") + "_gamepadKeys.txt");
+  output = createWriter("gameplay_data/" + join(nf(datetime, 2), "-") + "_gamepadKeys.txt");
 
   // Create headers on output file
   output.println(
@@ -448,6 +449,10 @@ public void defineControlBehaviors() {
   if (right & (abs(joystick2) > 2)) {A3_ctrl += increment * joystick2 / mScalar;}
   if (up & (abs(joystick2) > 2)) {A4_ctrl += increment * joystick2 / mScalar;}
 
+  // Save image
+  if (L1 & R1)
+    saveImage();
+
 }
 
 
@@ -614,11 +619,5 @@ public void togglePreview() {
   // fill(180);
   // text(x_mn, iwCX - gap/2, owCY + gap/2);
   // text(y_mn, iwCX + gap/2, owCY + gap/2);
-
-  // IMAGE SAVED
-  if (imageSaved == true) {
-    fill(255);
-    text("SAVED", owCX, owCY - 20); 
-  }
 
 }
