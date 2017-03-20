@@ -450,7 +450,7 @@ public void defineControlBehaviors() {
   if (up & (abs(joystick2) > 2)) {A4_ctrl += increment * joystick2 / mScalar;}
 
   // Save image
-  if (L1 & R1)
+  if (L2 & R2)
     saveImage();
 
 }
@@ -466,12 +466,13 @@ public void defineControlBehaviors() {
 
 public void defineResetBehaviors() {
 
+  // Reset background only
   if (select2 & !select1) {
-    // int bgColor = randomInt(0, 2);
-    // if (bgColor == 0)
-    //   resetBlack();
-    // if (bgColor > 0)
-    //   resetWhite();
+    int bgColor = randomInt(0, 2);
+    if (bgColor == 0)
+      resetBlack();
+    if (bgColor > 0)
+      resetWhite();
 
     // println("bg: "+bgColor);
 
@@ -481,6 +482,7 @@ public void defineResetBehaviors() {
     }
   }
 
+  // Reset background and set all params to default
   if (select2 & select1) {
     dpX = 300;
     dpY = 300;
