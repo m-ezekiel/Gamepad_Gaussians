@@ -253,7 +253,10 @@ public void createKeypressFile() {
     "up" + "\t" + "down" + "\t" + "left" + "\t" + "right" + "\t" + 
 
     // Analog axis values
-     "anlgX" + "\t" + "anlgY" + "\t" + "anlgU" + "\t" + "anlgV" + "\t" +
+    "anlgX" + "\t" + "anlgY" + "\t" + "anlgU" + "\t" + "anlgV" + "\t" +
+
+    // Focal points {x_mean, y_mean}
+    "x_mean" + "\t" + "y_mean" + "\t" +
 
     // Joystick integers
     "joy1_int" + "\t" + "joy2_int"
@@ -297,6 +300,9 @@ public void writeData(boolean writeData) {
         
         // Analog values {js1X, js1Y, js2U, js2V}
         Analog_array[0] + "\t" + Analog_array[1] + "\t" + Analog_array[2] + "\t" + Analog_array[3] + "\t" +
+
+        // Focal points: {x_mean, y_mean}
+        x_mean + "\t" + y_mean + "\t" +
 
         // Joystick integers
         joystick1 + "\t" + joystick2
