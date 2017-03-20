@@ -25,7 +25,7 @@ boolean left, right, up, down, select1, select2;
 boolean imageSaved;
 
 // INITIALIZE PARAMETERS
-boolean writeData = false;
+boolean writeData = true;
 boolean actionPad_pressed = false;
 
 int xpos = 0; int ypos = 0;
@@ -57,7 +57,7 @@ int A4_ctrl = alpha;
 
 // SETUP
 public void setup() {
-  size(1280, 800);
+  size(1280, 720);
   background(0);
   noStroke();
 
@@ -99,9 +99,10 @@ public void draw() {
 
   defineControlBehaviors();
   defineResetBehaviors();
-  constrainParameters();
-  togglePreview();
   drawShapes();
 
   writeData(writeData);
+
+  constrainParameters();
+  togglePreview();
 }

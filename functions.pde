@@ -171,7 +171,8 @@ public void refreshControlValues() {
 
 public boolean saveImage() {
   int [] datetime = dateTime();
-  save("IMG_exports/gamePad_sketch_" + join(nf(datetime, 0), "-") + ".png");  
+  save("IMG_exports/gamePad_sketch_" + join(nf(datetime, 2), "-") + ".png");
+  save("gameplay_data/gamePad_sketch_" + join(nf(datetime, 2), "-") + ".png");  
   return(true);
 }
 
@@ -231,7 +232,7 @@ public void createKeypressFile() {
   int [] datetime = dateTime();
 
   // Define keylogging output file naming convention
-  output = createWriter("data/logs/" + join(nf(datetime, 2), "-") + "_gamepadKeys.txt");
+  output = createWriter("gameplay_data/" + join(nf(datetime, 2), "-") + "_gamepadKeys.txt");
 
   // Create headers on output file
   output.println(
@@ -252,7 +253,10 @@ public void createKeypressFile() {
     "up" + "\t" + "down" + "\t" + "left" + "\t" + "right" + "\t" + 
 
     // Analog axis values
-     "anlgX" + "\t" + "anlgY" + "\t" + "anlgU" + "\t" + "anlgV" + "\t" +
+    "anlgX" + "\t" + "anlgY" + "\t" + "anlgU" + "\t" + "anlgV" + "\t" +
+
+    // Focal points {x_mean, y_mean}
+    "x_mean" + "\t" + "y_mean" + "\t" +
 
     // Joystick integers
     "joy1_int" + "\t" + "joy2_int"
@@ -296,6 +300,9 @@ public void writeData(boolean writeData) {
         
         // Analog values {js1X, js1Y, js2U, js2V}
         Analog_array[0] + "\t" + Analog_array[1] + "\t" + Analog_array[2] + "\t" + Analog_array[3] + "\t" +
+
+        // Focal points: {x_mean, y_mean}
+        x_mean + "\t" + y_mean + "\t" +
 
         // Joystick integers
         joystick1 + "\t" + joystick2
@@ -448,6 +455,10 @@ public void defineControlBehaviors() {
   if (right & (abs(joystick2) > 2)) {A3_ctrl += increment * joystick2 / mScalar;}
   if (up & (abs(joystick2) > 2)) {A4_ctrl += increment * joystick2 / mScalar;}
 
+  // Save image
+  if (L2 & R2)
+    saveImage();
+
 }
 
 
@@ -461,6 +472,7 @@ public void defineControlBehaviors() {
 
 public void defineResetBehaviors() {
 
+  // Reset background only
   if (select2 & !select1) {
     int bgColor = randomInt(0, 2);
     if (bgColor == 0)
@@ -468,7 +480,7 @@ public void defineResetBehaviors() {
     if (bgColor > 0)
       resetWhite();
 
-    println("bg: "+bgColor);
+    // println("bg: "+bgColor);
 
     if (writeData == true) {
       output.close();
@@ -476,6 +488,7 @@ public void defineResetBehaviors() {
     }
   }
 
+  // Reset background and set all params to default
   if (select2 & select1) {
     dpX = 300;
     dpY = 300;
@@ -510,10 +523,10 @@ public void constrainParameters() {
   A2_ctrl = limitScale(A2_ctrl, 0, 255);
   A3_ctrl = limitScale(A3_ctrl, 0, 255);
   A4_ctrl = limitScale(A4_ctrl, 0, 255);
-  dpY = limitScale(dpY, 0, 400);
-  dpX = limitScale(dpX, 0, 400);
-  brushSize_Y = limitScale(brushSize_Y, 1, 999);
-  brushSize_X = limitScale(brushSize_X, 1, 999);
+  dpY = limitScale(dpY, 0, height/2);
+  dpX = limitScale(dpX, 0, height/2);
+  brushSize_Y = limitScale(brushSize_Y, 1, height);
+  brushSize_X = limitScale(brushSize_X, 1, height);
   xpos = limitScale(xpos, 0, width);
   ypos = limitScale(ypos, 0, height);
   x_mean = limitScale(x_mean, 0, width);
@@ -611,14 +624,8 @@ public void togglePreview() {
   text(A3_val, owCX + (2*gap), owCY - gap/3);
 
   // Position Values
-  fill(180);
-  text(x_mn, iwCX - gap/2, owCY + gap/2);
-  text(y_mn, iwCX + gap/2, owCY + gap/2);
-
-  // IMAGE SAVED
-  if (imageSaved == true) {
-    fill(255);
-    text("SAVED", owCX, owCY - 20); 
-  }
+  // fill(180);
+  // text(x_mn, iwCX - gap/2, owCY + gap/2);
+  // text(y_mn, iwCX + gap/2, owCY + gap/2);
 
 }
