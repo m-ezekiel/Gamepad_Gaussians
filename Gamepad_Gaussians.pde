@@ -100,8 +100,9 @@ public void draw() {
   defineControlBehaviors();
   defineResetBehaviors();
   drawShapes();
-  constrainParameters();
-  togglePreview();
 
   writeData(writeData);
+
+  constrainParameters();
+  togglePreview();
 }
