@@ -456,8 +456,8 @@ public void defineControlBehaviors() {
   if (up & (abs(joystick2) > 2)) {A4_ctrl += increment * joystick2 / mScalar;}
 
   // Save image
-  if (L2 & R2)
-    saveImage();
+  // if (L2 & R2)
+  //   saveImage();
 
 }
 
@@ -473,14 +473,14 @@ public void defineControlBehaviors() {
 public void defineResetBehaviors() {
 
   // Reset background only
-  if (select2 & !select1) {
-    int bgColor = randomInt(0, 2);
-    if (bgColor == 0)
-      resetBlack();
-    if (bgColor > 0)
-      resetWhite();
+  if (select1) {
+    // int bgColor = randomInt(0, 2);
+    // if (bgColor == 0)
+    //   resetBlack();
+    // if (bgColor > 0)
+    //   resetWhite();
 
-    // println("bg: "+bgColor);
+    resetBlack();
 
     if (writeData == true) {
       output.close();
@@ -489,23 +489,8 @@ public void defineResetBehaviors() {
   }
 
   // Reset background and set all params to default
-  if (select2 & select1) {
-    dpX = 300;
-    dpY = 300;
-    brushSize_X = 350;
-    brushSize_Y = 350;
-    A1_ctrl = 60;
-    A2_ctrl = 60;
-    A3_ctrl = 60;
-    A4_ctrl = 60;
-    x_mean = width/2;
-    y_mean = height/2;
-    resetBlack();
-
-    if (writeData == true) {
-      output.close();
-      createKeypressFile();
-    }
+  if (select2) {
+    saveImage();
   }
 }
 
@@ -628,4 +613,9 @@ public void togglePreview() {
   // text(x_mn, iwCX - gap/2, owCY + gap/2);
   // text(y_mn, iwCX + gap/2, owCY + gap/2);
 
+  // Display save text
+  if (select2) {
+    fill(255);
+    text("IMG Saved", iwCX + gap/10, owCY + gap/2);
+  }
 }

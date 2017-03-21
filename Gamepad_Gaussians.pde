@@ -45,7 +45,6 @@ int joystick1, joystick2;
 int x_mean;
 int y_mean;
 
-
 float fps = 60;
 
 
