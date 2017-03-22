@@ -282,7 +282,7 @@ public void writeData(boolean writeData) {
     Analog_array = getAnalogValues();
 
     // if thumb keys above threshold...
-    if (abs(analogX) > .11 | abs(analogY) > .11 | abs(analogU) > .11 | abs(analogV) > .11 | actionPad_pressed == true) {
+    if (abs(analogX) > .15 | abs(analogY) > .15 | abs(analogU) > .15 | abs(analogV) > .15 | actionPad_pressed == true) {
 
       output.println(
 
