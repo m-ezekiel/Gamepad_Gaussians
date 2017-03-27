@@ -45,7 +45,7 @@ int joystick1, joystick2;
 int x_mean;
 int y_mean;
 
-float fps = 60;
+float fps = 30;
 
 
 // ASSIGN CONTROL MAPPINGS (variables numbered CCW from left)
@@ -56,7 +56,7 @@ int A4_ctrl = alpha;
 
 // SETUP
 public void setup() {
-  size(1280, 720);
+  size(1280, 800);
   background(0);
   noStroke();
 
