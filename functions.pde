@@ -363,12 +363,12 @@ public void defineControlBehaviors() {
   if ((select1) & A3) {A3_ctrl = 0;}
   if ((select1) & A4) {A4_ctrl = 0;}
   if (select1 & L1) {
-    brushSize_X = 350;
-    brushSize_Y = 350;
-  }
-  if (select1 & R1) {
     dpX = 300;
     dpY = 300;
+  }
+  if (select1 & R1) {
+    brushSize_X = 350;
+    brushSize_Y = 350;
   }
   if (select1 & R2) {
     x_mean = width/2;
@@ -473,7 +473,7 @@ public void defineControlBehaviors() {
 public void defineResetBehaviors() {
 
   // Reset background only
-  if (select1) {
+  if (select1 & !actionPad_pressed) {
     // int bgColor = randomInt(0, 2);
     // if (bgColor == 0)
     //   resetBlack();
