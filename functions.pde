@@ -142,7 +142,7 @@ public boolean getActionPad() {
   boolean value = false;
 
   // If buttons are pressed then value is false
-  if (A1 | A2 | A3 | A4 | R1 | R2 | L1 | up | down | left | right)
+  if (A1 | A2 | A3 | A4 | R1 | R2 | L1 | up | down | left | right | select2)
     value = true;
 
   return(value);
@@ -171,8 +171,8 @@ public void refreshControlValues() {
 
 public boolean saveImage() {
   int [] datetime = dateTime();
-  save("IMG_exports/gamePad_sketch_" + join(nf(datetime, 2), "-") + ".png");
-  save("gameplay_data/gamePad_sketch_" + join(nf(datetime, 2), "-") + ".png");  
+  save("IMG_exports/" + join(nf(datetime, 2), "-") + "_gamePad_sketch" + ".png");
+  save("gameplay_data/" + join(nf(datetime, 2), "-") + "_gamePad_sketch" + ".png");  
   return(true);
 }
 
@@ -282,7 +282,7 @@ public void writeData(boolean writeData) {
     Analog_array = getAnalogValues();
 
     // if thumb keys above threshold...
-    if (abs(analogX) > .15 | abs(analogY) > .15 | abs(analogU) > .15 | abs(analogV) > .15 | actionPad_pressed == true) {
+    if (abs(analogX) > .15 | abs(analogY) > .15 | abs(analogU) > .15 | abs(analogV) > .15 | actionPad_pressed == true | L2 == true | select1 == true) {
 
       output.println(
 
@@ -474,11 +474,6 @@ public void defineResetBehaviors() {
 
   // Reset background only
   if (select1 & !actionPad_pressed) {
-    // int bgColor = randomInt(0, 2);
-    // if (bgColor == 0)
-    //   resetBlack();
-    // if (bgColor > 0)
-    //   resetWhite();
 
     resetBlack();
 
