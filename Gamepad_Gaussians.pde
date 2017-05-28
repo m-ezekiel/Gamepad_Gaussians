@@ -99,6 +99,7 @@ public void draw() {
   xpos = gaussianInt(dpX, x_mean);
   ypos = gaussianInt(dpY, y_mean);
 
+  // Order matters here-- should verify that data writes correctly
   defineControlBehaviors();
   defineResetBehaviors();
 
