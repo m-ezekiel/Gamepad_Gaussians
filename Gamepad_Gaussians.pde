@@ -25,7 +25,7 @@ boolean left, right, up, down, select1, select2;
 boolean imageSaved;
 
 // INITIALIZE PARAMETERS
-boolean writeData = true;
+boolean writeData = false;
 boolean actionPad_pressed = false;
 
 int xpos = 0; int ypos = 0;
@@ -56,7 +56,7 @@ int A4_ctrl = alpha;
 
 // SETUP
 public void setup() {
-  size(1920, 1080);
+  size(1280, 800);
   background(0);
   noStroke();
 
@@ -92,16 +92,21 @@ public void draw() {
   joystick1 = analogToInteger(analogX, analogY, scalar);
   joystick2 = analogToInteger(analogU, analogV, scalar);
 
+  println("joystick1: "+joystick1);
+  println("joystick2: "+joystick2);
+
   // Get random gaussian distributed XY coordinates
   xpos = gaussianInt(dpX, x_mean);
   ypos = gaussianInt(dpY, y_mean);
 
   defineControlBehaviors();
   defineResetBehaviors();
+
+  constrainParameters();
+  togglePreview();
+
   drawShapes();
 
   writeData(writeData);
 
-  constrainParameters();
-  togglePreview();
 }
