@@ -358,19 +358,19 @@ public void defineControlBehaviors() {
 
 
   // Mute values: if (mute & button) {variable = 0}
-  if ((select1) & A1) {A1_ctrl = 0;}
-  if ((select1) & A2) {A2_ctrl = 0;}
-  if ((select1) & A3) {A3_ctrl = 0;}
-  if ((select1) & A4) {A4_ctrl = 0;}
-  if (select1 & L1) {
+  if ((select2) & A1) {A1_ctrl = 0;}
+  if ((select2) & A2) {A2_ctrl = 0;}
+  if ((select2) & A3) {A3_ctrl = 0;}
+  if ((select2) & A4) {A4_ctrl = 0;}
+  if (select2 & L1) {
     dpX = 300;
     dpY = 300;
   }
-  if (select1 & R1) {
+  if (select2 & R1) {
     brushSize_X = 350;
     brushSize_Y = 350;
   }
-  if (select1 & R2) {
+  if (select2 & R2) {
     x_mean = width/2;
     y_mean = height/2;
   }
