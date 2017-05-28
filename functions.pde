@@ -142,7 +142,7 @@ public boolean getActionPad() {
   boolean value = false;
 
   // If buttons are pressed then value is false
-  if (A1 | A2 | A3 | A4 | R1 | R2 | L1 | up | down | left | right | select2)
+  if (A1 | A2 | A3 | A4 | R1 | R2 | L1 | up | down | left | right)
     value = true;
 
   return(value);
@@ -473,7 +473,7 @@ public void defineControlBehaviors() {
 public void defineResetBehaviors() {
 
   // Reset background only
-  if (select1 & !actionPad_pressed) {
+  if (select2 & !actionPad_pressed) {
 
     resetBlack();
 
@@ -484,7 +484,7 @@ public void defineResetBehaviors() {
   }
 
   // Reset background and set all params to default
-  if (select2) {
+  if (select1) {
     saveImage();
   }
 }
@@ -609,7 +609,7 @@ public void togglePreview() {
   // text(y_mn, iwCX + gap/2, owCY + gap/2);
 
   // Display save text
-  if (select2) {
+  if (select1) {
     fill(255);
     text("IMG Saved", iwCX + gap/10, owCY + gap/2);
   }
