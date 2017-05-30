@@ -583,7 +583,7 @@ public void togglePreview() {
   // Add inverse color stroke to offset low value colors
   stroke(255-red, 255-green, 255-blue, 60);
   fill(red, green, blue, 255);
-  ellipse(owCX + gap + gap/11, owCY - gap/11, gap/2, gap/2);
+  ellipse(owCX + gap + gap/1.7, owCY - gap/11, gap/2, gap/2);
 
   noStroke();
 
@@ -592,16 +592,16 @@ public void togglePreview() {
   textSize(owB/15);
   // Color Values
   fill(200);
-  text(A4_val, owCX + gap + gap/11, owCY - gap/1.1);
+  text(A4_val, owCX + gap + gap/1.7, owCY - gap/1.1);
 
   fill(0, 255, 0, 255);
-  text(A2_val, owCX + gap + gap/11, owCY + gap/3);
+  text(A2_val, owCX + gap + gap/1.7, owCY + gap/3);
 
   fill(255, 0, 0, 255);
-  text(A1_val, owCX + gap/5, owCY - gap/3);
+  text(A1_val, owCX + gap/1.5, owCY - gap/3);
 
   fill(0, 200, 255, 255);
-  text(A3_val, owCX + (2*gap), owCY - gap/3);
+  text(A3_val, owCX + (2*gap) + gap/2, owCY - gap/3);
 
   // Position Values
   // fill(180);
