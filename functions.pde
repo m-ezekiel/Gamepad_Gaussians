@@ -528,7 +528,7 @@ public void togglePreview() {
 
   // Outer window
   int owB = w/7; // 160 (default is 8)
-  float owH = owB/2.5; // 60
+  float owH = owB/2.4; // 60
   int owX = width - owB - 0; // Minus 300 for the video demo, 0 otherwise
   int owY = 0;
   int gap = w/45; // 28
@@ -538,7 +538,7 @@ public void togglePreview() {
   // Centerpoints
   float owCX = owX + (owB/2);
   float owCY = owY + (owH/2);
-  float iwCX = owX + owB/12 + iwB/2;
+  float iwCX = owX + owB/6 + iwB/2;
   float iwCY = owY + owH/6 + iwH/2;  
   // Parameter values
   String A4_val = str(alpha);
@@ -559,7 +559,7 @@ public void togglePreview() {
 
   // Prototype for inner window preview
   stroke(100);
-  rect(owX + owB/12, owY + owH/6, iwB, iwH);
+  rect(owX + owB/6, owY + owH/6, iwB, iwH);
   noStroke();
 
 
