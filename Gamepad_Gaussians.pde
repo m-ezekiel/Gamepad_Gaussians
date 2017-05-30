@@ -86,14 +86,12 @@ public void setup() {
 // DRAW
 public void draw() {
 
+  noCursor();
   getUserInput();
   refreshControlValues();
 
   joystick1 = analogToInteger(analogX, analogY, scalar);
   joystick2 = analogToInteger(analogU, analogV, scalar);
-
-  println("joystick1: "+joystick1);
-  println("joystick2: "+joystick2);
 
   // Get random gaussian distributed XY coordinates
   xpos = gaussianInt(dpX, x_mean);
