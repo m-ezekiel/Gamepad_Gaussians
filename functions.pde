@@ -507,8 +507,8 @@ public void constrainParameters() {
   dpX = limitScale(dpX, 0, height/2);
   brushSize_Y = limitScale(brushSize_Y, 1, height);
   brushSize_X = limitScale(brushSize_X, 1, height);
-  xpos = limitScale(xpos, 0, width);
-  ypos = limitScale(ypos, 0, height);
+  xpos = limitScale(xpos, -width, 2*width);
+  ypos = limitScale(ypos, -height, 2*height);
   x_mean = limitScale(x_mean, 0, width);
   y_mean = limitScale(y_mean, 0, height);
 }
