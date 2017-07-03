@@ -105,7 +105,7 @@ public void togglePreview() {
   // text(y_mn, iwCX + gap/2, owCY + gap/2);
 
   // Display save text
-  if (select1) {
+  if (select1 & select2) {
     fill(255);
     text("IMG Saved", iwCX + gap/10, owCY + gap/2);
   }

@@ -53,19 +53,19 @@ public void defineControlBehaviors() {
 
 
   // Mute values: if (mute & button) {variable = 0}
-  if ((select2) & A1) {A1_ctrl = 0;}
-  if ((select2) & A2) {A2_ctrl = 0;}
-  if ((select2) & A3) {A3_ctrl = 0;}
-  if ((select2) & A4) {A4_ctrl = 0;}
-  if (select2 & L1) {
+  if ((select1) & A1) {A1_ctrl = 0;}
+  if ((select1) & A2) {A2_ctrl = 0;}
+  if ((select1) & A3) {A3_ctrl = 0;}
+  if ((select1) & A4) {A4_ctrl = 0;}
+  if (select1 & R2) {
     dpX = 300;
     dpY = 300;
   }
-  if (select2 & R1) {
+  if (select1 & R1) {
     brushSize_X = 350;
     brushSize_Y = 350;
   }
-  if (select2 & R2) {
+  if (select1 & L1) {
     x_mean = width/2;
     y_mean = height/2;
   }
@@ -157,8 +157,22 @@ public void defineControlBehaviors() {
 
 
   // SAVE IMAGE
-  if (select1)
+  if (select1 & select2)
     saveImage();
+
+
+  // SLOW AND FAST MOTION MODES
+  if (M1)
+    frameRate(60);
+  if (M2) {
+    frameRate(2);
+    increment = 1;
+  }
+  if (!M1 & !M2) {
+    frameRate(30);
+    increment = 2;
+  }
+
 }
 
 
