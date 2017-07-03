@@ -344,17 +344,17 @@ public void defineControlBehaviors() {
 
 
   // Dispersion (d-pad)
-  if (up & L1) {dpY += increment * 10;}
-  if (down & L1) {dpY -= increment * 10;}
-  if (right & L1) {dpX -= increment * 10;}
-  if (left & L1) {dpX += increment * 10;}
+  if (up & R2) {dpY += increment * 10;}
+  if (down & R2) {dpY -= increment * 10;}
+  if (right & R2) {dpX -= increment * 10;}
+  if (left & R2) {dpX += increment * 10;}
 
 
   // Position (d-pad)
-  if (up & R2) {y_mean += -increment * 15;}
-  if (down & R2) {y_mean -= -increment * 15;}
-  if (right & R2) {x_mean += increment * 15;}
-  if (left & R2) {x_mean -= increment * 15;}
+  if (up & L1) {y_mean += -increment * 15;}
+  if (down & L1) {y_mean -= -increment * 15;}
+  if (right & L1) {x_mean += increment * 15;}
+  if (left & L1) {x_mean -= increment * 15;}
 
 
   // Mute values: if (mute & button) {variable = 0}
@@ -415,10 +415,15 @@ public void defineControlBehaviors() {
     brushSize_Y = randomInt(0, 500);
     brushSize_X = randomInt(0, 500);
   }
-  if (L2 & R2) {
+  if (L2 & L1) {
     x_mean = randomInt(0, width);
     y_mean = randomInt(0, height);
   }
+  if (L2 & R2) {
+    dpY = randomInt(0, 400);
+    dpX = randomInt(0, 400);
+  }
+
 
   // Color & opacity (analog)
   if (A1 & (abs(joystick1) > 2)) {A1_ctrl += increment * joystick1 / mScalar;}
@@ -438,16 +443,16 @@ public void defineControlBehaviors() {
   if (R1 & (abs(analogV) > 0.15)) {brushSize_Y += -analogV * 15 * increment;}
 
   // Dispersion 
-  if (L1 & (abs(analogX) > 0.15)) {dpX += -analogX * 15 * increment;}
-  if (L1 & (abs(analogY) > 0.15)) {dpY += -analogY * 15 * increment;}
-  if (L1 & (abs(analogU) > 0.15)) {dpX += analogU * 15 * increment;}
-  if (L1 & (abs(analogV) > 0.15)) {dpY += -analogV * 15 * increment;}
+  if (R2 & (abs(analogX) > 0.15)) {dpX += -analogX * 15 * increment;}
+  if (R2 & (abs(analogY) > 0.15)) {dpY += -analogY * 15 * increment;}
+  if (R2 & (abs(analogU) > 0.15)) {dpX += analogU * 15 * increment;}
+  if (R2 & (abs(analogV) > 0.15)) {dpY += -analogV * 15 * increment;}
 
   // Position
-  if(R2 & (abs(analogX) > 0.15)) {x_mean += analogX * 15 * increment;}
-  if(R2 & (abs(analogY) > 0.15)) {y_mean += analogY * 15 * increment;}
-  if(R2 & (abs(analogU) > 0.15)) {x_mean += analogU * 15 * increment;}
-  if(R2 & (abs(analogV) > 0.15)) {y_mean += analogV * 15 * increment;}
+  if(L1 & (abs(analogX) > 0.15)) {x_mean += analogX * 15 * increment;}
+  if(L1 & (abs(analogY) > 0.15)) {y_mean += analogY * 15 * increment;}
+  if(L1 & (abs(analogU) > 0.15)) {x_mean += analogU * 15 * increment;}
+  if(L1 & (abs(analogV) > 0.15)) {y_mean += analogV * 15 * increment;}
 
   // Map D-Pad to colors when Joystick 2 is activated
   if (left & (abs(joystick2) > 2)) {A1_ctrl += increment * joystick2 / mScalar;}
