@@ -477,8 +477,35 @@ public void defineControlBehaviors() {
 
 public void defineResetBehaviors() {
 
-  // Reset background only
-  if (select2 & !actionPad_pressed) {
+  // // Reset background only
+  // if (select2 & !actionPad_pressed) {
+
+  //   resetBlack();
+
+  //   if (writeData == true) {
+  //     output.close();
+  //     createKeypressFile();
+  //   }
+  // }
+
+  // // Reset background and set all params to default
+  // if (select1) {
+  //   saveImage();
+  // }
+
+  // Reset background to white
+  if (select2 & up) {
+
+    resetWhite();
+
+    if (writeData == true) {
+      output.close();
+      createKeypressFile();
+    }
+  }
+
+  // Reset background to black
+  if (select2 & down) {
 
     resetBlack();
 
@@ -487,6 +514,7 @@ public void defineResetBehaviors() {
       createKeypressFile();
     }
   }
+
 
   // Reset background and set all params to default
   if (select1) {
