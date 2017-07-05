@@ -39,7 +39,7 @@ int red = 60;
 int blue = 60;
 int green = 60;
 int alpha = 60;
-
+ 
 int joystick1, joystick2;
 
 int x_mean;

@@ -187,7 +187,7 @@ public void defineControlBehaviors() {
 public void defineResetBehaviors() {
 
   // Reset background to white
-  if (select2 & up) {
+  if (select2 & down) {
     resetWhite();
     if (writeData == true) {
       output.close();
@@ -196,7 +196,7 @@ public void defineResetBehaviors() {
   }
 
   // Reset background to black
-  if (select2 & down) {
+  if (select2 & up) {
     resetBlack();
     if (writeData == true) {
       output.close();

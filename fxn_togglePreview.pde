@@ -41,8 +41,8 @@ public void togglePreview() {
   String A3_val = str(blue);
   String A2_val = str(green);
   String A1_val = str(red);
-  String x_mn = str(x_mean);
-  String y_mn = str(y_mean);
+  String x_mn = str(x_mean - width/2);
+  String y_mn = str(-(y_mean - height/2));
   String dX = str(dpX/4);
   String dY = str(dpY/4);
 
@@ -100,9 +100,10 @@ public void togglePreview() {
   text(A3_val, owCX + (2*gap) + gap/2, owCY - gap/3);
 
   // Position Values
-  // fill(180);
-  // text(x_mn, iwCX - gap/2, owCY + gap/2);
-  // text(y_mn, iwCX + gap/2, owCY + gap/2);
+  textSize(owB/16);
+  fill(140);
+  text(x_mn, iwCX - gap/2, owCY + gap/2);
+  text(y_mn, iwCX + gap/2, owCY + gap/2);
 
   // Display save text
   if (select1 & select2) {
