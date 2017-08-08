@@ -110,6 +110,7 @@ public void draw() {
   togglePreview();
 
   drawShapes();
+  displayMenu();
 
   writeData(writeData);
 

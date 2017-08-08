@@ -57,7 +57,7 @@ public void defineControlBehaviors() {
   if ((select1) & A2) {A2_ctrl = 0;}
   if ((select1) & A3) {A3_ctrl = 0;}
   if ((select1) & A4) {A4_ctrl = 0;}
-  if (select1 & R2) {
+  if (select1 & L1) {
     dpX = 300;
     dpY = 300;
   }
@@ -65,7 +65,7 @@ public void defineControlBehaviors() {
     brushSize_X = 350;
     brushSize_Y = 350;
   }
-  if (select1 & L1) {
+  if (select1 & R2) {
     x_mean = width/2;
     y_mean = height/2;
   }
