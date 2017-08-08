@@ -142,7 +142,7 @@ public boolean getActionPad() {
   boolean value = false;
 
   // If buttons are pressed then value is false
-  if (A1 | A2 | A3 | A4 | R1 | R2 | L1 | up | down | left | right | select1 | select2)
+  if (A1 | A2 | A3 | A4 | R1 | R2 | L1 | up | down | left | right)
     value = true;
 
   return(value);
@@ -171,8 +171,8 @@ public void refreshControlValues() {
 
 public boolean saveImage() {
   int [] datetime = dateTime();
-  save("IMG_exports/gamePad_sketch_" + join(nf(datetime, 2), "-") + ".png");
-  save("gameplay_data/gamePad_sketch_" + join(nf(datetime, 2), "-") + ".png");  
+  save("IMG_exports/" + join(nf(datetime, 2), "-") + "_gamePad_sketch" + ".png");
+  save("gameplay_data/" + join(nf(datetime, 2), "-") + "_gamePad_sketch" + ".png");  
   return(true);
 }
 
@@ -282,7 +282,7 @@ public void writeData(boolean writeData) {
     Analog_array = getAnalogValues();
 
     // if thumb keys above threshold...
-    if (abs(analogX) > .1 | abs(analogY) > .1 | abs(analogU) > .1 | abs(analogV) > .1 | actionPad_pressed == true) {
+    if (abs(analogX) > .15 | abs(analogY) > .15 | abs(analogU) > .15 | abs(analogV) > .15 | actionPad_pressed == true | L2 == true | select1 == true) {
 
       output.println(
 
@@ -358,19 +358,19 @@ public void defineControlBehaviors() {
 
 
   // Mute values: if (mute & button) {variable = 0}
-  if ((select1) & A1) {A1_ctrl = 0;}
-  if ((select1) & A2) {A2_ctrl = 0;}
-  if ((select1) & A3) {A3_ctrl = 0;}
-  if ((select1) & A4) {A4_ctrl = 0;}
-  if (select1 & L1) {
-    brushSize_X = 350;
-    brushSize_Y = 350;
-  }
-  if (select1 & R1) {
+  if ((select2) & A1) {A1_ctrl = 0;}
+  if ((select2) & A2) {A2_ctrl = 0;}
+  if ((select2) & A3) {A3_ctrl = 0;}
+  if ((select2) & A4) {A4_ctrl = 0;}
+  if (select2 & L1) {
     dpX = 300;
     dpY = 300;
   }
-  if (select1 & R2) {
+  if (select2 & R1) {
+    brushSize_X = 350;
+    brushSize_Y = 350;
+  }
+  if (select2 & R2) {
     x_mean = width/2;
     y_mean = height/2;
   }
@@ -456,8 +456,8 @@ public void defineControlBehaviors() {
   if (up & (abs(joystick2) > 2)) {A4_ctrl += increment * joystick2 / mScalar;}
 
   // Save image
-  if (L2 & R2)
-    saveImage();
+  // if (L2 & R2)
+  //   saveImage();
 
 }
 
@@ -473,14 +473,9 @@ public void defineControlBehaviors() {
 public void defineResetBehaviors() {
 
   // Reset background only
-  if (select2 & !select1) {
-    int bgColor = randomInt(0, 2);
-    if (bgColor == 0)
-      resetBlack();
-    if (bgColor > 0)
-      resetWhite();
+  if (select2 & !actionPad_pressed) {
 
-    // println("bg: "+bgColor);
+    resetBlack();
 
     if (writeData == true) {
       output.close();
@@ -489,23 +484,8 @@ public void defineResetBehaviors() {
   }
 
   // Reset background and set all params to default
-  if (select2 & select1) {
-    dpX = 300;
-    dpY = 300;
-    brushSize_X = 350;
-    brushSize_Y = 350;
-    A1_ctrl = 60;
-    A2_ctrl = 60;
-    A3_ctrl = 60;
-    A4_ctrl = 60;
-    x_mean = width/2;
-    y_mean = height/2;
-    resetBlack();
-
-    if (writeData == true) {
-      output.close();
-      createKeypressFile();
-    }
+  if (select1) {
+    saveImage();
   }
 }
 
@@ -527,8 +507,8 @@ public void constrainParameters() {
   dpX = limitScale(dpX, 0, height/2);
   brushSize_Y = limitScale(brushSize_Y, 1, height);
   brushSize_X = limitScale(brushSize_X, 1, height);
-  xpos = limitScale(xpos, 0, width);
-  ypos = limitScale(ypos, 0, height);
+  xpos = limitScale(xpos, -width, 2*width);
+  ypos = limitScale(ypos, -height, 2*height);
   x_mean = limitScale(x_mean, 0, width);
   y_mean = limitScale(y_mean, 0, height);
 }
@@ -548,7 +528,7 @@ public void togglePreview() {
 
   // Outer window
   int owB = w/7; // 160 (default is 8)
-  float owH = owB/2.5; // 60
+  float owH = owB/2.4; // 60
   int owX = width - owB - 0; // Minus 300 for the video demo, 0 otherwise
   int owY = 0;
   int gap = w/45; // 28
@@ -558,7 +538,7 @@ public void togglePreview() {
   // Centerpoints
   float owCX = owX + (owB/2);
   float owCY = owY + (owH/2);
-  float iwCX = owX + owB/12 + iwB/2;
+  float iwCX = owX + owB/6 + iwB/2;
   float iwCY = owY + owH/6 + iwH/2;  
   // Parameter values
   String A4_val = str(alpha);
@@ -579,7 +559,7 @@ public void togglePreview() {
 
   // Prototype for inner window preview
   stroke(100);
-  rect(owX + owB/12, owY + owH/6, iwB, iwH);
+  rect(owX + owB/6, owY + owH/6, iwB, iwH);
   noStroke();
 
 
@@ -603,7 +583,7 @@ public void togglePreview() {
   // Add inverse color stroke to offset low value colors
   stroke(255-red, 255-green, 255-blue, 60);
   fill(red, green, blue, 255);
-  ellipse(owCX + gap + gap/11, owCY - gap/11, gap/2, gap/2);
+  ellipse(owCX + gap + gap/1.7, owCY - gap/11, gap/2, gap/2);
 
   noStroke();
 
@@ -612,20 +592,25 @@ public void togglePreview() {
   textSize(owB/15);
   // Color Values
   fill(200);
-  text(A4_val, owCX + gap + gap/11, owCY - gap/1.1);
+  text(A4_val, owCX + gap + gap/1.7, owCY - gap/1.1);
 
   fill(0, 255, 0, 255);
-  text(A2_val, owCX + gap + gap/11, owCY + gap/3);
+  text(A2_val, owCX + gap + gap/1.7, owCY + gap/3);
 
   fill(255, 0, 0, 255);
-  text(A1_val, owCX + gap/5, owCY - gap/3);
+  text(A1_val, owCX + gap/1.5, owCY - gap/3);
 
   fill(0, 200, 255, 255);
-  text(A3_val, owCX + (2*gap), owCY - gap/3);
+  text(A3_val, owCX + (2*gap) + gap/2, owCY - gap/3);
 
   // Position Values
   // fill(180);
   // text(x_mn, iwCX - gap/2, owCY + gap/2);
   // text(y_mn, iwCX + gap/2, owCY + gap/2);
 
+  // Display save text
+  if (select1) {
+    fill(255);
+    text("IMG Saved", iwCX + gap/10, owCY + gap/2);
+  }
 }
