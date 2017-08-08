@@ -141,16 +141,16 @@ public void defineControlBehaviors() {
   if (R1 & (abs(analogV) > 0.15)) {brushSize_Y += -analogV * 15 * increment;}
 
   // Dispersion 
-  if (R2 & (abs(analogX) > 0.15)) {dpX += -analogX * 15 * increment;}
-  if (R2 & (abs(analogY) > 0.15)) {dpY += -analogY * 15 * increment;}
-  if (R2 & (abs(analogU) > 0.15)) {dpX += analogU * 15 * increment;}
-  if (R2 & (abs(analogV) > 0.15)) {dpY += -analogV * 15 * increment;}
+  if (L1 & (abs(analogX) > 0.15)) {dpX += -analogX * 15 * increment;}
+  if (L1 & (abs(analogY) > 0.15)) {dpY += -analogY * 15 * increment;}
+  if (L1 & (abs(analogU) > 0.15)) {dpX += analogU * 15 * increment;}
+  if (L1 & (abs(analogV) > 0.15)) {dpY += -analogV * 15 * increment;}
 
   // Position
-  if(L1 & (abs(analogX) > 0.15)) {x_mean += analogX * 15 * increment;}
-  if(L1 & (abs(analogY) > 0.15)) {y_mean += analogY * 15 * increment;}
-  if(L1 & (abs(analogU) > 0.15)) {x_mean += analogU * 15 * increment;}
-  if(L1 & (abs(analogV) > 0.15)) {y_mean += analogV * 15 * increment;}
+  if(R2 & (abs(analogX) > 0.15)) {x_mean += analogX * 15 * increment;}
+  if(R2 & (abs(analogY) > 0.15)) {y_mean += analogY * 15 * increment;}
+  if(R2 & (abs(analogU) > 0.15)) {x_mean += analogU * 15 * increment;}
+  if(R2 & (abs(analogV) > 0.15)) {y_mean += analogV * 15 * increment;}
 
   // Map D-Pad to colors when Joystick 2 is activated
   if (left & (abs(joystick2) > 2)) {A1_ctrl += increment * joystick2 / mScalar;}
@@ -160,8 +160,8 @@ public void defineControlBehaviors() {
 
 
   // SAVE IMAGE
-  if (select1 & select2)
-    saveImage();
+  // if (select1 & select2)
+  //   saveImage();
 
 
   // SLOW AND FAST MOTION MODES

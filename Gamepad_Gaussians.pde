@@ -104,7 +104,7 @@ public void draw() {
 
   // Order matters here-- should verify that data writes correctly
   defineControlBehaviors();
-  defineResetBehaviors();
+  // defineResetBehaviors();
 
   constrainParameters();
   togglePreview();
