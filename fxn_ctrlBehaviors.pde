@@ -99,6 +99,9 @@ public void defineControlBehaviors() {
 
   }
 
+  if (L2)
+    switch_to_previous = false;
+
 
   // Localized random behaviors
 
@@ -203,6 +206,23 @@ public void defineResetBehaviors() {
       createKeypressFile();
     }
   }
+
+  //
+  if (select2 & right) {
+    red_save = red;
+    green_save = green;
+    blue_save = blue;
+  }
+  //
+  if (select2 & left) {
+    switch_to_previous = true;
+  }
+  if (switch_to_previous == true) {
+    red = red_save;
+    green = green_save;
+    blue = blue_save;
+  }
+
 }
 
 

@@ -27,6 +27,7 @@ boolean imageSaved;
 // INITIALIZE PARAMETERS
 boolean writeData = false;
 boolean actionPad_pressed = false;
+boolean switch_to_previous = false;
 
 int xpos = 0; int ypos = 0;
 int dpX = 300; int dpY = 300;
@@ -39,7 +40,11 @@ int red = 60;
 int blue = 60;
 int green = 60;
 int alpha = 60;
- 
+
+int red_save = red;
+int green_save = green;
+int blue_save = blue;
+
 int joystick1, joystick2;
 
 int x_mean;
@@ -56,7 +61,7 @@ int A4_ctrl = alpha;
 
 // SETUP
 public void setup() {
-  size(1920, 1200);
+  size(1280, 800);
   background(0);
   noStroke();
 
